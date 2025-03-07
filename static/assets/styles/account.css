@@ -1,0 +1,53 @@
+.account-container {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+/* Main container styling */
+.account {
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px;
+    padding: 20px;
+    background: #333; /* Semi-transparent white background */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Horizontal navigation styling */
+.navigation-buttons {
+    gap: 6px;
+}
+
+.navigation-buttons a{
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+
+/* Account content styling */
+.account-content {
+    padding: 20px;
+}
+
+.account-content h1 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.split-container {
+    display: flex;
+}
+
+.split-container img {
+    width: 400px;
+    height: auto;
+}
+
+.split-text-content {
+    padding: 0px 50px;
+}

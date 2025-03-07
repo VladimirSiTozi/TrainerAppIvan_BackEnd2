@@ -1,0 +1,91 @@
+   /* Main container */
+.coaching-main {
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    border-radius: 8px;
+}
+
+/* Child containers */
+.coaching-container {
+    flex: 1; /* Allow containers to grow and fill available space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid #ddd;  */
+    box-sizing: border-box; /* Include padding and border in element's total size */
+}
+
+.normal-container {
+    flex-direction: column;
+}
+
+.content-boxes {
+    gap: 50px;
+}
+
+.coaching-inner {
+    padding: 50px;
+    width: 500px;
+}
+
+/* Coach card */
+.coach-card {
+    width: 300px; /* Fixed width for the card */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Center-align text */
+    font-family: "Roboto", sans-serif; /* Consistent font */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+.card-top {
+    height: 80px;
+}
+
+/* Styles for the image */
+.card-image {
+    width: 100%; /* Make image fill the card width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below the image */
+}
+
+.card-bottom {
+    height: 100px;
+}
+
+.coach-text {
+    padding: 50px;
+}
+
+.athletes-text-box {
+    padding: 0px 50px 50px 50px;
+}
+
+/* Boxers card */
+.boxers-card {
+    width: 300px; /* Fixed width for the card */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Center-align text */
+    font-family: "Roboto", sans-serif; /* Consistent font */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+.box-card-image {
+    width: 100%; /* Make image fill the card width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below the image */
+}
+
+.box-card-top {
+    height: 30px;
+}
+
+.box-card-bottom {
+    height: 120px;
+}
+
+.my-style {
+    padding: 50px;
+}

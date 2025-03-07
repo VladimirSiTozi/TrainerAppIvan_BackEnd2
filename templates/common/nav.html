@@ -1,0 +1,17 @@
+{% load static %}
+
+<div class="container logo-container">
+    <img src="{% static 'assets/images/logo-no-background.png' %}" alt="Logo" class="logo">
+</div>
+<div class="container navigation-container">
+    <div class="navigation-buttons">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'coaching' %}">choacing</a>
+        <a href="#">programs</a>
+        <a href="#">consult</a>
+        <a href="#">contact</a>
+        <a href="#">articles</a>
+        <a href="#">about</a>
+        <a href="#">login</a>
+    </div>
+</div>

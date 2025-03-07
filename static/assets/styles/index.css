@@ -1,0 +1,634 @@
+/* Common */
+body {
+    margin: 0;
+    padding: 0;
+    /* background: linear-gradient(45deg, #0f0c29, #302b63, #24243e); */
+    background: #000428;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff !important;
+}
+
+
+.heading-title {
+    color: #FFFFFF;
+    font-family: "Roboto", Sans-serif;
+    font-size: 60px;
+    font-weight: 700;
+}
+
+.secondary-heading-title {
+    color: #FFFFFF;
+    font-family: "Roboto", Sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.trird-heading-title {
+    color: #FFFFFF;
+    font-family: "Roboto", Sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.special-text {
+    color: #FFFFFF;
+    font-family: "Roboto", Sans-serif;
+    font-size: 24px; /* Slightly larger than regular text */
+    font-weight: 400; /* Bold text */
+}
+
+.text {
+    color: #FFFFFF;
+    font-family: "Roboto", Sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.secondaty-text {
+    color: #FFFFFF;
+    font-family: "Roboto", Sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.small-text {
+    color: #FFFFFF;
+    font-family: "Roboto", Sans-serif;
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.buy-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    max-width: 300px;
+    align-items: center;
+}
+
+/* Main container */
+.main-container {
+    max-width: 1200px; /* Changed from 1000 to 1200px */
+    width: 100%;
+    margin: auto;
+    /* background: #333; */
+    /* Semi-transparent white background */
+    /* border: 1px solid #ccc; */
+    /* border-radius: 8px; */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Logo and nav */
+.logo-container {
+    height: 100px;
+    margin: 20px;
+}
+
+.logo-container img {
+    width: 500px;
+    height: auto;
+}
+
+.navigation-container {
+    height: 80px;
+}
+
+.logo {
+    max-width: 100%;
+    height: auto;
+}
+
+.navigation-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.navigation-buttons a {
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none; /* Remove underline from links */
+    font-weight: bold; /* Make text bold */
+    border-radius: 5px; /* Rounded corners */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    display: inline-block; /* Ensure padding and margins work correctly */
+}
+
+.navigation-buttons a:hover {
+    background-color: whitesmoke; /* Darker background on hover */
+    color: #000;
+    transform: translateY(-3px); /* Slight lift effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
+}
+
+.navigation-buttons a:active {
+    transform: translateY(0); /* Reset lift effect when clicked */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Smaller shadow when active */
+}
+
+/* Resume */
+/* Resume Section - Fitness Trainer */
+.resume {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    gap: 60px; /* Space between image and text */
+    max-width: 1200px; /* Limit width for better readability */
+    margin: 0 auto;
+}
+
+.image-wrapper {
+    flex-shrink: 0; /* Prevent image from shrinking */
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.image-resume {
+    width: 400px; /* Slightly larger image for emphasis */
+    height: auto;
+    display: block;
+    border-radius: 15px;
+    transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.image-wrapper:hover .image-resume {
+    transform: scale(1.03); /* Slight zoom on hover */
+}
+
+.text-content {
+    max-width: 600px; /* Limit text width for better readability */
+}
+
+.title {
+    margin: 0 0 10px 0;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin: 0 0 20px 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.text {
+    font-size: 16px;
+    line-height: 1.8; /* Improved line spacing */
+    margin-bottom: 30px;
+}
+
+.trainer-skills {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between skills */
+}
+
+.trainer-skills li {
+    background-color: #e0e0e0; /* Light gray background for skills */
+    padding: 10px 20px;
+    border-radius: 25px; /* Rounded corners for skills */
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+
+/* Best Seller */
+.best-seller {
+    padding: 50px 0px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.image-best-seller {
+    width: 300px;
+}
+
+.left-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* margin-right: 20px; */
+    padding: 100px;
+}
+
+.right-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 80px;
+}
+
+.learn-text {
+    padding-left: 30px;
+}
+
+.icon-list {
+    list-style: none;
+    padding-left: 40px; /* Adjust this value to align with the red line */
+}
+
+.icon-list li {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.icon {
+    position: absolute;
+    left: -40px; /* Adjust this value to align the icon with the red line */
+    top: 0;
+}
+/* .widget-button {
+    text-align: center;
+} */
+
+/* Products container */
+.products {
+    text-align: center;
+    padding: 50px 50px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+
+.description {
+    font-size: 16px;
+    /* Adjust as needed */
+    margin: 10px 0 0;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.home-card {
+    width: 300px;
+    /* Adjust as needed */
+    margin: 10px;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.home-card a:hover {
+    text-decoration: none;
+}
+
+.home-card-image {
+    width: 316px;
+    height: 470px;
+}
+
+.home-card h3 {
+    color: #FFF;
+}
+
+.home-card-image {
+    width: 100%;
+    /* border: 1px solid #ccc; */
+    height: auto;
+    border-radius: 8px;
+}
+
+.card-text {
+    font-family: "Roboto", Sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: #FFFFFF;
+}
+
+.card-button {
+    display: inline-block; /* Make the link behave like a block element */
+    padding: 10px 20px; /* Add padding */
+    font-size: 16px; /* Set font size */
+    color: #fff; /* Text color */
+    background-color: #000; /* Background color */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    text-align: center; /* Center text */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    margin-top: 10px; /* Add some spacing above the button */
+}
+
+.card-button:hover {
+    background-color: #fff; /* Darker background on hover */
+    color: #000;
+    text-decoration: none;
+}
+
+/* General Styles */
+.hero2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero2-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    margin: auto;
+    max-width: 1600px;
+}
+
+.collage {
+    width: 500px;
+}
+
+.right-content {
+    width: 500px;
+}
+
+/* .image {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+
+}
+
+.image.one {
+    top: 20px;
+    left: -20px;
+}
+
+.image.two {
+    top: 220px;
+    left: 200px;
+    z-index: 2;
+}
+
+img {
+    border-radius: 10px;
+}
+
+.image.one img {
+    width: 350px;
+    height: auto;
+}
+
+.image.two img {
+    width: 350px;
+    height: auto;
+} */
+
+/* Youtube videos container */
+.videos-content {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 200px;
+}
+
+.video-text {
+    text-align: center;
+}
+
+.videos {
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.video-img {
+    width: 300px;
+    border-radius: 16px;
+}
+
+/* About */
+.about {
+    padding: 20px 20px 100px 20px;
+}
+
+/* Footer */
+.footer-container {
+    margin: 0 150px;
+}
+
+.site-footer {
+    background-color: #26272b;
+    padding: 45px 0 20px;
+    font-size: 15px;
+    line-height: 24px;
+    color: #737373;
+}
+
+.site-footer hr {
+    border-top-color: #bbb;
+    opacity: 0.5
+}
+
+.site-footer hr.small {
+    margin: 20px 0
+}
+
+.site-footer h6 {
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-top: 5px;
+    letter-spacing: 2px
+}
+
+.site-footer a {
+    color: #737373;
+}
+
+.site-footer a:hover {
+    color: #3366cc;
+    text-decoration: none;
+}
+
+.footer-links {
+    padding-left: 0;
+    list-style: none
+}
+
+.footer-links li {
+    display: block
+}
+
+.footer-links a {
+    color: #737373
+}
+
+.footer-links a:active,
+.footer-links a:focus,
+.footer-links a:hover {
+    color: #3366cc;
+    text-decoration: none;
+}
+
+.footer-links.inline li {
+    display: inline-block
+}
+
+.site-footer .social-icons {
+    text-align: right
+}
+
+.site-footer .social-icons a {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 6px;
+    margin-right: 0;
+    border-radius: 100%;
+    background-color: #33353d
+}
+
+.copyright-text {
+    margin: 0
+}
+
+@media (max-width:991px) {
+    .site-footer [class^=col-] {
+        margin-bottom: 30px
+    }
+}
+
+@media (max-width:767px) {
+    .site-footer {
+        padding-bottom: 0
+    }
+
+    .site-footer .copyright-text,
+    .site-footer .social-icons {
+        text-align: center
+    }
+}
+
+.social-icons {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none
+}
+
+.social-icons li {
+    display: inline-block;
+    margin-bottom: 4px
+}
+
+.social-icons li.title {
+    margin-right: 15px;
+    text-transform: uppercase;
+    color: #96a2b2;
+    font-weight: 700;
+    font-size: 13px
+}
+
+.social-icons a {
+    background-color: #eceeef;
+    color: #818a91;
+    font-size: 16px;
+    display: inline-block;
+    line-height: 44px;
+    width: 44px;
+    height: 44px;
+    text-align: center;
+    margin-right: 8px;
+    border-radius: 100%;
+    -webkit-transition: all .2s linear;
+    -o-transition: all .2s linear;
+    transition: all .2s linear
+}
+
+.social-icons a:active,
+.social-icons a:focus,
+.social-icons a:hover {
+    color: #fff;
+    background-color: #29aafe
+}
+
+.social-icons.size-sm a {
+    line-height: 34px;
+    height: 34px;
+    width: 34px;
+    font-size: 14px
+}
+
+.social-icons a.facebook:hover {
+    background-color: #3b5998
+}
+
+.social-icons a.twitter:hover {
+    background-color: #00aced
+}
+
+.social-icons a.linkedin:hover {
+    background-color: #007bb6
+}
+
+.social-icons a.dribbble:hover {
+    background-color: #ea4c89
+}
+
+@media (max-width:767px) {
+    .social-icons li.title {
+        display: block;
+        margin-right: 0;
+        font-weight: 600
+    }
+}
+
+/****
+Images by 
+Bryan Moats, Mike Dornseif, Griffin Moore, Andrea Austoni, Jack Hughes, Jeremy Fryc
+****/
+
+/* General Styles */
+.hero2 {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    justify-content: space-between;
+    height: 650px;
+    margin: 50px auto;
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Right Container Styles */
+.right-container {
+    width: 45%;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}

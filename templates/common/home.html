@@ -1,0 +1,263 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main-container">
+        <div class="container resume">
+            <div class="content">
+                <div class="image-wrapper">
+                    <img src="{% static 'assets/images/ivan.jpg' %}" alt="Fitness Trainer" class="image-resume">
+                </div>
+                <div class="text-content">
+                    <h2 class="underline-text heading-title">Meet Your Trainer</h2>
+                    <p class="subtitle">Certified Fitness Coach & Nutrition Expert</p>
+                    <p class="text">With over 10 years of experience in the fitness industry, I specialize in helping
+                        clients achieve their goals through personalized training programs and sustainable lifestyle
+                        changes. Whether you're looking to build strength, lose weight, or improve overall wellness, I’m
+                        here to guide you every step of the way.</p>
+                    <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur temporibus
+                        dicta
+                        sunt? Laborum labore enim magnam eligendi neque voluptas aspernatur excepturi temporibus et
+                        fugiat
+                        quas sapiente consequuntur, similique nulla harum!</p>
+                    <ul class="trainer-skills">
+                        <li>Personalized Training Plans</li>
+                        <li>Nutrition Guidance</li>
+                        <li>Strength & Conditioning</li>
+                        <li>Mind-Body Balance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="best-seller">
+        <div class="container best-seller-inner-container">
+            <!-- Left Column -->
+            <div class="column">
+                <!-- Heading -->
+                <div class="widget">
+                    <h2 class="heading-title">NEW RELEASE</h2>
+                </div>
+
+                <!-- Text Content -->
+                <div class="widget">
+                    <p class="secondaty-text">Your Ultimate Evidence-Based Guide to Strength and Conditioning for
+                        Wrestling.</p>
+                </div>
+
+                <!-- Image -->
+                <div class="widget">
+                    <a href="#">
+                        <img src="{% static 'assets/images/poster.png' %}" alt="Book Cover" width="450" height="auto">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="column">
+                <!-- Heading -->
+                <div class="widget learn-text">
+                    <h2>You will learn...</h2>
+                </div>
+
+                <!-- Icon List -->
+                <div class="widget">
+                    <ul class="icon-list">
+                        <li>
+                            <span class="icon"><i class="fa fa-check-circle"
+                                                  style="font-size:28px;color:green"></i></span>
+                            <span class="text">The physical and psychological traits of successful wrestlers.</span>
+                        </li>
+                        <li>
+                            <span class="icon"><i class="fa fa-check-circle"
+                                                  style="font-size:28px;color:green"></i></span>
+                            <span class="text">Key principles like individualization, variation, sport-specificity,
+                                and
+                                progressive overload.</span>
+                        </li>
+                        <li>
+                            <span class="icon"><i class="fa fa-check-circle"
+                                                  style="font-size:28px;color:green"></i></span>
+                            <span class="text">How to build a strong mindset and gain a clear focus.</span>
+                        </li>
+                        <li>
+                            <span class="icon"><i class="fa fa-check-circle"
+                                                  style="font-size:28px;color:green"></i></span>
+                            <span class="text">How to develop strength, explosive power, and endurance.</span>
+                        </li>
+                        <li>
+                            <span class="icon"><i class="fa fa-check-circle"
+                                                  style="font-size:28px;color:green"></i></span>
+                            <span class="text">Strategies to maximize athletic gains while minimizing fatigue,
+                                burnout,
+                                and injury risk.</span>
+                        </li>
+                        <li>
+                            <span class="icon"><i class="fa fa-check-circle"
+                                                  style="font-size:28px;color:green"></i></span>
+                            <span class="text">Periodization and program design tailored to each phase of the
+                                season.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Image -->
+                <!-- <div class="widget-button">
+                <a href="https://www.amazon.com/dp/9153113292">
+                    <img src="https://coachsaman.com/wp-content/uploads/2024/11/buy-on-amazon-button-png-3-768x284.png"
+                        alt="Buy on Amazon" width="308" height="auto">
+                </a>
+            </div> -->
+            </div>
+        </div>
+    </section>
+
+    <div class="main-container">
+        <div class="products">
+            <div class="header">
+                <h2 class="heading-title">Other Products/Programs</h2>
+                <p class="text">Explore our other products and programs. Lorem ipsum dolor sit, amet consectetur
+                    adipisicing elit. Reprehenderit corporis aspernatur adipisci qui mollitia facere inventore placeat.
+                    Porro voluptas labore suscipit non repellat magnam in?</p>
+            </div>
+            <div class="card-container">
+                <div class="home-card">
+                    <img src="{% static 'assets/images/julia.jpg' %}" alt="Product Image" class="card-image">
+                    <h3>Product Name</h3>
+                    <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, enim!</p>
+                    <a href="https://example.com/product1" class="card-button">Buy Now</a>
+                </div>
+                <div class="home-card">
+                    <img src="{% static 'assets/images/julia.jpg' %}" alt="Product Image" class="card-image">
+                    <h3>Product Name</h3>
+                    <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, enim!</p>
+                    <a href="https://example.com/product2" class="card-button">Buy Now</a>
+                </div>
+                <div class="home-card">
+                    <img src="{% static 'assets/images/julia.jpg' %}" alt="Product Image" class="card-image">
+                    <h3>Product Name</h3>
+                    <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, enim!</p>
+                    <a href="https://example.com/product3" class="card-button">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero2">
+        <div class="hero2-inner">
+            <div class="collage">
+                <!-- Top Set -->
+                <div class="collage-container">
+                    <div class="big-img">
+                        <img src="{% static 'assets/images/fight/mma-woman.jpg' %}" alt="Image 1">
+                    </div>
+                    <div class="sml-img ">
+                        <img src="{% static 'assets/images/fight/mma-woman2.jpg' %}" alt="Image 2">
+                    </div>
+                    <div class="sml-img ">
+                        <img src="{% static 'assets/images/fight/mma-woman9.jpg' %}" alt="Image 3">
+                    </div>
+                </div>
+                <div class="collage-container">
+                    <div class="sml-img ">
+                        <img src="{% static 'assets/images/fight/mma-woman5.jpg' %}" alt="Image 4">
+                    </div>
+                    <div class="sml-img ">
+                        <img src="{% static 'assets/images/fight/mma-woman6.jpg' %}" alt="Image 5">
+                    </div>
+                    <div class="big-img">
+                        <img src="{% static 'assets/images/fight/mma-woman4.jpg' %}" alt="Image 6">
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-container">
+                <h1 class="underline-text heading-title">Your Title Here</h1>
+                <p class="secondaty-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste a, sit magni
+                    unde reiciendis asperiores
+                    possimus praesentium deserunt facere excepturi, nobis cumque? Sint, iure obcaecati harum, recusandae
+                    eligendi atque perspiciatis, temporibus dolor rerum mollitia asperiores unde omnis eius minus sit
+                    facere. Expedita adipisci soluta earum dignissimos eaque laboriosam officiis, illum, itaque, ipsum
+                    consequuntur corrupti rem voluptatum non ducimus numquam! Maxime dicta officiis dolorum dolor
+                    expedita,
+                    magni perferendis enim hic nulla perspiciatis, facilis, assumenda at dignissimos sunt. Omnis
+                    recusandae
+                    ducimus quas expedita assumenda, reprehenderit distinctio accusantium eligendi qui architecto
+                    aliquam
+                    quibusdam sint fugit quod voluptatum officia vero exercitationem fugiat nobis iusto.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="products">
+            <div class="header">
+                <h2 class="heading-title">Other Products/Programs</h2>
+                <p class="text">Explore our other products and programs. Lorem ipsum dolor sit, amet consectetur
+                    adipisicing elit. Reprehenderit corporis aspernatur adipisci qui mollitia facere inventore placeat.
+                    Porro voluptas labore suscipit non repellat magnam in?</p>
+            </div>
+            <div class="card-container">
+                <div class="home-card">
+                    <img src="{% static 'assets/images/julia.jpg' %}" alt="Product Image" class="card-image">
+                    <h3>Product Name</h3>
+                    <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, enim!</p>
+                    <a href="https://example.com/product1" class="card-button">Buy Now</a>
+                </div>
+                <div class="home-card">
+                    <img src="{% static 'assets/images/julia.jpg' %}" alt="Product Image" class="card-image">
+                    <h3>Product Name</h3>
+                    <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, enim!</p>
+                    <a href="https://example.com/product2" class="card-button">Buy Now</a>
+                </div>
+                <div class="home-card">
+                    <img src="{% static 'assets/images/julia.jpg' %}" alt="Product Image" class="card-image">
+                    <h3>Product Name</h3>
+                    <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, enim!</p>
+                    <a href="https://example.com/product3" class="card-button">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="videos-content">
+            <div class="video-text">
+                <h2 class="heading-title">Lorem, ipsum dolor sit</h2>
+                <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore doloribus
+                    necessitatibus
+                    unde delectus? Optio, non?</p>
+            </div>
+            <div class="videos">
+                <div>
+                    <img class="video-img" src="{% static 'assets/images/youtube-video.webp' %}" alt="youtube-video">
+                </div>
+                <div>
+                    <img class="video-img" src="{% static 'assets/images/youtube-video.webp' %}" alt="youtube-video">
+                </div>
+                <div>
+                    <img class="video-img" src="{% static 'assets/images/youtube-video.webp' %}" alt="youtube-video">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="about">
+            <h2 class="heading-title">About</h2>
+            <p class="secondaty-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, placeat quod,
+                nostrum quia veritatis quis soluta aperiam, non dicta quo necessitatibus ex esse vero labore corrupti
+                eligendi facere cum illum consequatur iure magnam quibusdam reiciendis. Deserunt, voluptas ab cum vel
+                tempora atque in culpa nostrum, corrupti commodi animi saepe repellendus!</p>
+            <p class="secondaty-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, ex sit, excepturi
+                soluta commodi doloremque aperiam architecto, eum incidunt deserunt voluptatum? Illum non cum eos
+                quibusdam aliquid harum officia rerum.50</p>
+            <p class="secondaty-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit aut quo, fugiat dicta
+                temporibus labore explicabo soluta. Quis ex velit nulla officia earum error, maxime provident ducimus,
+                aliquid in facere voluptates ullam, mollitia unde ad. Delectus, ab dolore iusto quos dolor quas unde
+                vitae nam, accusamus numquam deleniti nostrum id.</p>
+        </div>
+    </div>
+{% endblock %}

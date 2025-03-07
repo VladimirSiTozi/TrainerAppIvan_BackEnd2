@@ -1,0 +1,32 @@
+/* Main container */
+.shop-main {
+    max-width: 1000px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 50px;
+    background: #333;
+    /* Semi-transparent white background */
+    /* border: 1px solid #ccc; */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Child containers */
+.shop-container {
+    flex: 1;
+    /* Allow containers to grow and fill available space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Optional: Add background color */
+    box-sizing: border-box;
+    /* Include padding and border in element's total size */
+}
+
+.normal-container {
+    flex-direction: column;
+}
+
+.content-boxes {
+    gap: 50px;
+}

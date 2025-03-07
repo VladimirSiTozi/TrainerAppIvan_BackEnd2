@@ -1,0 +1,111 @@
+/* Main container */
+.article-main {
+    max-width: 1200px; /* Changed from 1000 to 1200px */
+    width: 100%;
+    margin: auto;
+    padding: 30px 0px;
+    background: #f9f9f9;
+    /* Semi-transparent white background */
+    /* border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+}
+
+/* Child containers */
+.article-container {
+    flex: 1;
+    /* Allow containers to grow and fill available space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Add spacing between containers */
+    background-color: #f9f9f9;
+    /* Optional: Add background color */
+    box-sizing: border-box;
+    /* Include padding and border in element's total size */
+
+    gap: 30px;
+}
+
+.normal-container {
+    flex-direction: column;
+}
+
+
+/* Articles */
+/* MAIN CONTAINER */
+
+.articles {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* ARTICLE CARDS */
+
+.articles__article-card {
+    height: 400px;
+    width: 350px;
+    cursor: pointer;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.articles__article-card:hover {
+    border-bottom: 5px solid #FC6C03;
+    box-sizing: border-box;
+}
+
+/* ARTICLE CARDS - TOP */
+
+.articles__article-card__top__article-cat {
+    background: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: #FC6C03;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 200;
+}
+
+/* ARTICLE CARDS - BOTTOM */
+
+.articles__article-card__bottom {
+    background: rgba(234, 239, 242, .7);
+    height: 40%;
+}
+
+.articles__article-card__bottom__date-title__date {
+    font-size: 13px;
+    color: #99A7B0;
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 200;
+}
+
+.articles__article-card__bottom__date-title__title {
+    margin-top: 6px;
+    font-family: 'Libre Franklin', sans-serif;
+    color: #283D4A;
+}
+
+/* UTILITY CLASSES */
+
+.letter-spacing {
+    letter-spacing: .05em;
+}
+
+/* IMAGE STYLES */
+.article-image {
+    height: 250px; /* Set a fixed height for the image container */
+    overflow: hidden; /* Ensure the image doesn't overflow */
+}
+
+.article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container without distorting */
+}

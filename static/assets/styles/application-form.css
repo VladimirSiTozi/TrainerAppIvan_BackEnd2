@@ -1,0 +1,63 @@
+/* Applicaiton form */
+.application-form {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 50px;
+    background: #333;
+    /* Semi-transparent white background */
+    /* border: 1px solid #ccc; */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.inner-app-form {
+    margin: 50px;
+}
+
+/* Common form - may be used for contact form*/
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+small {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+button {
+    padding: 12px 20px;
+    background-color: #6a1b9a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4a148c;
+}

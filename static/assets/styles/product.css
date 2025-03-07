@@ -1,0 +1,249 @@
+/* Main container */
+.product-main {
+    max-width: 1000px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 50px;
+    background: #333;
+    /* Semi-transparent white background */
+    /* border: 1px solid #ccc; */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Child containers */
+.product-container {
+    display: flex;
+    flex: 1;
+    /* Allow containers to grow and fill available space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Optional: Add border for visualization */
+    box-sizing: border-box;
+    /* Include padding and border in element's total size */
+}
+
+.normal-container {
+    flex-direction: column;
+}
+
+.product-content {
+    padding: 0px 50px;
+}
+
+.product-buy {
+    height: 50px;
+    width: 160px;
+    border: transparent;
+    border-radius: 60px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #ffffff;
+    background-color: #f0b501;
+    cursor: pointer;
+    outline: none;
+}
+
+.underline-text {
+    position: relative;
+    display: inline-block;
+    /* font-size: 2rem; */
+    font-weight: bold;
+    text-decoration: none; /* Remove default underline */
+}
+
+.underline-text::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px; /* Adjust distance of underline from text */
+    width: 100%;
+    height: 3px; /* Thickness of the underline */
+    background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Gradient color for underline */
+    transform: scaleX(0); /* Start with no width */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-in-out; /* Smooth animation */
+}
+
+.underline-text:hover::after {
+    transform: scaleX(1); /* Expand underline on hover */
+    transform-origin: bottom left;
+}
+
+/* Duplicate Card CSS */
+        /* Card  */
+.card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+
+
+@media (max-width: 980px) {
+    #card {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 620px) {
+    #card {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+#card .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+    font-family: roboto;
+    margin: 15px;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+#card .card-image {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    height: 250px; /* Fixed height for the image container */
+    overflow: hidden; /* Ensures the image doesn't overflow the container */
+}
+
+#card .card-image img {
+    width: 100%; /* Make the image fill the container width */
+    height: 100%; /* Make the image fill the container height */
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+    border-top-left-radius: 15px; /* Match the container's border radius */
+    border-top-right-radius: 15px; /* Match the container's border radius */
+}
+
+#card .card-title h2 {
+    margin: 15px 25px 0px;
+    color: grey;
+    font-size: 28px;
+    text-align: left;
+    line-height: 1.5em;
+}
+
+#card .card-detail {
+    margin: 5px 5px;
+}
+
+#card .card-detail h3 {
+    color: grey;
+    font-size: 15px;
+    font-weight: 300;
+    text-align: left;
+    line-height: 1.5em;
+}
+
+#card .card-detail .date {
+    color: #f0b501;
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+#card .card-text {
+    height: 200px;
+    margin: 0px 25px;
+}
+
+#card .card-text p {
+    color: grey;
+    font-size: 17px;
+    font-weight: 300;
+    text-align: left;
+    line-height: 1.5em;
+    margin: 0px;
+}
+
+.card-product-price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff; /* Background color for the container */
+    padding: 6px; /* Padding inside the container */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.single-product {
+    justify-content: space-evenly;
+    padding: 8px;
+}
+
+.card-product-price p {
+    margin: 0;
+    font-size: 1.5rem; /* Font size for the price */
+    font-style: italic;
+    color: #333; /* Text color */
+}
+
+.card-product-price p span {
+    color: #ff7e5f; /* Highlight color for the price number */
+    margin-right: 5px; /* Space between the number and the dollar sign */
+}
+
+.product-buy {
+    background-color: #ff7e5f; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border: none;
+    padding: 10px 20px; /* Button padding */
+    font-size: 0.8rem; /* Button font size */
+    font-weight: bold;
+    border-radius: 5px; /* Rounded corners for the button */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+}
+
+.product-buy:hover {
+    background-color: #feb47b; /* Button hover background color */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.product-buy:active {
+    transform: translateY(0); /* Reset lift when clicked */
+}
+
+#card span {
+    font-size: 25px;
+}
+
+#card .card-product-price button {
+    height: 50px;
+    width: 160px;
+    border: transparent;
+    border-radius: 60px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #ffffff;
+    background-color: #f0b501;
+    cursor: pointer;
+    outline: none;
+}
+
+#card .card-product-price button:hover {
+    background-color: #ffd84e;
+}
+
+#card .card:hover {
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+
+/* Related products */
+.related-products{
+    justify-content: start;
+}

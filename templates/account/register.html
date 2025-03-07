@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="{% static 'assets/styles/styles.css' %}">
+</head>
+<body>
+
+<div class="login-container">
+  <div class="login-form">
+    <div class="login-form-inner">
+      <div class="logo-container black-logo">
+        <img src="{% static 'assets/images/png/logo-grayscale-inverted.png' %}" alt="Logo" class="logo">
+      </div>
+      <h1 class="heading-titletext">Register</h1>
+      <p class="body-text">See your growth and get consulting support!</p>
+
+      <div class="sign-in-seperator">
+        <span>or Sign in with Email</span>
+      </div>
+
+      <div class="login-form-group">
+        <label for="email">Email <span class="required-star">*</span></label>
+        <input type="text" placeholder="email@website.com" id="email">
+      </div>
+      <div class="login-form-group">
+        <label for="pwd">Password <span class="required-star">*</span></label>
+        <input autocomplete="off" type="text" placeholder="Minimum 8 characters" id="pwd">
+      </div>
+      <div class="login-form-group">
+        <label for="pwd">Repeat Password <span class="required-star">*</span></label>
+        <input autocomplete="off" type="text" placeholder="Confirm your password" id="pwd">
+      </div>
+
+      <div class="login-form-group single-row">
+        <div class="custom-check">
+          <input autocomplete="off" type="checkbox" checked id="remember"><label for="remember">Remember me</label>
+        </div>
+
+      </div>
+      
+
+      <a href="#" class="rounded-button login-cta">Register</a>
+
+      <div class="register-div">Not registered yet? <a href="#" class="link create-account" -link>Create an account ?</a></div>
+    </div>
+
+  </div>
+  
+</div>
+  
+  
+</body>
+</html>

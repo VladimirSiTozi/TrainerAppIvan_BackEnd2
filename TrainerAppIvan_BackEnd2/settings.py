@@ -39,11 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # My apps
     "TrainerAppIvan_BackEnd2.common.apps.CommonConfig",
     "TrainerAppIvan_BackEnd2.cart.apps.CartConfig",
     "TrainerAppIvan_BackEnd2.product.apps.ProductConfig",
     "TrainerAppIvan_BackEnd2.program.apps.ProgramConfig",
-    "TrainerAppIvan_BackEnd2.account.apps.AccountConfig"
+    "TrainerAppIvan_BackEnd2.account.apps.AccountConfig",
+    "TrainerAppIvan_BackEnd2.article.apps.ArticleConfig"
 ]
 
 MIDDLEWARE = [
@@ -131,6 +134,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     BASE_DIR / 'static',
 )
+
+MEDIA_URL = '/mediafiles/'
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

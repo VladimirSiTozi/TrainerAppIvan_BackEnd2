@@ -1,0 +1,51 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,500;0,700;0,900;1,300;1,500;1,700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <article>
+        <h2 class="heading-title">{{ article.name }}</h2>
+        <p>{{ article.brief_description }}</p>
+        <p>{{ article.paragraph1 }}</p>
+        <figure><img src="{{ article.image1.url }}" />
+            <figcaption>Lil Bub, a Hoosier cat who became internet famous and helped her owners raise thousands of
+                dollars for homeless pets</figcaption>
+        </figure>
+        <h3>{{ article.name }}</h3>
+        <p>{{ article.paragraph2 }}</p>
+        <div class="right"><img
+                src="{{ article.image2.url }}" />
+            <p><em>Source:</em> Photo credit or caption could be added here. The example below shows a floating image
+                with no caption.</p>
+        </div>
+        <p>{{ article.paragraph2 }}</p>
+        <p>{{ article.paragraph3 }}</p>
+        <p>{{ article.paragraph4 }}</p>
+        <p>{{ article.paragraph5 }}</p>
+        <p>{{ article.paragraph6 }}</p>
+        <p>{{ article.paragraph6 }}</p>
+        <h3>{{ article.name }}</h3>
+        <div class="left"><img
+                src="{{ article.image3.url }}"
+                alt="Portrait of Lil Bub sitting on a blanket" /></div>
+        <p>{{ article.paragraph7 }}.</p>
+        <p>{{ article.paragraph8 }}.</p>
+        <p>{{ article.paragraph9 }}</p>
+        <p>Thankfully, Vice put its money where it&rsquo;s mouth was with the Bub documentary, which investigates not
+            only Bub&rsquo;s life but the larger phenomenon of internet cats, especially under<del>dogs</del>cats like
+            Grumpy Cat and Maru. <em>Lil Bub and Friendz</em> premiered this spring and went on to win best online
+            feature film at the Tribeca Film Festival. In addition to the doc and the book, Bub (with Mike&rsquo;s help,
+            we imagine) launched a series with Revision3 called <em>Lil Bub&rsquo;s Big Show</em>. First guest? Whoopi
+            Goldberg. &ldquo;She was the easiest part,&rdquo; Bridavsky says. &ldquo;It was like, &lsquo;Hey Whoopi, do
+            you want to do this?&rsquo; [She responded] &lsquo;Anything for you, Bub.'&rdquo;</p>
+        <p>Lil Bub also stared in a book in which she depicted a space cat who traveled to earth to hook up with her
+            owner. The book featured more than 100 photos of Lil Bub and Mike and all proceeds went to animal
+            organizations across the country.</p>
+        <h3>Small Right-Floating Images</h3>
+        
+    </article>
+{% endblock %}

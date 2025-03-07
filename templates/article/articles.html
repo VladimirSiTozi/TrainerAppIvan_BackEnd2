@@ -1,0 +1,27 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="article-main">
+        <div class="article-container">
+            {% for article in articles %}
+                <article class="articles__article-card">
+                    <div class="articles__article-card__bottom">
+                        <div class="articles__article-card__bottom__date-title">
+                            <div class="article-image">
+                                <img src="{{ article.image1.url }}" alt="Article Image">
+                            </div>
+                            <time class="articles__article-card__bottom__date-title__date letter-spacing"
+                                  datetime="2019-02-02">{{ article.created_at|date:"F d, Y" }}
+                            </time>
+                            <h2 class="articles__article-card__bottom__date-title__title">
+                                {{ article.name }}
+                            </h2>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

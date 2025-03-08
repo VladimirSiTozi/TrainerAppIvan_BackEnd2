@@ -1,31 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'common/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product</title>
-    <link rel="stylesheet" href="assets/styles/styles.css">
-</head>
-
-<body>
+{% block content %}
     <div class="product-main">
         <div class="title">
-            <h2 class="underline-text heading-title">Boxing training name</h2>
+            <h2 class="underline-text heading-title">{{ product.name }}</h2>
         </div>
         <div class="product-container">
             <div class="product-image">
-                <img src="assets/images/boxer.jpg" alt="" width="400px">
+                <img src="{{ product.image.url }}" alt="" width="400px">
             </div>
             <div class="product-content">
                 <div class="single-category">
-                    <p>boxing</p>
+                    <p>{{ product.category }}</p>
                 </div>
                 <div class="text">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero reprehenderit saepe, culpa dolores eius nobis minima itaque incidunt repudiandae fuga aperiam laborum perferendis veniam atque quisquam qui assumenda voluptatem quos alias vitae harum accusantium molestias! Quas quisquam non, sit libero necessitatibus nisi perspiciatis aperiam? Totam eius odit asperiores nemo perspiciatis!</p>
+                    <p>{{ product.brief_description }}</p>
                 </div>
                 <div class="card-product-price single-product">
-                    <p><span>50.99</span>$</p>
+                    <p><span>{{ product.price }}</span>$</p>
                     <button type="button" class="product-buy">Buy Now</button>
                 </div>
             </div>
@@ -35,10 +27,7 @@
                 <h2 class="underline-text secondary-heading-title">Description</h2>
             </div>
             <div class="text">
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi eum nihil harum dolorum in, quidem eveniet sequi iste commodi, atque quod ea a doloribus, accusamus repellat quam aspernatur placeat cumque?</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. A, corporis ratione culpa dolorem ab officia recusandae quidem tempora voluptas deserunt vero. Voluptatibus tempora dicta nulla expedita asperiores necessitatibus corporis reprehenderit!</p>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium corrupti incidunt mollitia magnam deserunt. Commodi quis modi provident quasi possimus minus fuga quidem cupiditate non perspiciatis. Quo dolor ex sit.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus architecto expedita corporis excepturi distinctio necessitatibus aspernatur exercitationem ipsa, placeat laudantium dolorum earum sapiente suscipit iure nostrum temporibus error quae omnis?</p>
+                <p>{{ product.description }}</p>
             </div>
         </div>
         <div class="">
@@ -47,12 +36,9 @@
             </div>
             <div class="text">
                 <ul>
-                    <li>The critical role of relaxation in punching speed and energy efficiency:</li>
-                    <li>Soviet-era techniques for fluid, whip-like punches and reducing unnecessary muscular tension:</li>
-                    <li>How to use the stretch-shortening cycle (SSC) and elastic energy for explosive movements:</li>
-                    <li>Specific drills to improve shoulder relaxation, breathing efficiency, and kinetic chain utilization:</li>
-                    <li>Improving psychological aspects such as mindfulness and highlighting the importance of mind-body connection in relaxation:</li>
-                    <li>Step-by-step programs (10, 20, and 60-minute plans) for integrating these exercises into your training:</li>
+                    {% for item in product.will_learn  %}
+                    	<li>{{ item }}</li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -125,7 +111,4 @@
             </div>
         </div>
     </div>
-
-</body>
-
-</html>
+{% endblock %}

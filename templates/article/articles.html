@@ -5,6 +5,7 @@
     <div class="article-main">
         <div class="article-container">
             {% for article in articles %}
+                <a href="{% url 'articles-detail' article.pk %}">
                 <article class="articles__article-card">
                     <div class="articles__article-card__bottom">
                         <div class="articles__article-card__bottom__date-title">
@@ -21,6 +22,7 @@
                     </div>
                 </article>
             {% endfor %}
+            </a>
         </div>
     </div>
 {% endblock %}

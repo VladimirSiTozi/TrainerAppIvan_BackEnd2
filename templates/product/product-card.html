@@ -1,0 +1,19 @@
+<div id="card">
+    <div class="card">
+        <div class="card-image">
+            <img src="{{ product.image.url }}" alt="Product Image">
+        </div>
+        <div class="card-title">
+            <h2>{{ product.name }}</h2>
+        </div>
+        <div class="card-text">
+            <p>{{ product.brief_description|truncatechars:200 }}</p>
+        </div>
+        <div class="card-product-price">
+            <p><span>{{ product.price }}</span>$</p>
+        </div>
+        <div class="card-product-price">
+            <button type="button">Buy Now</button>
+        </div>
+    </div>
+</div>

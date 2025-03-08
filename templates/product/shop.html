@@ -1,158 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'common/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop</title>
-    <link rel="stylesheet" href="assets/styles/styles.css">
-</head>
-
-<body>
+{% block content %}
     <div class="shop-main">
         <div class="shop-container">
             <h2 class="heading-title">ONLINE SHOP</h2>
         </div>
         <div class="shop-section">
             <div class="shop-container text">
-                <p class="text">some text</p>
+                <p class="text">Welcome to our online shop! Here you can find a wide range of high-quality products designed to enhance your fitness journey. Whether you're looking for workout gear, training programs, or nutrition essentials, we have something for everyone. Explore our collection and take your fitness to the next level!</p>
             </div>
-            <div class="shop-container">
-                <div id="card">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="assets/images/boxer.jpg" alt="">
-                        </div>
-                        <div class="card-title">
-                            <h2>Boxing</h2>
-                        </div>
-                        <div class="card-text">
-                            <p>Lorem ipsum dolor sit amet consectetur, Ducimus, repudiandae temporibus omnis illum maxime quod deserunt eligendi dolor</p>
-                        </div>
 
-                        <div class="card-product-price">
-                            <p><span>50.99</span>$</p>
-                           
-                        </div>
-                        <div class="card-product-price">
-                            <button type="button" >Buy Now</button>
-                        </div>   
-                    </div>
-                </div>
-                <div id="card">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="assets/images/boxing.jpg" alt="">
-                        </div>
-                        <div class="card-title">
-                            <h2>Boxing 2</h2>
-                        </div>
-                        <div class="card-text">
-                            <p>Lorem ipsum dolor sit amet consectetur, Ducimus, repudiandae temporibus omnis illum maxime quod deserunt eligendi dolor</p>
-                        </div>
+            {% for product in products %}
+                {% if forloop.first or forloop.counter0|divisibleby:3 %}
+                    <div class="shop-container">
+                {% endif %}
+                
+                <a href="{% url 'product-detail' product.pk %}">
+                {% include 'product/product-card.html' %}
+                </a>
 
-                        <div class="card-product-price">
-                            <p><span>34.99</span>$</p>
-                           
-                        </div>
-                        <div class="card-product-price">
-                            <button type="button" >Buy Now</button>
-                        </div>   
-                    </div>
-                </div>
-                <div id="card">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="assets/images/power-lifting.jpg" alt="">
-                        </div>
-                        <div class="card-title">
-                            <h2>Power Lifting</h2>
-                        </div>
-                        <div class="card-text">
-                            <p>Lorem ipsum dolor sit amet consectetur, Ducimus, repudiandae temporibus omnis illum maxime quod deserunt eligendi dolor</p>
-                        </div>
-
-                        <div class="card-product-price">
-                            <p><span>50.09</span>$</p>
-                           
-                        </div>
-                        <div class="card-product-price">
-                            <button type="button" >Buy Now</button>
-                        </div>   
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="shop-section">
-            <div class="shop-container">
-                <div id="card">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="assets/images/power-lifting.jpg" alt="">
-                        </div>
-                        <div class="card-title">
-                            <h2>Power Lifting</h2>
-                        </div>
-                        <div class="card-text">
-                            <p>Lorem ipsum dolor sit amet consectetur, Ducimus, repudiandae temporibus omnis illum maxime quod deserunt eligendi dolor</p>
-                        </div>
-
-                        <div class="card-product-price">
-                            <p><span>50.99</span>$</p>
-                           
-                        </div>
-                        <div class="card-product-price">
-                            <button type="button" >Buy Now</button>
-                        </div>   
-                    </div>
-                </div>
-                <div id="card">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="assets/images/power-lifting.jpg" alt="">
-                        </div>
-                        <div class="card-title">
-                            <h2>Power Lifting</h2>
-                        </div>
-                        <div class="card-text">
-                            <p>Lorem ipsum dolor sit amet consectetur, Ducimus, repudiandae temporibus omnis illum maxime quod deserunt eligendi dolor</p>
-                        </div>
-
-                        <div class="card-product-price">
-                            <p><span>50.99</span>$</p>
-                           
-                        </div>
-                        <div class="card-product-price">
-                            <button type="button" >Buy Now</button>
-                        </div>   
-                    </div>
-                </div>
-                <div id="card">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="assets/images/power-lifting.jpg" alt="">
-                        </div>
-                        <div class="card-title">
-                            <h2>Power Lifting</h2>
-                        </div>
-                        <div class="card-text">
-                            <p>Lorem ipsum dolor sit amet consectetur, Ducimus, repudiandae temporibus omnis illum maxime quod deserunt eligendi dolor</p>
-                        </div>
-
-                        <div class="card-product-price">
-                            <p><span>50.99</span>$</p>
-                           
-                        </div>
-                        <div class="card-product-price">
-                            <button type="button" >Buy Now</button>
-                        </div>   
-                    </div>
-                </div>
-            </div>
+            {% if forloop.counter|divisibleby:3 or forloop.last %}
+                </div> {# Closes .shop-container after every three cards #}
+            {% endif %}
+            {% endfor %}
         </div>
     </div>
-
-</body>
-
-</html>
+{% endblock %}

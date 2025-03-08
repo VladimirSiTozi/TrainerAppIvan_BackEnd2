@@ -9,7 +9,7 @@
 
     <article>
         <h2 class="heading-title">{{ article.name }}</h2>
-        <p>{{ article.brief_description }}</p>
+        <h3>{{ article.brief_description }}</h3>
         <p>{{ article.paragraph1 }}</p>
         <figure><img src="{{ article.image1.url }}" />
             <figcaption>Lil Bub, a Hoosier cat who became internet famous and helped her owners raise thousands of
@@ -36,10 +36,8 @@
         <p>{{ article.paragraph8 }}.</p>
         <p>{{ article.paragraph9 }}</p>
         <p>{{ article.paragraph10 }}</p>
-        <p>Lil Bub also stared in a book in which she depicted a space cat who traveled to earth to hook up with her
-            owner. The book featured more than 100 photos of Lil Bub and Mike and all proceeds went to animal
-            organizations across the country.</p>
-        <h3>Small Right-Floating Images</h3>
+        <p>{{ article.paragraph10 }}</p>
+        <p>{{ article.paragraph10 }}</p>
 
     </article>
 {% endblock %}

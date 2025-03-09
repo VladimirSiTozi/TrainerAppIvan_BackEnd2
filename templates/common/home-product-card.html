@@ -1,0 +1,6 @@
+<div class="home-card">
+    <img src="{{ product.image.url }}" alt="Product Image" class="card-image">
+    <div><h3>{{ product.name }}</h3></div>
+    <p class="card-text">{{ product.brief_description|truncatechars:100 }}</p>
+    <a href="https://example.com/product1" class="card-button">Buy Now</a>
+</div>

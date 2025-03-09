@@ -122,24 +122,9 @@
                     Porro voluptas labore suscipit non repellat magnam in?</p>
             </div>
             <div class="card-container">
-                <div class="home-card">
-                    <img src="{% static 'assets/images/julia.jpg' %}" alt="Product Image" class="card-image">
-                    <h3>Product Name</h3>
-                    <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, enim!</p>
-                    <a href="https://example.com/product1" class="card-button">Buy Now</a>
-                </div>
-                <div class="home-card">
-                    <img src="{% static 'assets/images/julia.jpg' %}" alt="Product Image" class="card-image">
-                    <h3>Product Name</h3>
-                    <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, enim!</p>
-                    <a href="https://example.com/product2" class="card-button">Buy Now</a>
-                </div>
-                <div class="home-card">
-                    <img src="{% static 'assets/images/julia.jpg' %}" alt="Product Image" class="card-image">
-                    <h3>Product Name</h3>
-                    <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, enim!</p>
-                    <a href="https://example.com/product3" class="card-button">Buy Now</a>
-                </div>
+                {% for product in products %}
+                    {% include 'common/home-product-card.html' %}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -200,27 +185,13 @@
                     Porro voluptas labore suscipit non repellat magnam in?</p>
             </div>
             <div class="card-container">
-                <div class="home-card">
-                    <img src="{% static 'assets/images/julia.jpg' %}" alt="Product Image" class="card-image">
-                    <h3>Product Name</h3>
-                    <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, enim!</p>
-                    <a href="https://example.com/product1" class="card-button">Buy Now</a>
-                </div>
-                <div class="home-card">
-                    <img src="{% static 'assets/images/julia.jpg' %}" alt="Product Image" class="card-image">
-                    <h3>Product Name</h3>
-                    <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, enim!</p>
-                    <a href="https://example.com/product2" class="card-button">Buy Now</a>
-                </div>
-                <div class="home-card">
-                    <img src="{% static 'assets/images/julia.jpg' %}" alt="Product Image" class="card-image">
-                    <h3>Product Name</h3>
-                    <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, enim!</p>
-                    <a href="https://example.com/product3" class="card-button">Buy Now</a>
-                </div>
+                {% for product in products %}
+                    {% include 'common/home-product-card.html' %}
+                {% endfor %}
             </div>
         </div>
     </div>
+
 
     <div class="main-container">
         <div class="videos-content">

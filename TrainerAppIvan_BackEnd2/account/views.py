@@ -12,7 +12,10 @@ from TrainerAppIvan_BackEnd2.account.models import AppUser
 
 
 class AccountDetailView(TemplateView):
-    template_name = 'account/account-details.html'
+    template_name = 'account/account-profile.html'
+
+class AccountNutritionView(TemplateView):
+    template_name = 'programs/training-plan.html'
 
 
 class AccountLoginView(TemplateView):

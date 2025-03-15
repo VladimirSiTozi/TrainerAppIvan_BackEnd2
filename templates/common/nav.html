@@ -15,7 +15,7 @@
         {% if not request.user.is_authenticated %}
              <a href="{% url 'login' %}">login</a>
         {% else %}
-            <a href="#">profile</a>
+            <a href="{% url 'account-detail' %}">profile</a>
             <a href="{% url 'sign-out' %}">logout</a>
         {% endif %} 
        

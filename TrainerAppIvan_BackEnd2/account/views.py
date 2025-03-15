@@ -2,7 +2,7 @@ import os
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from django.views.decorators.csrf import csrf_exempt
@@ -65,7 +65,7 @@ def auth_receiver(request):
 
 
 def sign_out(request):
-    del request.session['user_data']
+    logout(request)
     return redirect('home')
 
 

@@ -1,7 +1,7 @@
 import os
 
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from google.oauth2 import id_token
 from google.auth.transport import requests
@@ -9,10 +9,19 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
 from TrainerAppIvan_BackEnd2.account.models import AppUser
+from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan
 
 
 class AccountDetailView(TemplateView):
     template_name = 'account/account-profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        workout_plans = WorkoutPlan.objects.filter(user=self.request.user).all()
+        context['workout_plans'] = workout_plans
+        return context
+
 
 class AccountNutritionView(TemplateView):
     template_name = 'programs/training-plan.html'

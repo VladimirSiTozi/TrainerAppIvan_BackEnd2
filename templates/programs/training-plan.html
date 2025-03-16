@@ -2,405 +2,77 @@
 
 {% block account-content %}
     <div class="table-container">
-        <h2>Workout Plan</h2>
+        <h2>Workout Plan {{ workout_plan }}</h2>
 
+        <!-- Navigation Buttons for Periods -->
         <div class="navigation-container">
             <nav class="navigation-buttons text">
-                <a href="#">Period 1</a>
-                <a href="#">Period 2</a>
-                <a href="#">Period 3</a>
-                <a href="#">Period 4</a>
+                {% for period_data in plan_data %}
+                    <a href="javascript:void(0);" onclick="showPeriod('period-{{ period_data.period }}')">Period {{ period_data.period }}</a>
+                {% endfor %}
             </nav>
         </div>
 
-        <div class="inner-table-container plan-detail">
-            <h3>Day I</h3>
-            <table>
-                <thead>
-                <tr>
-                    <th>Exercise</th>
-                    <th>Sets</th>
-                    <th>Reps</th>
-                    <th>Rest</th>
-                    <th>Progression</th>
-                    <th>Aim</th>
-                    <th>Focus</th>
-                    <th>Tempo</th>
-                    <th>Weight</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Bench Press</td>
-                    <td>4</td>
-                    <td>8-10</td>
-                    <td>90s</td>
-                    <td>Increase weight weekly</td>
-                    <td>Strength</td>
-                    <td>Chest, Triceps</td>
-                    <td>2-1-2</td>
-                    <td>70kg</td>
-                </tr>
-                <tr>
-                    <td>Deadlift</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>120s</td>
-                    <td>Add 2.5kg every 2 weeks</td>
-                    <td>Power</td>
-                    <td>Back, Legs</td>
-                    <td>1-1-1</td>
-                    <td>120kg</td>
-                </tr>
-                <tr>
-                    <td>Pull-Ups</td>
-                    <td>3</td>
-                    <td>10-12</td>
-                    <td>60s</td>
-                    <td>Add resistance bands</td>
-                    <td>Endurance</td>
-                    <td>Back, Biceps</td>
-                    <td>2-0-2</td>
-                    <td>Bodyweight</td>
-                </tr>
-                <tr>
-                    <td>Squats</td>
-                    <td>4</td>
-                    <td>6-8</td>
-                    <td>90s</td>
-                    <td>Increase depth and weight</td>
-                    <td>Strength</td>
-                    <td>Legs, Core</td>
-                    <td>3-1-1</td>
-                    <td>90kg</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <!-- Period Content -->
+        {% for period_data in plan_data %}
+            <div id="period-{{ period_data.period }}" class="period-content" style="display: none;">
+                <h2>Period {{ period_data.period }}</h2>
+                <p>Duration: {{ period_data.duration_weeks }} weeks</p>
 
-        <div class="inner-table-container plan-detail">
-            <h3>Day II</h3>
-            <table>
-                <thead>
-                <tr>
-                    <th>Exercise</th>
-                    <th>Sets</th>
-                    <th>Reps</th>
-                    <th>Rest</th>
-                    <th>Progression</th>
-                    <th>Aim</th>
-                    <th>Focus</th>
-                    <th>Tempo</th>
-                    <th>Weight</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Bench Press</td>
-                    <td>4</td>
-                    <td>8-10</td>
-                    <td>90s</td>
-                    <td>Increase weight weekly</td>
-                    <td>Strength</td>
-                    <td>Chest, Triceps</td>
-                    <td>2-1-2</td>
-                    <td>70kg</td>
-                </tr>
-                <tr>
-                    <td>Deadlift</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>120s</td>
-                    <td>Add 2.5kg every 2 weeks</td>
-                    <td>Power</td>
-                    <td>Back, Legs</td>
-                    <td>1-1-1</td>
-                    <td>120kg</td>
-                </tr>
-                <tr>
-                    <td>Pull-Ups</td>
-                    <td>3</td>
-                    <td>10-12</td>
-                    <td>60s</td>
-                    <td>Add resistance bands</td>
-                    <td>Endurance</td>
-                    <td>Back, Biceps</td>
-                    <td>2-0-2</td>
-                    <td>Bodyweight</td>
-                </tr>
-                <tr>
-                    <td>Squats</td>
-                    <td>4</td>
-                    <td>6-8</td>
-                    <td>90s</td>
-                    <td>Increase depth and weight</td>
-                    <td>Strength</td>
-                    <td>Legs, Core</td>
-                    <td>3-1-1</td>
-                    <td>90kg</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="inner-table-container plan-detail">
-            <h3>Day III</h3>
-            <table>
-                <thead>
-                <tr>
-                    <th>Exercise</th>
-                    <th>Sets</th>
-                    <th>Reps</th>
-                    <th>Rest</th>
-                    <th>Progression</th>
-                    <th>Aim</th>
-                    <th>Focus</th>
-                    <th>Tempo</th>
-                    <th>Weight</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Bench Press</td>
-                    <td>4</td>
-                    <td>8-10</td>
-                    <td>90s</td>
-                    <td>Increase weight weekly</td>
-                    <td>Strength</td>
-                    <td>Chest, Triceps</td>
-                    <td>2-1-2</td>
-                    <td>70kg</td>
-                </tr>
-                <tr>
-                    <td>Deadlift</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>120s</td>
-                    <td>Add 2.5kg every 2 weeks</td>
-                    <td>Power</td>
-                    <td>Back, Legs</td>
-                    <td>1-1-1</td>
-                    <td>120kg</td>
-                </tr>
-                <tr>
-                    <td>Pull-Ups</td>
-                    <td>3</td>
-                    <td>10-12</td>
-                    <td>60s</td>
-                    <td>Add resistance bands</td>
-                    <td>Endurance</td>
-                    <td>Back, Biceps</td>
-                    <td>2-0-2</td>
-                    <td>Bodyweight</td>
-                </tr>
-                <tr>
-                    <td>Squats</td>
-                    <td>4</td>
-                    <td>6-8</td>
-                    <td>90s</td>
-                    <td>Increase depth and weight</td>
-                    <td>Strength</td>
-                    <td>Legs, Core</td>
-                    <td>3-1-1</td>
-                    <td>90kg</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="inner-table-container plan-detail">
-            <h3>Day IV</h3>
-            <table>
-                <thead>
-                <tr>
-                    <th>Exercise</th>
-                    <th>Sets</th>
-                    <th>Reps</th>
-                    <th>Rest</th>
-                    <th>Progression</th>
-                    <th>Aim</th>
-                    <th>Focus</th>
-                    <th>Tempo</th>
-                    <th>Weight</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Bench Press</td>
-                    <td>4</td>
-                    <td>8-10</td>
-                    <td>90s</td>
-                    <td>Increase weight weekly</td>
-                    <td>Strength</td>
-                    <td>Chest, Triceps</td>
-                    <td>2-1-2</td>
-                    <td>70kg</td>
-                </tr>
-                <tr>
-                    <td>Deadlift</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>120s</td>
-                    <td>Add 2.5kg every 2 weeks</td>
-                    <td>Power</td>
-                    <td>Back, Legs</td>
-                    <td>1-1-1</td>
-                    <td>120kg</td>
-                </tr>
-                <tr>
-                    <td>Pull-Ups</td>
-                    <td>3</td>
-                    <td>10-12</td>
-                    <td>60s</td>
-                    <td>Add resistance bands</td>
-                    <td>Endurance</td>
-                    <td>Back, Biceps</td>
-                    <td>2-0-2</td>
-                    <td>Bodyweight</td>
-                </tr>
-                <tr>
-                    <td>Squats</td>
-                    <td>4</td>
-                    <td>6-8</td>
-                    <td>90s</td>
-                    <td>Increase depth and weight</td>
-                    <td>Strength</td>
-                    <td>Legs, Core</td>
-                    <td>3-1-1</td>
-                    <td>90kg</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="inner-table-container plan-detail">
-            <h3>Day V</h3>
-            <table>
-                <thead>
-                <tr>
-                    <th>Exercise</th>
-                    <th>Sets</th>
-                    <th>Reps</th>
-                    <th>Rest</th>
-                    <th>Progression</th>
-                    <th>Aim</th>
-                    <th>Focus</th>
-                    <th>Tempo</th>
-                    <th>Weight</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Bench Press</td>
-                    <td>4</td>
-                    <td>8-10</td>
-                    <td>90s</td>
-                    <td>Increase weight weekly</td>
-                    <td>Strength</td>
-                    <td>Chest, Triceps</td>
-                    <td>2-1-2</td>
-                    <td>70kg</td>
-                </tr>
-                <tr>
-                    <td>Deadlift</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>120s</td>
-                    <td>Add 2.5kg every 2 weeks</td>
-                    <td>Power</td>
-                    <td>Back, Legs</td>
-                    <td>1-1-1</td>
-                    <td>120kg</td>
-                </tr>
-                <tr>
-                    <td>Pull-Ups</td>
-                    <td>3</td>
-                    <td>10-12</td>
-                    <td>60s</td>
-                    <td>Add resistance bands</td>
-                    <td>Endurance</td>
-                    <td>Back, Biceps</td>
-                    <td>2-0-2</td>
-                    <td>Bodyweight</td>
-                </tr>
-                <tr>
-                    <td>Squats</td>
-                    <td>4</td>
-                    <td>6-8</td>
-                    <td>90s</td>
-                    <td>Increase depth and weight</td>
-                    <td>Strength</td>
-                    <td>Legs, Core</td>
-                    <td>3-1-1</td>
-                    <td>90kg</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="inner-table-container plan-detail">
-            <h3>Day VI</h3>
-            <table>
-                <thead>
-                <tr>
-                    <th>Exercise</th>
-                    <th>Sets</th>
-                    <th>Reps</th>
-                    <th>Rest</th>
-                    <th>Progression</th>
-                    <th>Aim</th>
-                    <th>Focus</th>
-                    <th>Tempo</th>
-                    <th>Weight</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Bench Press</td>
-                    <td>4</td>
-                    <td>8-10</td>
-                    <td>90s</td>
-                    <td>Increase weight weekly</td>
-                    <td>Strength</td>
-                    <td>Chest, Triceps</td>
-                    <td>2-1-2</td>
-                    <td>70kg</td>
-                </tr>
-                <tr>
-                    <td>Deadlift</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>120s</td>
-                    <td>Add 2.5kg every 2 weeks</td>
-                    <td>Power</td>
-                    <td>Back, Legs</td>
-                    <td>1-1-1</td>
-                    <td>120kg</td>
-                </tr>
-                <tr>
-                    <td>Pull-Ups</td>
-                    <td>3</td>
-                    <td>10-12</td>
-                    <td>60s</td>
-                    <td>Add resistance bands</td>
-                    <td>Endurance</td>
-                    <td>Back, Biceps</td>
-                    <td>2-0-2</td>
-                    <td>Bodyweight</td>
-                </tr>
-                <tr>
-                    <td>Squats</td>
-                    <td>4</td>
-                    <td>6-8</td>
-                    <td>90s</td>
-                    <td>Increase depth and weight</td>
-                    <td>Strength</td>
-                    <td>Legs, Core</td>
-                    <td>3-1-1</td>
-                    <td>90kg</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+                {% for day_data in period_data.days %}
+                    <div class="inner-table-container plan-detail">
+                        <h3>{{ day_data.day }}</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Exercise</th>
+                                    <th>Sets</th>
+                                    <th>Reps</th>
+                                    <th>Rest</th>
+                                    <th>Progression</th>
+                                    <th>Aim</th>
+                                    <th>Focus</th>
+                                    <th>Tempo</th>
+                                    <th>Weight</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for exercise in day_data.exercises %}
+                                    <tr>
+                                        <td>{{ exercise.exercise_template.name }}</td>
+                                        <td>{{ exercise.sets }}</td>
+                                        <td>{{ exercise.reps }}</td>
+                                        <td>{{ exercise.rest }}</td>
+                                        <td>{{ exercise.progression }}</td>
+                                        <td>{{ exercise.aim }}</td>
+                                        <td>{{ exercise.exercise_template.focus }}</td>
+                                        <td>{{ exercise.tempo }}</td>
+                                        <td>{{ exercise.weight }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
     </div>
+
+    <!-- JavaScript to Handle Period Toggling -->
+    <script>
+        function showPeriod(periodId) {
+            // Hide all period content
+            document.querySelectorAll('.period-content').forEach(function(element) {
+                element.style.display = 'none';
+            });
+
+            // Show the selected period
+            document.getElementById(periodId).style.display = 'block';
+        }
+
+        // Show the first period by default
+        document.addEventListener('DOMContentLoaded', function() {
+            showPeriod('period-1');
+        });
+    </script>
 {% endblock %}

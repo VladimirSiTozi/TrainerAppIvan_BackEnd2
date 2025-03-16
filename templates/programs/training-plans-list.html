@@ -1,0 +1,12 @@
+{% extends 'account/account-base.html' %}
+
+{% block account-content %}
+
+    <div class="table-container">
+        <ul>
+            {% for workout_plan in workout_plans %}
+                <li><a href="{% url 'workout_plan_details' workout_plan.pk %}">{{ workout_plan.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

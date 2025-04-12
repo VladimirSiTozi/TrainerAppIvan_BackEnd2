@@ -1,0 +1,43 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="contact-form">
+        <h2>Contact Us</h2>
+        <form action="/submit-form" method="POST">
+            <div class="name-fields">
+                <div class="form-group">
+                    <label for="first-name">First Name*</label>
+                    <input type="text" id="first-name" name="first-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name*</label>
+                    <input type="text" id="last-name" name="last-name" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email*</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="theme">Theme</label>
+                <select id="theme" name="theme">
+                    <option value="">Select a topic</option>
+                    <option value="general">General Inquiry</option>
+                    <option value="support">Support</option>
+                    <option value="feedback">Feedback</option>
+                    <option value="business">Business Inquiry</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message*</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+{% endblock %}

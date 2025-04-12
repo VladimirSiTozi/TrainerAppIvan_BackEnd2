@@ -21,4 +21,11 @@ class ArticlePageView():
     template_name = 'common/articles.html'
 
 
+class ContactMeView(TemplateView):
+    template_name = 'common/contact-me.html'
+
+
+class AboutUsView(TemplateView):
+    template_name = 'common/about.us.html'
+
 

@@ -15,6 +15,14 @@ label {
     font-weight: bold;
 }
 
+.contact-form input, option {
+    color: black;
+}
+
+.contact-form option {
+    color: black;
+}
+
 input[type="text"],
 input[type="email"],
 select,

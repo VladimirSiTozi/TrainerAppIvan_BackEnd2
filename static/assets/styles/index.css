@@ -2,10 +2,20 @@
 body {
     margin: 0;
     padding: 0;
+    /*1st*/
     /* background: linear-gradient(45deg, #0f0c29, #302b63, #24243e); */
-    background: #000428;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    /*2nd*/
+    /*background: #000428;*/
+    /*background: -webkit-linear-gradient(to right, #004e92, #000428);  */
+    /*background: linear-gradient(to right, #004e92, #000428); */
+
+    /*3rd*/
+    background-image: url('../images/png/background.png');
+    background-size: cover; /* Cover the entire element */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Don't repeat the image */
+    background-attachment: fixed; /* Optional: makes the background fixed during scrolling */
     color: #fff !important;
 }
 

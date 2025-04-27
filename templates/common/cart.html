@@ -1,0 +1,52 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="cart-container">
+        <h1 class="cart-title">Your Shopping Cart</h1>
+
+        <div class="cart-items">
+            {% for item in cart_items %}
+
+                <div class="cart-item">
+                    <img src="{{ item.product.image.url }}" alt="Product Image" class="item-image">
+                    <div class="item-details">
+                        <h3 class="item-name">{{ item.product.name }}</h3>
+                        <p class="item-desc">{{ item.product.brief_description|truncatechars:100 }}</p>
+                        <div class="item-controls">
+                            <input type="number" value="1" min="1" class="item-quantity" disabled>
+                            <span class="item-price">${{ item.product.price }}</span>
+                                <form action="{% url 'remove_from_cart' item.product.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="remove-btn">Remove</button>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        
+            <div class="cart-summary">
+                <h2>Summary</h2>
+                <p class="summary-subtotal">Subtotal: <span id="subtotal">$0.00</span></p>
+                <p class="summary-total">Total: <span id="total">$0.00</span></p>
+                {% if cart_items %}
+                    {% if user.is_authenticated  %}
+                    <a href="{% url 'home' %}" class="checkout-btn">Proceed to Checkout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}?next={% url 'home' %}" class="checkout-btn">Proceed to Checkout</a>
+                    {% endif %}
+                {% else %}
+                	 <a href="{% url 'shop-home' %}" class="checkout-btn disabled">Go back to the shop</a>
+                        <style>
+                            .checkout-btn.disabled {
+                                opacity: 0.7;
+                                {#cursor: not-allowed;#}
+                            }
+                        </style>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+        <!-- Load the script at the end of the body -->
+    <script src="{% static 'assets/js/cart.js' %}"></script>
+{% endblock %}

@@ -13,7 +13,7 @@ urlpatterns = [
     path('auth-receiver', views.auth_receiver, name='auth_receiver'),
     path('', include('TrainerAppIvan_BackEnd2.common.urls')),
     path('account/', include('TrainerAppIvan_BackEnd2.account.urls')),
-    path('cart/', include('TrainerAppIvan_BackEnd2.cart.urls')),
+    # path('cart/', include('TrainerAppIvan_BackEnd2.cart.urls')),
     path('shop/', include('TrainerAppIvan_BackEnd2.product.urls')),
     path('articles/', include('TrainerAppIvan_BackEnd2.article.urls')),
 ]

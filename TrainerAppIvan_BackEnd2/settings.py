@@ -66,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'TrainerAppIvan_BackEnd2.product.middleware.CartMiddleware'
 ]
 
 ROOT_URLCONF = 'TrainerAppIvan_BackEnd2.urls'

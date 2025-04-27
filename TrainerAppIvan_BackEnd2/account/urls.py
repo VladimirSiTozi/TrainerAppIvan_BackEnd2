@@ -5,12 +5,12 @@ from TrainerAppIvan_BackEnd2.program.views import WorkoutPlanDetailView, Workout
 
 urlpatterns = [
     path('details/', views.AccountDetailView.as_view(), name='account-detail'),
-    path('workout-plans', include([
+    path('workout-plans/', include([
         path('list/', WorkoutPlansListView.as_view(), name='workout-plans-list'),
-        path('/<int:pk>/details/', WorkoutPlanDetailView.as_view(), name='workout_plan_details'),
+        path('<int:pk>/details/', WorkoutPlanDetailView.as_view(), name='workout_plan_details'),
     ])),
 
     path('', include([
-        path('google-sign-in', views.GoogleView.as_view(), name='google_sign_in')
+        path('google-sign-in/', views.GoogleView.as_view(), name='google_sign_in')
     ])),
 ]

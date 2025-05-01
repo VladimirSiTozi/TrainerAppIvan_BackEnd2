@@ -1,13 +1,13 @@
 {% extends 'common/base.html' %}
 
 {% block content %}
-    <div class="shop-main">
+    <div class="main-container">
         <div class="shop-container">
             <h2 class="heading-title">ONLINE SHOP</h2>
         </div>
         <div class="shop-section">
-            <div class="shop-container text">
-                <p class="text">Welcome to our online shop! Here you can find a wide range of high-quality products designed to enhance your fitness journey. Whether you're looking for workout gear, training programs, or nutrition essentials, we have something for everyone. Explore our collection and take your fitness to the next level!</p>
+            <div class="shop-text-content">
+                <h3>Welcome to our online shop! Here you can find a wide range of high-quality products designed to enhance your fitness journey. Whether you're looking for workout gear, training programs, or nutrition essentials, we have something for everyone. Explore our collection and take your fitness to the next level!</h3>
             </div>
 
             {% for product in products %}
@@ -16,12 +16,12 @@
                 {% endif %}
                 
                 <a href="{% url 'product-detail' product.pk %}">
-                {% include 'product/product-card.html' %}
+                    {% include 'product/product-card.html' %}
                 </a>
 
-            {% if forloop.counter|divisibleby:3 or forloop.last %}
-                </div> {# Closes .shop-container after every three cards #}
-            {% endif %}
+                {% if forloop.counter|divisibleby:3 or forloop.last %}
+                    </div> {# Closes .shop-container after every three cards #}
+                {% endif %}
             {% endfor %}
         </div>
     </div>

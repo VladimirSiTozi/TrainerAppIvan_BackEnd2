@@ -23,6 +23,15 @@
     /* Include padding and border in element's total size */
 }
 
+.shop-text-content {
+    margin: auto;
+    width: 85%;
+}
+
+.shop-section a {
+    text-decoration: none;
+}
+
 .normal-container {
     flex-direction: column;
 }

@@ -11,7 +11,7 @@
             </div>
             <div class="product-content">
                 <div class="single-category">
-                    <p>{{ product.category }}</p>
+                    <p><i>category:</i> {{ product.category }}</p>
                 </div>
                 <div class="text">
                     <p>{{ product.brief_description }}</p>
@@ -46,68 +46,9 @@
             <h2 class="underline-text secondary-heading-title">Related Products</h2>
         </div>
         <div class="product-container related-products">
-            <div id="card">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="assets/images/boxer.jpg" alt="">
-                    </div>
-                    <div class="card-title">
-                        <h2>Boxing</h2>
-                    </div>
-                    <div class="card-text">
-                        <p>Lorem ipsum dolor sit amet consectetur, Ducimus, repudiandae temporibus omnis illum maxime quod deserunt eligendi dolor</p>
-                    </div>
-
-                    <div class="card-product-price">
-                        <p><span>50.99</span>$</p>
-                       
-                    </div>
-                    <div class="card-product-price">
-                        <button type="button" >Buy Now</button>
-                    </div>   
-                </div>
-            </div>
-            <div id="card">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="assets/images/boxing.jpg" alt="">
-                    </div>
-                    <div class="card-title">
-                        <h2>Boxing 2</h2>
-                    </div>
-                    <div class="card-text">
-                        <p>Lorem ipsum dolor sit amet consectetur, Ducimus, repudiandae</p>
-                    </div>
-
-                    <div class="card-product-price">
-                        <p><span>50.99</span>$</p>
-                       
-                    </div>
-                    <div class="card-product-price">
-                        <button type="button" >Buy Now</button>
-                    </div>   
-                </div>
-            </div>
-            <div id="card">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="assets/images/power-lifting.jpg" alt="">
-                    </div>
-                    <div class="card-title">
-                        <h2>Power Lifting</h2>
-                    </div>
-                    <div class="card-text">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, vitae atque placeat asperiores dolore qui sit laboriosam? Quibusdam maiores illum et sed eaque eligendi, velit commodi quod deleniti voluptates facere.</p>
-                    </div>
-
-                    <div class="card-product-price">
-                        <p><span>50.99</span>$</p>
-                       
-                    </div>
-                    <div class="card-product-price">
-                        <button type="button" >Buy Now</button>
-                    </div>   
-                </div>
+                {% for product in related_products %}
+                    {% include 'product/product-card.html' %}
+                {% endfor %}
             </div>
         </div>
     </div>

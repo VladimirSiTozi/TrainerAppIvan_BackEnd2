@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.6;
     color: #fff;
     /* background: linear-gradient(45deg, #0f0c29, #302b63, #24243e); */
@@ -83,8 +83,8 @@ h3 {
 
 .subtitle {
     margin: 0 0 20px 0;
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 510;
 }
 
 

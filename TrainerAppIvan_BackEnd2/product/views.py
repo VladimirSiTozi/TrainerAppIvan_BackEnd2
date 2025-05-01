@@ -28,6 +28,16 @@ class ProductDetailView(DetailView):
     template_name = 'product/product.html'
     context_object_name = 'product'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = context['product']
+
+        context['related_products'] = Product.objects.filter(
+            category=product.category
+        ).exclude(id=product.id).order_by('-created_at')[:3]
+        print(context['related_products'])
+        return context
+
 
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -140,3 +150,4 @@ class SuccessPaymentView(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class CancelPaymentView(TemplateView):
     template_name = 'common/cancel-payment.html'
+

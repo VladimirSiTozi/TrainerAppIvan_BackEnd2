@@ -2,21 +2,24 @@
 body {
     margin: 0;
     padding: 0;
-    /*1st*/
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #fff;
     /* background: linear-gradient(45deg, #0f0c29, #302b63, #24243e); */
+    /* background: #000428;
+    background: -webkit-linear-gradient(to right, #004e92, #000428);
+    background: linear-gradient(to right, #004e92, #000428);  */
 
-    /*2nd*/
-    /*background: #000428;*/
-    /*background: -webkit-linear-gradient(to right, #004e92, #000428);  */
-    /*background: linear-gradient(to right, #004e92, #000428); */
-
-    /*3rd*/
     background-image: url('../images/png/background.png');
-    background-size: cover; /* Cover the entire element */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Don't repeat the image */
-    background-attachment: fixed; /* Optional: makes the background fixed during scrolling */
-    color: #fff !important;
+    background-size: cover;
+    /* Cover the entire element */
+    background-position: center;
+    /* Center the image */
+    background-repeat: no-repeat;
+    /* Don't repeat the image */
+    background-attachment: fixed;
+    /* Optional: makes the background fixed during scrolling */
 }
 
 
@@ -34,40 +37,56 @@ body {
     font-weight: 700;
 }
 
-.trird-heading-title {
-    color: #FFFFFF;
-    font-family: "Roboto", Sans-serif;
-    font-size: 26px;
+h1,
+h2,
+h3 {
+    font-family: 'Poppins', 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 1rem;
+    transition: color 0.3s;
+}
+
+/* Light theme */
+.light-theme {
+    background: #f8f9fa;
+    color: #111;
+}
+
+.light-theme .card {
+    background: #ffffff;
+    color: #111;
+}
+
+
+/* Dark theme */
+.dark-theme {
+    background: #121212;
+    color: #f1f1f1;
+}
+
+.dark-theme .card {
+    background: #1e1e1e;
+    color: #f1f1f1;
+}
+
+.text-content {
+    max-width: 600px;
+    /* Limit text width for better readability */
+}
+
+.title {
+    margin: 0 0 10px 0;
+    font-size: 36px;
     font-weight: 700;
 }
 
-.special-text {
-    color: #FFFFFF;
-    font-family: "Roboto", Sans-serif;
-    font-size: 24px; /* Slightly larger than regular text */
-    font-weight: 400; /* Bold text */
-}
-
-.text {
-    color: #FFFFFF;
-    font-family: "Roboto", Sans-serif;
-    font-size: 20px;
+.subtitle {
+    margin: 0 0 20px 0;
+    font-size: 18px;
     font-weight: 500;
 }
 
-.secondaty-text {
-    color: #FFFFFF;
-    font-family: "Roboto", Sans-serif;
-    font-size: 18px;
-    font-weight: 300;
-}
-
-.small-text {
-    color: #FFFFFF;
-    font-family: "Roboto", Sans-serif;
-    font-size: 16px;
-    font-weight: 200;
-}
 
 .buy-button {
     margin-top: 10px;
@@ -80,7 +99,8 @@ body {
 
 /* Main container */
 .main-container {
-    max-width: 1200px; /* Changed from 1000 to 1200px */
+    max-width: 1200px;
+    /* Changed from 1000 to 1200px */
     width: 100%;
     margin: auto;
     /* background: #333; */
@@ -100,7 +120,7 @@ body {
 /* Logo and nav */
 .logo-container {
     height: 120px;
-    margin: 20px;
+    margin-top: 20px;
 }
 
 .logo-container img {
@@ -128,23 +148,33 @@ body {
     cursor: pointer;
     color: #fff;
     text-transform: uppercase;
-    text-decoration: none; /* Remove underline from links */
-    font-weight: bold; /* Make text bold */
-    border-radius: 5px; /* Rounded corners */
-    transition: all 0.3s ease; /* Smooth transition for hover effects */
-    display: inline-block; /* Ensure padding and margins work correctly */
+    text-decoration: none;
+    /* Remove underline from links */
+    font-weight: bold;
+    /* Make text bold */
+    border-radius: 5px;
+    /* Rounded corners */
+    transition: all 0.3s ease;
+    /* Smooth transition for hover effects */
+    display: inline-block;
+    /* Ensure padding and margins work correctly */
 }
 
 .navigation-buttons a:hover {
-    background-color: whitesmoke; /* Darker background on hover */
+    background-color: whitesmoke;
+    /* Darker background on hover */
     color: #000;
-    transform: translateY(-3px); /* Slight lift effect */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
+    transform: translateY(-3px);
+    /* Slight lift effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Add a shadow on hover */
 }
 
 .navigation-buttons a:active {
-    transform: translateY(0); /* Reset lift effect when clicked */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Smaller shadow when active */
+    transform: translateY(0);
+    /* Reset lift effect when clicked */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Smaller shadow when active */
 }
 
 /* Resume */
@@ -159,50 +189,35 @@ body {
 .content {
     display: flex;
     align-items: center;
-    gap: 60px; /* Space between image and text */
-    max-width: 1200px; /* Limit width for better readability */
+    gap: 60px;
+    /* Space between image and text */
+    max-width: 1200px;
+    /* Limit width for better readability */
     margin: 0 auto;
 }
 
 .image-wrapper {
-    flex-shrink: 0; /* Prevent image from shrinking */
+    flex-shrink: 0;
+    /* Prevent image from shrinking */
     overflow: hidden;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
 }
 
 .image-resume {
-    width: 400px; /* Slightly larger image for emphasis */
+    width: 400px;
+    /* Slightly larger image for emphasis */
     height: auto;
     display: block;
     border-radius: 15px;
-    transition: transform 0.3s ease; /* Smooth hover effect */
+    transition: transform 0.3s ease;
+    /* Smooth hover effect */
 }
 
 .image-wrapper:hover .image-resume {
-    transform: scale(1.03); /* Slight zoom on hover */
-}
-
-.text-content {
-    max-width: 600px; /* Limit text width for better readability */
-}
-
-.title {
-    margin: 0 0 10px 0;
-    font-size: 36px;
-    font-weight: 700;
-}
-
-.subtitle {
-    margin: 0 0 20px 0;
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.text {
-    font-size: 16px;
-    line-height: 1.8; /* Improved line spacing */
-    margin-bottom: 30px;
+    transform: scale(1.03);
+    /* Slight zoom on hover */
 }
 
 .trainer-skills {
@@ -211,17 +226,21 @@ body {
     margin: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Space between skills */
+    gap: 10px;
+    /* Space between skills */
 }
 
 .trainer-skills li {
-    background-color: #e0e0e0; /* Light gray background for skills */
+    background-color: #e0e0e0;
+    /* Light gray background for skills */
     padding: 10px 20px;
-    border-radius: 25px; /* Rounded corners for skills */
+    border-radius: 25px;
+    /* Rounded corners for skills */
     font-size: 14px;
     font-weight: 500;
     color: #333;
-    transition: background-color 0.3s ease; /* Smooth hover effect */
+    transition: background-color 0.3s ease;
+    /* Smooth hover effect */
 }
 
 
@@ -231,7 +250,8 @@ body {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border-radius: 15px;
-    box-sizing: border-box; /* Ensure padding is included in the width */
+    box-sizing: border-box;
+    /* Ensure padding is included in the width */
 }
 
 .image-best-seller {
@@ -260,7 +280,8 @@ body {
 
 .icon-list {
     list-style: none;
-    padding-left: 40px; /* Adjust this value to align with the red line */
+    padding-left: 40px;
+    /* Adjust this value to align with the red line */
 }
 
 .icon-list li {
@@ -270,9 +291,11 @@ body {
 
 .icon {
     position: absolute;
-    left: -40px; /* Adjust this value to align the icon with the red line */
+    left: -40px;
+    /* Adjust this value to align the icon with the red line */
     top: 0;
 }
+
 /* .widget-button {
     text-align: center;
 } */
@@ -338,20 +361,31 @@ body {
 }
 
 .card-button {
-    display: inline-block; /* Make the link behave like a block element */
-    padding: 10px 20px; /* Add padding */
-    font-size: 16px; /* Set font size */
-    color: #fff; /* Text color */
-    background-color: #000; /* Background color */
-    border-radius: 5px; /* Rounded corners */
-    text-decoration: none; /* Remove underline */
-    text-align: center; /* Center text */
-    transition: background-color 0.3s ease; /* Smooth hover effect */
-    margin-top: 10px; /* Add some spacing above the button */
+    display: inline-block;
+    /* Make the link behave like a block element */
+    padding: 10px 20px;
+    /* Add padding */
+    font-size: 16px;
+    /* Set font size */
+    color: #fff;
+    /* Text color */
+    background-color: #000;
+    /* Background color */
+    border-radius: 5px;
+    /* Rounded corners */
+    text-decoration: none;
+    /* Remove underline */
+    text-align: center;
+    /* Center text */
+    transition: background-color 0.3s ease;
+    /* Smooth hover effect */
+    margin-top: 10px;
+    /* Add some spacing above the button */
 }
 
 .card-button:hover {
-    background-color: #fff; /* Darker background on hover */
+    background-color: #fff;
+    /* Darker background on hover */
     color: #000;
     text-decoration: none;
 }
@@ -443,186 +477,16 @@ img {
     padding: 20px 20px 100px 20px;
 }
 
-/* Footer */
-.footer-container {
-    margin: 0 150px;
-}
-
-.site-footer {
-    background-color: #26272b;
-    padding: 45px 0 20px;
-    font-size: 15px;
-    line-height: 24px;
-    color: #737373;
-}
-
-.site-footer hr {
-    border-top-color: #bbb;
-    opacity: 0.5
-}
-
-.site-footer hr.small {
-    margin: 20px 0
-}
-
-.site-footer h6 {
-    color: #fff;
-    font-size: 16px;
-    text-transform: uppercase;
-    margin-top: 5px;
-    letter-spacing: 2px
-}
-
-.site-footer a {
-    color: #737373;
-}
-
-.site-footer a:hover {
-    color: #3366cc;
-    text-decoration: none;
-}
-
-.footer-links {
-    padding-left: 0;
-    list-style: none
-}
-
-.footer-links li {
-    display: block
-}
-
-.footer-links a {
-    color: #737373
-}
-
-.footer-links a:active,
-.footer-links a:focus,
-.footer-links a:hover {
-    color: #3366cc;
-    text-decoration: none;
-}
-
-.footer-links.inline li {
-    display: inline-block
-}
-
-.site-footer .social-icons {
-    text-align: right
-}
-
-.site-footer .social-icons a {
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    margin-left: 6px;
-    margin-right: 0;
-    border-radius: 100%;
-    background-color: #33353d
-}
-
-.copyright-text {
-    margin: 0
-}
-
-@media (max-width:991px) {
-    .site-footer [class^=col-] {
-        margin-bottom: 30px
-    }
-}
-
-@media (max-width:767px) {
-    .site-footer {
-        padding-bottom: 0
-    }
-
-    .site-footer .copyright-text,
-    .site-footer .social-icons {
-        text-align: center
-    }
-}
-
-.social-icons {
-    padding-left: 0;
-    margin-bottom: 0;
-    list-style: none
-}
-
-.social-icons li {
-    display: inline-block;
-    margin-bottom: 4px
-}
-
-.social-icons li.title {
-    margin-right: 15px;
-    text-transform: uppercase;
-    color: #96a2b2;
-    font-weight: 700;
-    font-size: 13px
-}
-
-.social-icons a {
-    background-color: #eceeef;
-    color: #818a91;
-    font-size: 16px;
-    display: inline-block;
-    line-height: 44px;
-    width: 44px;
-    height: 44px;
-    text-align: center;
-    margin-right: 8px;
-    border-radius: 100%;
-    -webkit-transition: all .2s linear;
-    -o-transition: all .2s linear;
-    transition: all .2s linear
-}
-
-.social-icons a:active,
-.social-icons a:focus,
-.social-icons a:hover {
-    color: #fff;
-    background-color: #29aafe
-}
-
-.social-icons.size-sm a {
-    line-height: 34px;
-    height: 34px;
-    width: 34px;
-    font-size: 14px
-}
-
-.social-icons a.facebook:hover {
-    background-color: #3b5998
-}
-
-.social-icons a.twitter:hover {
-    background-color: #00aced
-}
-
-.social-icons a.linkedin:hover {
-    background-color: #007bb6
-}
-
-.social-icons a.dribbble:hover {
-    background-color: #ea4c89
-}
-
-@media (max-width:767px) {
-    .social-icons li.title {
-        display: block;
-        margin-right: 0;
-        font-weight: 600
-    }
-}
-
 /****
-Images by 
+Images by
 Bryan Moats, Mike Dornseif, Griffin Moore, Andrea Austoni, Jack Hughes, Jeremy Fryc
 ****/
 
 /* General Styles */
 .hero2 {
     display: flex;
-    align-items: flex-start; /* Align items to the top */
+    align-items: flex-start;
+    /* Align items to the top */
     justify-content: space-between;
     height: 650px;
     margin: 50px auto;
@@ -632,6 +496,114 @@ Bryan Moats, Mike Dornseif, Griffin Moore, Andrea Austoni, Jack Hughes, Jeremy F
     border-radius: 15px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
+
+/* Collage Styles (Keep your existing collage CSS) */
+.collage {
+    width: 500px;
+    position: relative;
+    margin: 0px 75px;
+    /* Remove the auto margin to align it properly */
+}
+
+.collage-item {
+    position: absolute;
+    width: 300px;
+    /* Increased width */
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    transform: rotate(-7deg);
+    -ms-transform: rotate(-7deg);
+    -moz-transform: rotate(-7deg);
+    -webkit-transform: rotate(-7deg);
+    -o-transform: rotate(-7deg);
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    /* -webkit-transform-style: preserve-3d; */
+    -moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    -ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=1,OffY=1,Color=#33000000,Positive=true)";
+    filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=1, OffY=1, Color=#33000000, Positive=true);
+}
+
+.collage-item:nth-child(2) {
+    transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -webkit-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    margin-left: 35%;
+    /* Increased spacing */
+    margin-top: 20px;
+    /* Added vertical spacing */
+}
+
+.collage-item:nth-child(3) {
+    transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -webkit-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    margin-left: 70%;
+    /* Increased spacing */
+    margin-top: 50px;
+    /* Added vertical spacing */
+}
+
+.collage-item:nth-child(4) {
+    transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -webkit-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    margin-top: 200px;
+    /* Increased vertical spacing */
+    margin-left: 10%;
+    /* Increased spacing */
+}
+
+.collage-item:nth-child(5) {
+    transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -webkit-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    margin-left: 60%;
+    /* Increased spacing */
+    margin-top: 250px;
+    /* Increased vertical spacing */
+}
+
+.collage-item img {
+    max-width: 100%;
+    max-height: 100%;
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+    /*filter: gray;*/
+    -webkit-filter: grayscale(100%);
+}
+
+.collage-item:hover {
+    z-index: 999;
+    transform: rotate(3deg);
+    -ms-transform: rotate(3deg);
+    -moz-transform: rotate(3deg);
+    -webkit-transform: rotate(3deg);
+    -o-transform: rotate(0deg);
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+
+.collage-item:hover img {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
+    -webkit-filter: grayscale(0%);
+}
+
 
 /* Right Container Styles */
 .right-container {

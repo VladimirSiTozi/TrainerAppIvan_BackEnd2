@@ -132,9 +132,11 @@ def create_checkout_session(request):
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 
+@method_decorator(login_required, name='dispatch')
 class SuccessPaymentView(TemplateView):
     template_name = 'common/success-payment.html'
 
 
+@method_decorator(login_required, name='dispatch')
 class CancelPaymentView(TemplateView):
     template_name = 'common/cancel-payment.html'

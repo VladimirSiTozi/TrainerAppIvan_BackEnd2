@@ -167,3 +167,9 @@ AUTH_USER_MODEL = 'account.AppUser'
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+STRIPE_WEBHOOK_SECRET = ""
+
+SITE_URL = config('SITE_URL')

@@ -1,26 +1,17 @@
+{% extends 'common/base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="{% static 'assets/styles/styles.css' %}">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-</head>
-<body>
+{% block content %}
 
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+    
 <div class="login-container">
     <div class="login-form">
         <div class="login-form-inner">
-            <div class="logo-container black-logo">
-                <img src="{% static 'assets/images/png/logo-grayscale-inverted.png' %}" alt="Logo" class="logo">
-            </div>
-            <h1 class="heading-title text">Login</h1>
+            <h1 class="heading-title light-theme">Sign in</h1>
             <p class="body-text">See your growth and get consulting support!</p>
             
-            <a href="{% url 'google_sign_in' %}">hello</a>
+            <a href="{% url 'google_sign_in' %}"></a>
             
             <a href="{% url 'google_sign_in' %}" class="rounded-button google-login-button">
         <span class="google-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -75,6 +66,5 @@
         </div>
     </div>
 </div>
-
-
-
+    
+{% endblock %}

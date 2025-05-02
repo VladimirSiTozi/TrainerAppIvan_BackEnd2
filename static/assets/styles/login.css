@@ -13,13 +13,13 @@
 
 .login-container {
   display: flex;
-  max-width: 1200px;
+  max-width: 800px;
+  height: 900px;
   background: var(--white);
   margin: auto;
   width: 100%;
   min-width: 320px;
   color: #333;
-  height: 100vh;
 }
 
 .logo {

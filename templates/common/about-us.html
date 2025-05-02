@@ -1,4 +1,5 @@
-sta{% extends 'common/base.html' %}
+{% extends 'common/base.html' %}
+{% load static %}
 
 {% block content %}
     <div class="about-us">
@@ -16,6 +17,17 @@ sta{% extends 'common/base.html' %}
         <div class="mission-box">
             <h2>Our Mission</h2>
             <p>To make fitness accessible, enjoyable, and sustainable for everyone - no matter your starting point.</p>
+            <div class="about-us-collage">
+                <div class="about-us-image-container">
+                    <img src="{% static 'assets/images/ivan5.jpg' %}">
+                </div>
+                <div class="about-us-image-container">
+                    <img src="{% static 'assets/images/ivan2.jpg' %}">
+                </div>
+                <div class="about-us-image-container">
+                    <img src="{% static 'assets/images/ivan3.jpg' %}">
+                </div>
+            </div>
         </div>
 
         <section>
@@ -38,7 +50,7 @@ sta{% extends 'common/base.html' %}
 
         <section style="text-align: center;">
             <h2>Ready to Start Your Journey?</h2>
-            <a href="/programs" class="cta-button">Explore Our Programs</a>
+            <a href="{% url 'shop-home' %}" class="cta-button">Explore Our Programs</a>
         </section>
     </div>
 {% endblock %}

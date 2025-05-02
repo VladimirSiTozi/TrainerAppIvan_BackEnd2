@@ -8,8 +8,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <article>
-        <h2 class="heading-title">{{ article.name }}</h2>
-        <h3>{{ article.brief_description }}</h3>
+        <h2 class="article-title">{{ article.name }}</h2>
+        <h4 class="article-brief">{{ article.brief_description }}</h4>
         <p>{{ article.paragraph1 }}</p>
         <figure><img src="{{ article.image1.url }}" />
             <figcaption>Lil Bub, a Hoosier cat who became internet famous and helped her owners raise thousands of
@@ -17,8 +17,7 @@
         </figure>
         <h3>{{ article.name }}</h3>
         <p>{{ article.paragraph2 }}</p>
-        <div class="right"><img
-                src="{{ article.image2.url }}" />
+        <div class="right"><img src="{{ article.image2.url }}" />
             <p><em>Source:</em> Photo credit or caption could be added here. The example below shows a floating image
                 with no caption.</p>
         </div>
@@ -26,17 +25,15 @@
         <p>{{ article.paragraph3 }}</p>
         <p>{{ article.paragraph4 }}</p>
         <p>{{ article.paragraph5 }}</p>
-        <p>{{ article.paragraph6 }}</p>
-        <p>{{ article.paragraph6 }}</p>
         <h3>{{ article.name }}</h3>
-        <div class="left"><img
-                src="{{ article.image3.url }}"
-                alt="Portrait of Lil Bub sitting on a blanket" /></div>
-        <p>{{ article.paragraph7 }}.</p>
+        <div class="left"><img src="{{ article.image3.url }}" alt="Portrait of Lil Bub sitting on a blanket" />
+            <p><em>Source:</em> Photo credit or caption could be added here. The example below shows a floating image
+                with no caption.</p>
+        </div>
+        <p>{{ article.paragraph6 }}</p>
+        <p>{{ article.paragraph7 }}</p>
         <p>{{ article.paragraph8 }}.</p>
         <p>{{ article.paragraph9 }}</p>
-        <p>{{ article.paragraph10 }}</p>
-        <p>{{ article.paragraph10 }}</p>
         <p>{{ article.paragraph10 }}</p>
 
     </article>

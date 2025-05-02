@@ -14,13 +14,11 @@
 /* Child containers */
 .shop-container {
     flex: 1;
-    /* Allow containers to grow and fill available space */
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Optional: Add background color */
     box-sizing: border-box;
-    /* Include padding and border in element's total size */
+    padding-bottom: 28px;
 }
 
 .shop-text-content {
@@ -28,8 +26,8 @@
     width: 85%;
 }
 
-.shop-section a {
-    text-decoration: none;
+.shop-text-title {
+    text-align: center;
 }
 
 .normal-container {

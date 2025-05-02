@@ -51,11 +51,7 @@
     cursor: pointer;
     margin-bottom: 40px;
     position: relative;
-}
-
-.articles__article-card:hover {
-    border-bottom: 5px solid #FC6C03;
-    box-sizing: border-box;
+    padding-bottom: 50px;
 }
 
 /* ARTICLE CARDS - TOP */
@@ -90,6 +86,7 @@
     margin-top: 6px;
     font-family: 'Libre Franklin', sans-serif;
     color: #283D4A;
+    font-size: 28px;
 }
 
 /* UTILITY CLASSES */

@@ -47,9 +47,8 @@
         </div>
         <div class="product-container related-products">
                 {% for product in related_products %}
-                    {% include 'product/product-card.html' %}
+                    <a href="{% url 'product-detail' pk=product.pk %}">{% include 'product/product-card.html' %}</a>
                 {% endfor %}
             </div>
         </div>
-    </div>
 {% endblock %}

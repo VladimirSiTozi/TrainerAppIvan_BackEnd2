@@ -30,9 +30,9 @@
             </div>
 
             <div class="form-group">
-                <label for="theme">Theme</label>
+                <label for="theme">Theme*</label>
                 <select id="theme" name="theme">
-                    <option value="">Select a topic</option>
+                    <option value="" disabled selected hidden></option>
                     <option value="general" {% if request.POST.theme == "general" %}selected{% endif %}>General Inquiry</option>
                     <option value="support" {% if request.POST.theme == "support" %}selected{% endif %}>Support</option>
                     <option value="feedback" {% if request.POST.theme == "feedback" %}selected{% endif %}>Feedback</option>

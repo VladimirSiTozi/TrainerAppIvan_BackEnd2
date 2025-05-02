@@ -36,7 +36,7 @@
 	background-color: #e91e63;
 	height: 2px;
 	box-sizing: border-box;
-	width: 50px;
+	width: 200px;
 }
 .footer-col ul li:not(:last-child){
 	margin-bottom: 10px;

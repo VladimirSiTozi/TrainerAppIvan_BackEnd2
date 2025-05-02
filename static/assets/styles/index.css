@@ -70,6 +70,10 @@ h3 {
     color: #f1f1f1;
 }
 
+a {
+    text-decoration: none;
+}
+
 .text-content {
     max-width: 600px;
     /* Limit text width for better readability */
@@ -353,11 +357,8 @@ h3 {
     border-radius: 8px;
 }
 
-.card-text {
-    font-family: "Roboto", Sans-serif;
-    font-size: 20px;
-    font-weight: 300;
-    color: #FFFFFF;
+.home-card-text {
+    height: 100px;
 }
 
 .card-button {

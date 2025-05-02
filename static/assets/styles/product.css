@@ -18,7 +18,7 @@
     /* Allow containers to grow and fill available space */
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     /* Optional: Add border for visualization */
     box-sizing: border-box;
     /* Include padding and border in element's total size */
@@ -245,5 +245,6 @@
 
 /* Related products */
 .related-products{
+    display: flex;
     justify-content: start;
 }

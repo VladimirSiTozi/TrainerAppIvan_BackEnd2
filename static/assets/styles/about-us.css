@@ -49,3 +49,17 @@
 .cta-button:hover {
     background-color: #45a049;
 }
+
+.about-us-collage {
+    display: flex;
+    justify-content: space-between;
+}
+
+.about-us-image-container img {
+    width: 235px;
+    height: 235px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+    /*transition: transform 0.3s ease, box-shadow 0.3s ease;*/
+    object-fit: cover;
+}

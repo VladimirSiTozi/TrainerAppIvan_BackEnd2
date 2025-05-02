@@ -48,9 +48,7 @@
 
                 <!-- Image -->
                 <div class="widget">
-                    <a href="#">
-                        <img src="{% static 'assets/images/poster.png' %}" alt="Book Cover" width="450" height="auto">
-                    </a>
+                    <img src="{% static 'assets/images/poster.png' %}" alt="Book Cover" width="450" height="auto">
                 </div>
             </div>
 
@@ -102,6 +100,8 @@
                     </ul>
                 </div>
                 
+{#                <a href="" class="card-button">See more</a>#}
+                
             </div>
         </div>
     </section>
@@ -116,7 +116,7 @@
                 </p>
             </div>
             <div class="card-container">
-                {% for product in products %}
+                {% for product in first_products %}
                     {% include 'common/home-product-card.html' %}
                 {% endfor %}
             </div>
@@ -180,7 +180,7 @@
                 </p>
             </div>
             <div class="card-container">
-                {% for product in products %}
+                {% for product in second_products %}
                     {% include 'common/home-product-card.html' %}
                 {% endfor %}
             </div>
@@ -193,8 +193,8 @@
             <div class="video-text">
                 <h2 class="underline-text heading-title">Lorem, ipsum dolor sit</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore doloribus
-                    necessitatibus
-                    unde delectus? Optio, non?
+                    necessitatibus unde delectus? Optio, non? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore doloribus
+                    necessitatibus unde delectus? Optio, non?
                 </p>
             </div>
             <div class="videos">

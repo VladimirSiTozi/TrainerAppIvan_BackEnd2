@@ -2,13 +2,13 @@
 
 {% block content %}
     <div class="success-wrapper">
-        <div class="success-cancel-container">
+        <div class="success-cancel-container light-theme">
             <div class="cross-circle">
                 <span class="cross">✖</span>
             </div>
             <h1>Payment Canceled</h1>
             <p>Your payment was not completed. If this was a mistake, please try again.</p>
-            <a href="/" class="home-button">Return to Home</a>
+            <a href="{% url 'cart' %}" class="home-button">Return to your cart</a>
         </div>
     </div>
 {% endblock %}

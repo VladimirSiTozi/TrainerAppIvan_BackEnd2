@@ -18,60 +18,67 @@
                         <div class="item-controls">
                             <input type="number" value="1" min="1" class="item-quantity" disabled>
                             <span class="item-price">${{ item.product.price }}</span>
-                                <form action="{% url 'remove_from_cart' item.product.id %}" method="post">
+                                <form action="{% url 'remove_from_cart' item.product.id %}" method="post" class="remove-form">
                                     {% csrf_token %}
-                                    <button class="remove-btn">Remove</button>
+                                    <button type="button" class="remove-btn" data-product-id="{{ item.product.id }}">Remove</button>
                                 </form>
                         </div>
                     </div>
                 </div>
             {% endfor %}
+
+        <div class="cart-summary">
+                <h2 class="light-theme">Summary</h2>
+                <p class="summary-subtotal light-theme">Subtotal: <span id="subtotal">$0.00</span></p>
+                <p class="summary-total light-theme">Total: <span id="total">$0.00</span></p>
         
-            <div class="cart-summary">
-                <h2>Summary</h2>
-                <p class="summary-subtotal">Subtotal: <span id="subtotal">$0.00</span></p>
-                <p class="summary-total">Total: <span id="total">$0.00</span></p>
+            <div class="checkout-button-wrapper">
                 {% if cart_items %}
-                    {% if user.is_authenticated  %}
-{#                        <a href="{% url 'create-checkout-session' %}" class="checkout-btn">Proceed to Checkout</a>#}
-                        <form action="{% url 'create-checkout-session' %}" method="post" id="checkout-button">
+                    {% if user.is_authenticated %}
+                        <form id="checkout-form">
                             {% csrf_token %}
                             <button type="submit" class="checkout-btn">Proceed to Checkout</button>
                         </form>
                     {% else %}
-                        <a href="{% url 'login' %}?next={% url 'home' %}" class="checkout-btn">Proceed to Checkout</a>
+                        <a href="{% url 'login' %}?next={% url 'view_cart' %}" class="checkout-btn">Proceed to Checkout</a>
                     {% endif %}
                 {% else %}
-                	 <a href="{% url 'shop-home' %}" class="checkout-btn disabled">Go back to the shop</a>
-                        <style>
-                            .checkout-btn.disabled {
-                                opacity: 0.7;
-                                {#cursor: not-allowed;#}
-                            }
-                        </style>
+                    <a href="{% url 'shop-home' %}" class="checkout-btn disabled">Go back to the shop</a>
                 {% endif %}
             </div>
         </div>
     </div>
-        <!-- Load the script at the end of the body -->
+
     <script src="{% static 'assets/js/cart.js' %}"></script>
+    
     <script>
-    document.getElementById('checkout-button').addEventListener('click', function () {
-        fetch('/shop/create-checkout-session/', {
+    document.getElementById('checkout-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        fetch('{% url "create-checkout-session" %}', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'  // Include this if you're using Django templates
+                'X-CSRFToken': '{{ csrf_token }}'
             },
             body: JSON.stringify({})
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => { throw err; });
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.url) {
-                window.location.href = data.url;  // Redirect to Stripe Checkout
+                window.location.href = data.url;
             } else {
-                alert("Error: " + data.error);
+                alert("Error: " + (data.error || "Unknown error occurred"));
             }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Checkout error: " + (error.error || "Please try again"));
         });
     });
     </script>

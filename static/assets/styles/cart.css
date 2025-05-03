@@ -103,7 +103,13 @@
   color: #111;
 }
 
+.checkout-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .checkout-btn {
+  width: 200px;
   margin-top: 20px;
   padding: 12px 30px;
   font-size: 1rem;

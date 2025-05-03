@@ -11,6 +11,7 @@
         <a href="{% url 'contact-me' %}">contact</a>
         <a href="{% url 'articles-home' %}">articles</a>
         <a href="{% url 'about-us' %}">about</a>
+        <a href="{% url 'cart' %}" class="cart-button">🛒 View Cart</a>
         {% if not request.user.is_authenticated %}
              <a href="{% url 'login' %}">login</a>
         {% else %}

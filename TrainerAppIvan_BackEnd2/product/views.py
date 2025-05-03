@@ -1,9 +1,11 @@
 import stripe
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -58,17 +60,16 @@ def add_to_cart(request, product_id):
     return redirect('shop-home')
 
 
-def remove_from_cart(request, cart_item_id):
-    # product = get_object_or_404(Product, id=product_id)
+@require_POST
+def remove_from_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
     cart = request.cart
-    cart_item = get_object_or_404(CartItem, id=cart_item_id)
-
-    print(cart_item)
+    print(product)
 
     try:
-        cart_item = CartItem.objects.get(cart=cart, product=cart_item)
+        cart_item = CartItem.objects.get(cart=cart, product=product)
         cart_item.delete()
-        messages.success(request, f"{cart_item.name} е премахнат от количката!")
+        messages.success(request, f"{product.name} е премахнат от количката!")
     except CartItem.DoesNotExist:
         messages.error(request, "Продуктът не е намерен в количката!")
 
@@ -84,7 +85,7 @@ def view_cart(request):
                'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
                }
 
-    return render(request, 'common/cart.html', {'cart_items': cart_items, 'cart': cart})
+    return render(request, 'common/cart.html', context)
 
 
 @login_required
@@ -108,11 +109,12 @@ def checkout(request):
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == 'POST':
-        # Get the user's cart
         cart = get_object_or_404(Cart, user=request.user)
         cart_items = cart.items.all()
 
-        # Create Stripe line items
+        if not cart_items.exists():
+            return JsonResponse({'error': 'Your cart is empty'}, status=400)
+
         line_items = []
         for item in cart_items:
             line_items.append({
@@ -121,23 +123,25 @@ def create_checkout_session(request):
                     'product_data': {
                         'name': item.product.name,
                     },
-                    'unit_amount': int(item.total_price * 100),  # Convert to cents
+                    'unit_amount': int(item.product.price * 100),  # Use price, not total_price
                 },
                 'quantity': item.quantity,
             })
-            print(line_items)
 
         try:
             checkout_session = stripe.checkout.Session.create(
                 payment_method_types=['card'],
                 line_items=line_items,
                 mode='payment',
-                success_url=settings.SITE_URL + 'success/',
-                cancel_url=settings.SITE_URL + 'cancel/',
+                success_url=request.build_absolute_uri(reverse('success')),  # Use reverse()
+                cancel_url=request.build_absolute_uri(reverse('cancel')),
             )
             return JsonResponse({'url': checkout_session.url})
+        except stripe.error.CardError as e:
+            # Handle specific card errors (e.g., insufficient funds)
+            return JsonResponse({'error': e.user_message}, status=400)
         except Exception as e:
-            return JsonResponse({'error': str(e)}, status=400)
+            return JsonResponse({'error': str(e)}, status=500)
 
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 

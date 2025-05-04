@@ -8,6 +8,7 @@ from TrainerAppIvan_BackEnd2.account.models import AppUser
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
+    type = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
     image = models.ImageField(upload_to='products/images/')
     brief_description = models.CharField(max_length=500)

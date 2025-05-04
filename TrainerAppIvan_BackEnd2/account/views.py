@@ -18,6 +18,9 @@ class AccountDetailView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        current_user = AppUser.objects.get(email=self.request.user.email)
+        context['current_user'] = current_user
+
         workout_plans = WorkoutPlan.objects.filter(user=self.request.user).all()
         context['workout_plans'] = workout_plans
         return context

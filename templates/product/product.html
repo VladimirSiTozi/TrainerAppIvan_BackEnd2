@@ -13,7 +13,7 @@
                 <div class="single-category">
                     <p><i>category:</i> {{ product.category }}</p>
                 </div>
-                <div class="text">
+                <div>
                     <p>{{ product.brief_description }}</p>
                 </div>
                 <div class="card-product-price single-product">
@@ -26,7 +26,7 @@
             <div class="title">
                 <h2 class="underline-text secondary-heading-title">Description</h2>
             </div>
-            <div class="text">
+            <div>
                 <p>{{ product.description }}</p>
             </div>
         </div>
@@ -34,7 +34,7 @@
             <div class="title">
                 <h2 class="underline-text secondary-heading-title">Youl will learn</h2>
             </div>
-            <div class="text">
+            <div>
                 <ul>
                     {% for item in product.will_learn  %}
                     	<li>{{ item }}</li>

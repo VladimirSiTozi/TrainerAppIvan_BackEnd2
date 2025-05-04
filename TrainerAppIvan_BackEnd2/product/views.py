@@ -53,7 +53,10 @@ def add_to_cart(request, product_id):
     )
 
     if not created:
-        cart_item.quantity += 1
+        if product.type == 'training program':
+            cart_item.quantity = 1
+        else:
+            cart_item.quantity += 1
         cart_item.save()
 
     messages.success(request, f"{product.name} е добавен към количката!")
@@ -64,7 +67,6 @@ def add_to_cart(request, product_id):
 def remove_from_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart = request.cart
-    print(product)
 
     try:
         cart_item = CartItem.objects.get(cart=cart, product=product)

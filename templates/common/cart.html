@@ -3,7 +3,7 @@
 
 {% block content %}
     <script src="https://js.stripe.com/v3/"></script>
-    
+
     <div class="cart-container">
         <h1 class="cart-title">Your Shopping Cart</h1>
 
@@ -13,73 +13,122 @@
                 <div class="cart-item">
                     <img src="{{ item.product.image.url }}" alt="Product Image" class="item-image">
                     <div class="item-details">
-                        <h3 class="item-name">{{ item.product.name }}</h3>
-                        <p class="item-desc">{{ item.product.brief_description|truncatechars:100 }}</p>
+                        <a href="{% url 'product-detail' item.product.id %}">
+                            <h3 class="item-name">{{ item.product.name }}</h3>
+                        </a>
+                        <p class="item-desc">{{ item.product.brief_description }}</p>
                         <div class="item-controls">
-                            <input type="number" value="1" min="1" class="item-quantity" disabled>
+                            {% if item.product.type == 'training program' %}
+                            	<input type="number" value="1" min="1" class="item-quantity" disabled>
+{#                            {% else %}#}
+{#                                <input type="number" value="1" min="1" class="item-quantity">#}
+                            {% endif %}
                             <span class="item-price">${{ item.product.price }}</span>
-                                <form action="{% url 'remove_from_cart' item.product.id %}" method="post" class="remove-form">
-                                    {% csrf_token %}
-                                    <button type="button" class="remove-btn" data-product-id="{{ item.product.id }}">Remove</button>
-                                </form>
+                            <form action="{% url 'remove_from_cart' item.product.id %}" method="post"
+                                  class="remove-form">
+                                {% csrf_token %}
+                                <button type="submit" class="remove-btn">Remove</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             {% endfor %}
 
-        <div class="cart-summary">
+            <div class="cart-summary">
                 <h2 class="light-theme">Summary</h2>
                 <p class="summary-subtotal light-theme">Subtotal: <span id="subtotal">$0.00</span></p>
                 <p class="summary-total light-theme">Total: <span id="total">$0.00</span></p>
-        
-            <div class="checkout-button-wrapper">
-                {% if cart_items %}
-                    {% if user.is_authenticated %}
-                        <form id="checkout-form">
-                            {% csrf_token %}
-                            <button type="submit" class="checkout-btn">Proceed to Checkout</button>
-                        </form>
+
+                <div class="checkout-button-wrapper">
+                    {% if cart_items %}
+                        {% if user.is_authenticated %}
+                            <form id="checkout-form">
+                                {% csrf_token %}
+                                <button type="submit" class="checkout-btn">Proceed to Checkout</button>
+                            </form>
+                        {% else %}
+                            <a href="{% url 'login' %}?next={% url 'view_cart' %}" class="checkout-btn">Proceed to
+                                Checkout</a>
+                        {% endif %}
                     {% else %}
-                        <a href="{% url 'login' %}?next={% url 'view_cart' %}" class="checkout-btn">Proceed to Checkout</a>
+                        <a href="{% url 'shop-home' %}" class="checkout-btn disabled">Go back to the shop</a>
                     {% endif %}
-                {% else %}
-                    <a href="{% url 'shop-home' %}" class="checkout-btn disabled">Go back to the shop</a>
-                {% endif %}
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="{% static 'assets/js/cart.js' %}"></script>
-    
-    <script>
-    document.getElementById('checkout-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        fetch('{% url "create-checkout-session" %}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'
-            },
-            body: JSON.stringify({})
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(err => { throw err; });
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.url) {
-                window.location.href = data.url;
-            } else {
-                alert("Error: " + (data.error || "Unknown error occurred"));
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert("Checkout error: " + (error.error || "Please try again"));
-        });
-    });
-    </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                function calculateTotals() {
+                    let subtotal = 0;
+
+                    // Get all cart items
+                    const items = document.querySelectorAll('.cart-item');
+
+                    // Calculate subtotal by summing up all item prices
+                    items.forEach(item => {
+                        const priceElement = item.querySelector('.item-price');
+                        const quantityElement = item.querySelector('.item-quantity');
+
+                        // Extract numerical value from price (remove $ sign)
+                        const price = parseFloat(priceElement.textContent.replace('$', ''));
+                        const quantity = parseInt(quantityElement.value);
+
+                        subtotal += price * quantity;
+                    });
+
+                    // Update the subtotal display
+                    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+
+                    // For now, total is the same as subtotal (you can add taxes/shipping here if needed)
+                    const total = subtotal;
+                    document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+                }
+
+                // Calculate totals when page loads
+                calculateTotals();
+
+                // If you implement quantity changes later, you can recalculate when quantities change
+                const quantityInputs = document.querySelectorAll('.item-quantity');
+                quantityInputs.forEach(input => {
+                    input.addEventListener('change', calculateTotals);
+                });
+            });
+        </script>
+
+        {# STRIPE #}
+        <script>
+            document.getElementById('checkout-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                fetch('{% url "create-checkout-session" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: JSON.stringify({})
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(err => {
+                                throw err;
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.url) {
+                            window.location.href = data.url;
+                        } else {
+                            alert("Error: " + (data.error || "Unknown error occurred"));
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert("Checkout error: " + (error.error || "Please try again"));
+                    });
+            });
+        </script>
 {% endblock %}

@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -30,3 +32,11 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"Profile object ({self.user})"
+
+    def age(self):
+        if self.date_of_birth:
+            today = datetime.date.today()
+            return today.year - self.date_of_birth.year - (
+                    (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day)
+            )
+        return None

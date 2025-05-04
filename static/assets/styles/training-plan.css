@@ -1,5 +1,5 @@
 .table-container {
-    max-width: 1200px;
+    max-width: 1000px;
     width: 100%;
     margin: auto;
     /*background-color: #333;*/
@@ -71,4 +71,26 @@ td input:focus {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+
+/* Style the list item */
+.workout-item {
+    margin: 10px 0;
+    list-style-type: none;
+}
+
+/* Style the link */
+.workout-link {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s ease;
+
+}
+
+.workout-link:hover {
+    color: #3498db;
+    text-decoration: underline;
 }

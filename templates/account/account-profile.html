@@ -2,57 +2,46 @@
 {% load static %}
 
 {% block account-content %}
+    <div class="account-message-content">
+        <h3>Welcome to the Ivan The Beat fitness trainer app! This is your secure account overview, where everything is tailored just for you. 
+            Here, you'll find personalized tips from your trainer Ivan The Bear, along with your workout program, 
+            nutrition and recovery plans, videos, and more — all in one place.
+        </h3>
+        <h2>Stay consistent, trust the process, and let’s reach your goals together!</h2>
+    </div>
+    
     <div class="account-content">
-        <h2 class="heading-title">Account Overview</h2>
-        <p class="text">Welcome to your account dashboard. Here you can manage your profile, settings, and
-            more.
-        </p>
-        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique non odit
-            blanditiis iusto maxime consectetur eligendi molestiae quod quia, quos, facere consequuntur!
-            Veniam vero deserunt, adipisci nam nostrum ab amet voluptas deleniti! Quod incidunt aut omnis
-            repellendus deleniti doloremque, sunt, nihil totam libero sequi ad aliquid iusto officia, quis
-            modi voluptates explicabo error voluptas. Similique accusantium debitis voluptatibus optio alias
-            officiis sapiente, quibusdam magni quisquam. Adipisci ut placeat, temporibus voluptate,
-            voluptates quod nihil rem quia ipsam alias earum, corporis voluptas obcaecati incidunt sed.
-            Voluptatem, ut rem atque, sunt quia a qui dolor explicabo quidem voluptate in. Molestiae nulla
-            cum error.
-        </p>
+        <p>Make sure your details are correct so your trainer can reach you.</p>
+        <h1>Account Details</h1>
+        <h3>First name: {{ current_user.profile.first_name }}</h3>
+        <h3>Last Name: {{ current_user.profile.last_name }}</h3>
+        <h3>Email: {{ current_user.email }}</h3>
+        <h3>Age: {{ current_user.profile.age }}</h3>
+    
     </div>
     <div class="account-content">
         <div class="split-container">
             <div>
-                <img src="{% static 'assets/images/boxer.jpg' %}" alt="">
+                <img src="{% static 'assets/images/ivan.jpg' %}" alt="">
             </div>
             <div class="split-text-content text">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum ipsam cumque amet ipsa culpa
-                    accusamus porro! Voluptatem, porro consequuntur. Non nobis eligendi facilis tenetur numquam,
-                    similique hic a nisi atque!
-                </p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo aliquam magni atque sint
-                    recusandae perspiciatis, ut, nostrum molestias modi quos ipsa eligendi porro quas et
-                    laboriosam. Tenetur enim delectus maiores.
-                </p>
+                <div class="trainer-message-box">
+                    <h2>Hello, {{ current_user.profile.first_name }} {{ current_user.profile.last_name }} 👋</h2>
+                    <p>I’m your personal trainer, here to support you every step of the way on your fitness journey. Whether you're aiming to build strength, improve endurance, or just feel healthier, I've got your back.</p>
+                
+                    <h3>💡 Trainer Tips for You</h3>
+                    <ul>
+                        <li><strong>Start Smart:</strong> Always warm up for 5–10 minutes to prepare your body and avoid injury.</li>
+                        <li><strong>Stay Consistent:</strong> Small, regular workouts are more effective than occasional intense sessions.</li>
+                        <li><strong>Hydrate:</strong> Aim to drink water before, during, and after your workouts.</li>
+                        <li><strong>Track Progress:</strong> Use this dashboard to monitor your achievements and set new goals.</li>
+                        <li><strong>Rest is Part of Training:</strong> Recovery is where real growth happens—don't skip it!</li>
+                    </ul>
+                
+                    <p>Check back here weekly for more tips and motivation. Let’s crush those goals! 💪</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="account-content">
-        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique non odit blanditiis
-            iusto maxime consectetur eligendi molestiae quod quia, quos, facere consequuntur! Veniam vero
-            deserunt, adipisci nam nostrum ab amet voluptas deleniti! Quod incidunt aut omnis repellendus
-            deleniti doloremque, sunt, nihil totam libero sequi ad aliquid iusto officia, quis modi voluptates
-            explicabo error voluptas. Similique accusantium debitis voluptatibus optio alias officiis sapiente,
-            quibusdam magni quisquam. Adipisci ut placeat, temporibus voluptate, voluptates quod nihil rem quia
-            ipsam alias earum, corporis voluptas obcaecati incidunt sed. Voluptatem, ut rem atque, sunt quia a
-            qui dolor explicabo quidem voluptate in. Molestiae nulla cum error.
-        </p>
-    </div>
-    <div>
-        <h2 class="secondary-heading-title">Best practices</h2>
-        <ul>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, recusandae.</li>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, perspiciatis culpa!</li>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-        </ul>
     </div>
 
 {% endblock %}

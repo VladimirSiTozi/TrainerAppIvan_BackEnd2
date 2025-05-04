@@ -3,47 +3,52 @@
 {% block content %}
     <div class="contact-form">
         <h2>Contact Us</h2>
-
-        {% if success %}
-            <p class="success-message" style="color: green;">{{ success }}</p>
-        {% endif %}
-        {% if error %}
-            <p class="error-message" style="color: red;">{{ error }}</p>
-        {% endif %}
+        
+        <div class="contact-message">
+            {% if success %}
+                <p class="success-message">{{ success }}</p>
+            {% endif %}
+            {% if error %}
+                <p class="error-message">{{ error }}</p>
+            {% endif %}
+        </div>
 
         <form method="POST">
             {% csrf_token %}
             <div class="name-fields">
                 <div class="form-group">
                     <label for="first-name">First Name*</label>
-                    <input type="text" id="first-name" name="first-name" required value="{{ request.POST.first_name|default:'' }}">
+                    <input type="text" id="first-name" name="first-name" required value="{{ form_data.first_name|default_if_none:'' }}">
+
+
                 </div>
                 <div class="form-group">
                     <label for="last-name">Last Name*</label>
-                    <input type="text" id="last-name" name="last-name" required value="{{ request.POST.last_name|default:'' }}">
+                    <input type="text" id="last-name" name="last-name" required value="{{ form_data.last_name|default_if_none:'' }}">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="email">Email*</label>
-                <input type="email" id="email" name="email" required value="{{ request.POST.email|default:'' }}">
+                <small>IMPORTANT: Please enter a valid email so your trainer can contact you.*</small>
+                <input type="email" id="email" name="email" required value="{{ c.email|default_if_none:'' }}">
             </div>
 
             <div class="form-group">
                 <label for="theme">Theme*</label>
                 <select id="theme" name="theme">
                     <option value="" disabled selected hidden></option>
-                    <option value="general" {% if request.POST.theme == "general" %}selected{% endif %}>General Inquiry</option>
-                    <option value="support" {% if request.POST.theme == "support" %}selected{% endif %}>Support</option>
-                    <option value="feedback" {% if request.POST.theme == "feedback" %}selected{% endif %}>Feedback</option>
-                    <option value="business" {% if request.POST.theme == "business" %}selected{% endif %}>Business Inquiry</option>
-                    <option value="other" {% if request.POST.theme == "other" %}selected{% endif %}>Other</option>
+                    <option value="General" {% if request.POST.theme == "General" %}selected{% endif %}>General Inquiry</option>
+                    <option value="Support" {% if request.POST.theme == "Support" %}selected{% endif %}>Support</option>
+                    <option value="Feedback" {% if request.POST.theme == "Feedback" %}selected{% endif %}>Feedback</option>
+                    <option value="Business" {% if request.POST.theme == "Business" %}selected{% endif %}>Business Inquiry</option>
+                    <option value="Other" {% if request.POST.theme == "Other" %}selected{% endif %}>Other</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="message">Message*</label>
-                <textarea id="message" name="message" required>{{ request.POST.message|default:'' }}</textarea>
+                <textarea id="message" name="message" required>{{ form_data.message|default_if_none:'' }}</textarea>
             </div>
 
             <button type="submit">Send Message</button>

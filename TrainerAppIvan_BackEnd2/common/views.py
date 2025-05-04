@@ -33,6 +33,7 @@ class ContactMeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['success'] = kwargs.get('success')
         context['error'] = kwargs.get('error')
+        context['form_data'] = kwargs.get('form_data', {})
         return context
 
     def post(self, request, *args, **kwargs):
@@ -40,16 +41,25 @@ class ContactMeView(TemplateView):
         first_name = request.POST.get('first-name')
         last_name = request.POST.get('last-name')
         email = request.POST.get('email')
-        theme = request.POST.get('theme', 'No topic selected')
+        theme = request.POST.get('theme')
         message = request.POST.get('message')
 
-        if not (first_name and last_name and email and message):
+        if not (first_name and last_name and email and theme and message):
             return self.render_to_response(
-                self.get_context_data(error="Please fill in all required fields.")
+                self.get_context_data(
+                    error="*Please fill in all required fields.",
+                    form_data=request.POST
+                )
             )
 
-        subject = f"{theme} - Message from {first_name} {last_name}"
-        full_message = f"From: {first_name} {last_name} <{email}>\n\n{message}"
+        subject = f"Contact Form filled - Theme: {theme} - Message from {first_name} {last_name}"
+        full_message = f"""
+            From: {first_name} {last_name} Email:<{email}>
+            
+            Subject: {theme}
+            
+            Message: {message}
+            """
 
         send_mail(
             subject,

@@ -1,4 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.core.mail import send_mail
 from django.conf import settings
@@ -77,3 +79,11 @@ class ContactMeView(TemplateView):
 class AboutUsView(TemplateView):
     template_name = 'common/about-us.html'
 
+
+class ApplyView(TemplateView):
+    template_name = 'common/apply.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class ApplicationFormView(TemplateView):
+    template_name = 'common/application-form.html'

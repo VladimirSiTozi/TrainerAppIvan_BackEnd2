@@ -91,6 +91,7 @@ def view_cart(request):
     return render(request, 'common/cart.html', context)
 
 
+# ????????????
 @login_required
 def checkout(request):
     cart = request.cart

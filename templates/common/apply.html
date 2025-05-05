@@ -1,0 +1,23 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="apply-container-wrapper">
+        <div class="apply-container">
+            <h1>Application Form</h1>
+            
+            <div class="message">
+                <p>To continue with the application form, you need to be signed in to your account.</p>
+                <p>If you already have an account, please sign in below. If you don't have an account yet, you'll be able to create one during the sign-in process.</p>
+            </div>
+            
+            <div class="actions">
+                <a href="/login" class="btn btn-login">Sign In</a>
+                <a href="/form" class="btn btn-form">Go to Form</a>
+            </div>
+            
+            <div class="note">
+                <p>Note: You will be redirected to the sign-in page if you attempt to access the form without being authenticated.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

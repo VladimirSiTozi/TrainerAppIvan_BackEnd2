@@ -87,3 +87,7 @@ class ApplyView(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class ApplicationFormView(TemplateView):
     template_name = 'common/application-form.html'
+
+
+class BusinessCardView(TemplateView):
+    template_name = 'common/business-card.html'

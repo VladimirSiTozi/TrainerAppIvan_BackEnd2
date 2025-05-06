@@ -2,14 +2,18 @@ import os
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.urls import reverse_lazy
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
 
+from TrainerAppIvan_BackEnd2.account.forms import AppUserCreationForm
 from TrainerAppIvan_BackEnd2.account.models import AppUser
 from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan
+
+UserModel = get_user_model()
 
 
 class AccountDetailView(TemplateView):
@@ -36,6 +40,7 @@ class AccountLoginView(TemplateView):
 
 class GoogleView(TemplateView):
     template_name = 'account/google_sign_in.html'
+
 
 @csrf_exempt
 def auth_receiver(request):
@@ -84,6 +89,15 @@ def sign_out(request):
     return redirect('home')
 
 
-class AccountRegisterView(TemplateView):
+class AccountRegisterView(CreateView):
+    model = UserModel
+    form_class = AppUserCreationForm
     template_name = 'account/register.html'
+    success_url = reverse_lazy('home')
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+
+        login(self.request, self.object)
+
+        return response

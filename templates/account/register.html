@@ -1,58 +1,59 @@
+{% extends 'common/base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet" href="{% static 'assets/styles/styles.css' %}">
-</head>
-<body>
-
+{% block content %}
+    
 <div class="login-container">
-  <div class="login-form">
-    <div class="login-form-inner">
-      <div class="logo-container black-logo">
-        <img src="{% static 'assets/images/png/logo-grayscale-inverted.png' %}" alt="Logo" class="logo">
-      </div>
-      <h1 class="heading-titletext">Register</h1>
-      <p class="body-text">See your growth and get consulting support!</p>
+    <div class="login-form">
+        <div class="login-form-inner">
+            <h1 class="heading-title light-theme">Sign in</h1>
+            <p class="body-text">See your growth and get consulting support!</p>
 
-      <div class="sign-in-seperator">
-        <span>or Sign in with Email</span>
-      </div>
-
-      <div class="login-form-group">
-        <label for="email">Email <span class="required-star">*</span></label>
-        <input type="text" placeholder="email@website.com" id="email">
-      </div>
-      <div class="login-form-group">
-        <label for="pwd">Password <span class="required-star">*</span></label>
-        <input autocomplete="off" type="text" placeholder="Minimum 8 characters" id="pwd">
-      </div>
-      <div class="login-form-group">
-        <label for="pwd">Repeat Password <span class="required-star">*</span></label>
-        <input autocomplete="off" type="text" placeholder="Confirm your password" id="pwd">
-      </div>
-
-      <div class="login-form-group single-row">
-        <div class="custom-check">
-          <input autocomplete="off" type="checkbox" checked id="remember"><label for="remember">Remember me</label>
+            <div class="sign-in-seperator">
+                <span>or Sign in with Email</span>
+            </div>
+            
+            <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+                <div class="login-form-group">
+                    <label for="email">Email <span class="required-star">*</span></label>
+                    {{ form.email }}
+                    {% for error in form.email.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="login-form-group">
+                    <label for="pwd">Password <span class="required-star">*</span></label>
+                    {{ form.password1 }}
+                    {% if form.password1.errors %}
+                        <div class="error">
+                            {{ form.password1.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            
+                <div class="login-form-group">
+                    <label for="pwd">Confirm your Password <span class="required-star">*</span></label>
+                    {{ form.password2 }}
+                    {% for error in form.password2.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                </div>
+        
+                <div class="login-form-group single-row">
+                    <div class="custom-check">
+                        <input autocomplete="off" type="checkbox" checked id="remember"><label for="remember">Remember
+                        me</label>
+                    </div>
+        
+                    <a href="#" class="link forgot-link">Forgot Password ?</a>
+                </div>
+        
+                <button type="submit" class="rounded-button login-cta">Register</button>
+            </form>
+        
         </div>
-
-      </div>
-      
-
-      <a href="#" class="rounded-button login-cta">Register</a>
-
-      <div class="register-div">Not registered yet? <a href="#" class="link create-account" -link>Create an account ?</a></div>
     </div>
-
-  </div>
-  
 </div>
-  
-  
-</body>
-</html>
+    
+{% endblock %}

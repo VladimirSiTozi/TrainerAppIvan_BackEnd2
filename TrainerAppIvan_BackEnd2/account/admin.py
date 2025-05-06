@@ -1,11 +1,17 @@
 from django.contrib import admin
 
 from django.contrib.auth.admin import UserAdmin
+
+from .forms import AppUserCreationForm, AppUserChangeForm
 from .models import AppUser, Profile
 
 
 @admin.register(AppUser)
 class AppUserAdmin(UserAdmin):
+    model = AppUser
+    add_form = AppUserCreationForm
+    form = AppUserChangeForm
+
     list_display = ('email', 'is_active', 'is_staff')  # Fields displayed in admin list view
     search_fields = ('email',)
     ordering = ('email',)

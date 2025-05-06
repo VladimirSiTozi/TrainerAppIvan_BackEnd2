@@ -41,26 +41,60 @@
             <div class="sign-in-seperator">
                 <span>or Sign in with Email</span>
             </div>
-
-            <div class="login-form-group">
-                <label for="email">Email <span class="required-star">*</span></label>
-                <input type="text" placeholder="email@website.com" id="email">
-            </div>
-            <div class="login-form-group">
-                <label for="pwd">Password <span class="required-star">*</span></label>
-                <input autocomplete="off" type="text" placeholder="Minimum 8 characters" id="pwd">
-            </div>
-
-            <div class="login-form-group single-row">
-                <div class="custom-check">
-                    <input autocomplete="off" type="checkbox" checked id="remember"><label for="remember">Remember
-                    me</label>
+            
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                
+                {% if form.non_field_errors %}
+                    <div class="error">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                <div class="login-form-group">
+                    <label for="{{ form.username.id_for_label }}">Email <span class="required-star">*</span></label>
+                    <input type="text" 
+                           name="{{ form.username.name }}" 
+                           id="{{ form.username.id_for_label }}"
+                           placeholder="email@website.com"
+                           value="{{ form.username.value|default_if_none:'' }}">
+                    {% if form.username.errors %}
+                        <div class="error">
+                            {% for error in form.username.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
-
-                <a href="#" class="link forgot-link">Forgot Password ?</a>
-            </div>
-
-            <a href="#" class="rounded-button login-cta">Login</a>
+                
+                <div class="login-form-group">
+                    <label for="{{ form.password.id_for_label }}">Password <span class="required-star">*</span></label>
+                    <input type="password" 
+                           name="{{ form.password.name }}" 
+                           id="{{ form.password.id_for_label }}"
+                           autocomplete="off"
+                           placeholder="Minimum 8 characters">
+                    {% if form.password.errors %}
+                        <div class="error">
+                            {% for error in form.password.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="login-form-group single-row">
+                    <div class="custom-check">
+                        <input type="checkbox" name="remember_me" id="remember" checked>
+                        <label for="remember">Remember me</label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="rounded-button login-cta">Login</button>
+                        
+                </form>
 
             <div class="register-div">Not registered yet? <a href="{% url 'register' %}" class="link create-account" -link>Create an account ?</a></div>
         </div>

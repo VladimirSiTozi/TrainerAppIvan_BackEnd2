@@ -1,5 +1,6 @@
 import os
 
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, get_user_model
@@ -34,7 +35,7 @@ class AccountNutritionView(TemplateView):
     template_name = 'programs/training-plan.html'
 
 
-class AccountLoginView(TemplateView):
+class AccountLoginView(LoginView):
     template_name = 'account/login.html'
 
 

@@ -74,14 +74,9 @@
 }
 
 /* Duplicate Card CSS */
-        /* Card  */
-.card {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
+#card .card {
+    width: 30%;
 }
-
 
 
 @media (max-width: 980px) {

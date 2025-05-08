@@ -1,21 +1,13 @@
-   /* Main container */
-.coaching-main {
-    max-width: 1200px;
-    width: 100%;
-    margin: 20px auto;
-    padding: 20px;
-    /* border: 1px solid #ccc; */
-    border-radius: 8px;
-}
-
 /* Child containers */
 .coaching-container {
-    flex: 1; /* Allow containers to grow and fill available space */
+    flex: 1;
+    max-width: 1000px;
+    margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border: 1px solid #ddd;  */
-    box-sizing: border-box; /* Include padding and border in element's total size */
+    box-sizing: border-box;
+    padding-bottom: 30px;
 }
 
 .normal-container {
@@ -27,17 +19,17 @@
 }
 
 .coaching-inner {
-    padding: 50px;
     width: 500px;
 }
 
 /* Coach card */
 .coach-card {
-    width: 300px; /* Fixed width for the card */
-    border-radius: 10px; /* Rounded corners */
-    text-align: center; /* Center-align text */
-    font-family: "Roboto", sans-serif; /* Consistent font */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    width: 300px;
+    height: 100%;
+    border-radius: 10px;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-top {
@@ -52,7 +44,7 @@
 }
 
 .card-bottom {
-    height: 100px;
+    height: 120px;
 }
 
 .coach-text {
@@ -86,6 +78,4 @@
     height: 120px;
 }
 
-.my-style {
-    padding: 50px;
-}
+

@@ -4,7 +4,7 @@
 {% block content %}
     <div class="main-container">
         <div class="container resume">
-            <div class="content">
+            <div class="hero">
                 <div class="image-wrapper">
                     <img src="{% static 'assets/images/ivan.jpg' %}" alt="Fitness Trainer" class="image-resume">
                 </div>
@@ -24,7 +24,7 @@
                         <li>Personalized Training Plans</li>
                         <li>Nutrition Guidance</li>
                         <li>Strength & Conditioning</li>
-                        <li>Mind-Body Balance</li>
+                        {#                        <li>Mind-Body Balance</li>#}
                     </ul>
                 </div>
             </div>
@@ -34,26 +34,24 @@
     <section class="best-seller">
         <div class="container best-seller-inner-container">
             <!-- Left Column -->
-            <div class="column">
+            <div class="best-seller-column">
                 <!-- Heading -->
                 <div class="widget">
                     <h2>NEW RELEASE</h2>
                 </div>
 
-                <!-- Text Content -->
-                <div class="widget">
-                    <p>Your Ultimate Evidence-Based Guide to Strength and Conditioning for
-                        Wrestling.</p>
-                </div>
-
                 <!-- Image -->
-                <div class="widget">
+                <div class="best-seller-img">
                     <img src="{% static 'assets/images/poster.png' %}" alt="Book Cover" width="450" height="auto">
                 </div>
             </div>
 
             <!-- Right Column -->
-            <div class="column">
+            <div class="best-seller-column-content">
+                <h4>Your Ultimate Evidence-Based Guide to Strength and Conditioning for Wrestling.
+                    Gain a competitive edge with proven training methods designed to maximize power, agility, and
+                    endurance on the mat.
+                </h4>
                 <!-- Heading -->
                 <div class="widget learn-text">
                     <h2>You will learn...</h2>
@@ -94,9 +92,9 @@
                         </li>
                     </ul>
                 </div>
-                
-{#                <a href="" class="card-button">See more</a>#}
-                
+
+                {#                <a href="" class="card-button">See more</a>#}
+
             </div>
         </div>
     </section>
@@ -154,12 +152,7 @@
                     eligendi atque perspiciatis, temporibus dolor rerum mollitia asperiores unde omnis eius minus sit
                     facere. Expedita adipisci soluta earum dignissimos eaque laboriosam officiis, illum, itaque, ipsum
                     consequuntur corrupti rem voluptatum non ducimus numquam! Maxime dicta officiis dolorum dolor
-                    expedita,
-                    magni perferendis enim hic nulla perspiciatis, facilis, assumenda at dignissimos sunt. Omnis
-                    recusandae
-                    ducimus quas expedita assumenda, reprehenderit distinctio accusantium eligendi qui architecto
-                    aliquam
-                    quibusdam sint fugit quod voluptatum officia vero exercitationem fugiat nobis iusto.
+                    expedita, magni perferendis enim hic nulla perspiciatis, facilis, assumenda at dignissimos sunt.
                 </p>
             </div>
         </div>
@@ -187,10 +180,9 @@
         <div class="videos-content">
             <div class="video-text">
                 <h2 class="underline-text heading-title">Lorem, ipsum dolor sit</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore doloribus
-                    necessitatibus unde delectus? Optio, non? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore doloribus
-                    necessitatibus unde delectus? Optio, non?
-                </p>
+                <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore doloribus
+                    necessitatibus unde delectus?
+                </h3>
             </div>
             <div class="videos">
                 <div>

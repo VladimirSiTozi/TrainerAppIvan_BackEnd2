@@ -68,7 +68,9 @@ textarea {
     flex: 1;
 }
 
-button[type="submit"] {
+.contact-form button[type="submit"] {
+    width: 150px;
+    margin: auto;
     background-color: #4CAF50;
     color: white;
     padding: 12px 20px;

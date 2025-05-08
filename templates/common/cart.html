@@ -27,7 +27,7 @@
                             <form action="{% url 'remove_from_cart' item.product.id %}" method="post"
                                   class="remove-form">
                                 {% csrf_token %}
-                                <button type="submit" class="remove-btn">Remove</button>
+                                <button id="remove-from-cart" type="submit" class="remove-btn">Remove</button>
                             </form>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                                 <button type="submit" class="checkout-btn">Proceed to Checkout</button>
                             </form>
                         {% else %}
-                            <a href="{% url 'login' %}?next={% url 'view_cart' %}" class="checkout-btn">Proceed to
+                            <a href="{% url 'login' %}" class="checkout-btn">Proceed to
                                 Checkout</a>
                         {% endif %}
                     {% else %}

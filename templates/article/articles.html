@@ -3,9 +3,15 @@
 
 {% block content %}
     <div class="article-main">
-        <div class="article-container">
-            {% for article in articles %}
-                <a href="{% url 'articles-detail' article.pk %}">
+        {% for article in articles %}
+            {% if forloop.counter0|divisibleby:3 %}
+                {% if not forloop.first %}
+                    </div>
+                {% endif %}
+                <div class="article-container">
+            {% endif %}
+            
+            <a href="{% url 'articles-detail' article.pk %}">
                 <article class="articles__article-card">
                     <div class="articles__article-card__bottom">
                         <div class="articles__article-card__bottom__date-title">
@@ -21,9 +27,11 @@
                         </div>
                     </div>
                 </article>
-            {% endfor %}
             </a>
-        </div>
+            
+            {% if forloop.last %}
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
 {% endblock %}
-

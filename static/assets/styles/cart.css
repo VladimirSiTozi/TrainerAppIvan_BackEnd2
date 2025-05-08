@@ -75,7 +75,7 @@
   transition: background 0.3s;
 }
 
-.remove-btn:hover {
+#remove-from-cart:hover {
   background: #e04344;
 }
 

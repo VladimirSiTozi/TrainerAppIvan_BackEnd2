@@ -11,14 +11,28 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Child containers */
-.shop-container {
-    flex: 1;
+.shop-section {
+    max-width: 1000px;
+    width: 100%;
+    margin: auto;
+}
+
+.shop-products {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    padding-bottom: 28px;
+    flex-wrap: wrap;
+    width: 100%;
+    /*justify-content: space-evenly;*/
+    flex-direction: row;
+    padding: 20px;
+}
+
+/* Child containers */
+.shop-container-product {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    margin: 0 auto;
+    gap: 30px;
 }
 
 .shop-text-content {

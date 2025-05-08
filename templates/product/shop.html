@@ -4,26 +4,32 @@
     <div class="main-container">
         <div class="shop-section">
             <div class="shop-text-title">
-                <h2 class="heading-title">ONLINE SHOP</h2>
-            </div>
-            
-            <div class="shop-text-content">
-                <h3>Welcome to our online shop! Here you can find a wide range of high-quality products designed to enhance your fitness journey. Whether you're looking for workout gear, training programs, or nutrition essentials, we have something for everyone. Explore our collection and take your fitness to the next level!</h3>
+                <h2 class="heading-title underline-text">TRAINING & NUTRITION PLANS</h2>
             </div>
 
-            {% for product in products %}
-                {% if forloop.first or forloop.counter0|divisibleby:3 %}
-                    <div class="shop-container">
-                {% endif %}
-                
+            <div class="shop-text-content">
+                <h3>Welcome to our online shop! Here you can find a wide range of high-quality products designed to
+                    enhance your fitness journey. Whether you're looking for workout gear, training programs, or
+                    nutrition essentials, we have something for everyone. Explore our collection and take your fitness
+                    to the next level!</h3>
+            </div>
+
+            <div class="shop-products">
+                {% for product in products %}
+                    {% if forloop.counter0|divisibleby:3 %}
+                        {% if not forloop.first %}
+                            </div>
+                        {% endif %}
+                        <div class="shop-container-product">
+                    {% endif %}
+
                 <a href="{% url 'product-detail' product.pk %}">
                     {% include 'product/product-card.html' %}
                 </a>
 
-                {% if forloop.counter|divisibleby:3 or forloop.last %}
-                    </div> {# Closes .shop-container after every three cards #}
-                {% endif %}
-            {% endfor %}
+                {% if forloop.last %}
+                    </div>{% endif %}
+                {% endfor %}
         </div>
     </div>
 {% endblock %}

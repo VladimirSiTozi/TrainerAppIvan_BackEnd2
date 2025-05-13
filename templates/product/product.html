@@ -1,54 +1,57 @@
 {% extends 'common/base.html' %}
 
 {% block content %}
-    <div class="product-main">
-        <div class="title">
-            <h2 class="underline-text heading-title">{{ product.name }}</h2>
-        </div>
-        <div class="product-container">
-            <div class="product-image">
-                <img src="{{ product.image.url }}" alt="" width="400px">
+    <div class="outer-product-container">
+        <div class="inner-product-container">
+            <div class="product-title">
+                <h2 class="underline-text heading-title">{{ product.name }}</h2>
             </div>
-            <div class="product-content">
-                <div class="single-category">
-                    <p><i>category:</i> {{ product.category }}</p>
+            <div class="product-container">
+                <div class="product-image">
+                    <img src="{{ product.image.url }}" alt="" width="400px">
+                </div>
+                <div class="product-content">
+                    <div class="single-category">
+                        <p><i>category:</i> {{ product.category }}</p>
+                    </div>
+                    <div>
+                        <p>{{ product.brief_description }}</p>
+                    </div>
+                    <div class="card-product-price single-product">
+                        <p><span>{{ product.price }}</span>$</p>
+                        <button type="button" class="product-buy">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-description-text">
+                <div class="title">
+                    <h2 class="underline-text secondary-heading-title">Description</h2>
                 </div>
                 <div>
-                    <p>{{ product.brief_description }}</p>
-                </div>
-                <div class="card-product-price single-product">
-                    <p><span>{{ product.price }}</span>$</p>
-                    <button type="button" class="product-buy">Buy Now</button>
+                    <p>{{ product.description }}</p>
                 </div>
             </div>
-        </div>
-        <div class="">
+            <div class="">
+                <div class="title">
+                    <h2 class="underline-text secondary-heading-title">You will learn</h2>
+                </div>
+                <div>
+                    <ul>
+                        {% for item in product.will_learn %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
             <div class="title">
-                <h2 class="underline-text secondary-heading-title">Description</h2>
-            </div>
-            <div>
-                <p>{{ product.description }}</p>
+                <h2 class="underline-text secondary-heading-title">Related Products</h2>
             </div>
         </div>
-        <div class="">
-            <div class="title">
-                <h2 class="underline-text secondary-heading-title">Youl will learn</h2>
-            </div>
-            <div>
-                <ul>
-                    {% for item in product.will_learn  %}
-                    	<li>{{ item }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
+
+        <div class="related-products">
+            {% for product in related_products %}
+                <a href="{% url 'product-detail' pk=product.pk %}">{% include 'product/product-card.html' %}</a>
+            {% endfor %}
         </div>
-        <div class="title">
-            <h2 class="underline-text secondary-heading-title">Related Products</h2>
-        </div>
-        <div class="product-container related-products">
-                {% for product in related_products %}
-                    <a href="{% url 'product-detail' pk=product.pk %}">{% include 'product/product-card.html' %}</a>
-                {% endfor %}
-            </div>
-        </div>
+    </div>
 {% endblock %}

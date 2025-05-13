@@ -22,7 +22,6 @@ body {
     /* Optional: makes the background fixed during scrolling */
 }
 
-
 .heading-title {
     color: #FFFFFF;
     font-family: "Roboto", Sans-serif;
@@ -77,6 +76,31 @@ a {
     margin: 0 0 20px 0;
     font-size: 20px;
     font-weight: 510;
+}
+
+.underline-text {
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.underline-text::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px; /* Adjust distance of underline from text */
+    width: 100%;
+    height: 3px; /* Thickness of the underline */
+    background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Gradient color for underline */
+    transform: scaleX(0); /* Start with no width */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-in-out; /* Smooth animation */
+}
+
+.underline-text:hover::after {
+    transform: scaleX(1); /* Expand underline on hover */
+    transform-origin: bottom left;
 }
 
 

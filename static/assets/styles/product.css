@@ -1,12 +1,15 @@
 /* Child containers */
+.outer-product-container {
+    max-width: 1000px;
+    width: 100%;               /* Ensures it shrinks on smaller screens */
+    margin: 0 auto;
+}
+
 .product-container {
     display: flex;
-    flex: 1;
     align-items: center;
     justify-content: space-between;
-    /* Optional: Add border for visualization */
     box-sizing: border-box;
-    /* Include padding and border in element's total size */
 }
 
 .normal-container {
@@ -32,49 +35,9 @@
     outline: none;
 }
 
-.underline-text {
-    position: relative;
-    display: inline-block;
-    /* font-size: 2rem; */
-    font-weight: bold;
-    text-decoration: none; /* Remove default underline */
-}
-
-.underline-text::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -5px; /* Adjust distance of underline from text */
-    width: 100%;
-    height: 3px; /* Thickness of the underline */
-    background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Gradient color for underline */
-    transform: scaleX(0); /* Start with no width */
-    transform-origin: bottom right;
-    transition: transform 0.3s ease-in-out; /* Smooth animation */
-}
-
-.underline-text:hover::after {
-    transform: scaleX(1); /* Expand underline on hover */
-    transform-origin: bottom left;
-}
-
 /* Duplicate Card CSS */
 #card .card {
     width: 30%;
-}
-
-
-@media (max-width: 980px) {
-    #card {
-        gap: 2rem;
-    }
-}
-
-@media (max-width: 620px) {
-    #card {
-        flex-direction: column;
-        align-items: center;
-    }
 }
 
 #card .card {
@@ -227,6 +190,37 @@
     justify-content: start;
 }
 
+@media (max-width: 1240px) {
+    .outer-product-container {
+        width: 80%;
+    }
+}
+
+@media (max-width: 980px) {
+    #card {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 850px) {
+    .product-title{
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
+        text-align: center;
+    }
+
+    .product-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 620px) {
+    #card {
+        flex-direction: column;
+        align-items: center;
+    }
+}
 
 @media (max-width: 768px) {
     #card {
@@ -240,4 +234,28 @@
         width: 90%;
         max-width: 350px;
     }
+
+    .related-products {
+        flex-direction: column;
+    }
 }
+
+@media (max-width: 425px) {
+    .product-image {
+        width: 100%;
+    }
+
+    .product-image img {
+        width: 100%;
+        height: auto;
+    }
+
+    .product-content {
+        padding: 0;
+    }
+
+    .card-product-price {
+        flex-direction: column;
+    }
+}
+

@@ -93,10 +93,25 @@ article p {
 }
 
 
-/* Styling images for mobile */
+@media (max-width: 768px) {
+    article {
+        max-width: 85%;
+    }
+
+    article p {
+        font-size: 1rem;
+    }
+
+    .article-title {
+        font-size: 1.5rem;
+    }
+
+    .article-brief {
+        padding: 2px;
+    }
+}
 
 @media screen and (max-width: 600px) {
-
     .left,
     .right {
         float: none;

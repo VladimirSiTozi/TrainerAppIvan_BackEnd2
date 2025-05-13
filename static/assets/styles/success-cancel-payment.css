@@ -12,7 +12,7 @@
     padding: 40px 30px;
     border-radius: 12px;
     text-align: center;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 90%;
 }
@@ -61,4 +61,16 @@
 
 .home-button:hover {
     background: #3a9b39;
+}
+
+@media (max-width: 768px) {
+    .success-wrapper {
+        padding: 50px;
+    }
+}
+
+@media (max-width: 425px) {
+    .success-wrapper {
+        padding: 20px;
+    }
 }

@@ -141,4 +141,7 @@
   .cart-summary {
     text-align: center;
   }
+  .checkout-button-wrapper {
+    justify-content: center;
+  }
 }

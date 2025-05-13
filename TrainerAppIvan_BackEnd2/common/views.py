@@ -91,3 +91,7 @@ class ApplicationFormView(TemplateView):
 
 class BusinessCardView(TemplateView):
     template_name = 'common/business-card.html'
+
+
+def privacy_policy(request):
+    return render(request, 'common/privacy_policy.html')

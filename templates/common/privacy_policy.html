@@ -1,0 +1,64 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+<section class="policy-container">
+    <h1>Cookie & Privacy Policy</h1>
+    <p class="effective-date">Effective Date: {{ today|default:"January 1, 2024" }}</p>
+
+    <h2>1. Introduction</h2>
+    <p>We respect your privacy and are committed to protecting it. This policy explains how we use cookies and your choices regarding them.</p>
+
+    <h2>2. What Are Cookies?</h2>
+    <p>Cookies are small text files that websites store on your device. They help sites function properly and provide a better user experience.</p>
+
+    <h2>3. Types of Cookies We Use</h2>
+    <p>We only use <strong>strictly necessary cookies</strong> that are essential for the operation of our website. These include:</p>
+
+    <table class="cookie-table">
+        <thead>
+            <tr>
+                <th>Cookie Name</th>
+                <th>Purpose</th>
+                <th>Type</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>sessionid</td>
+                <td>Keeps you logged in during your visit</td>
+                <td>Essential</td>
+                <td>Session</td>
+            </tr>
+            <tr>
+                <td>csrftoken</td>
+                <td>Protects forms from cross-site attacks</td>
+                <td>Essential</td>
+                <td>1 year</td>
+            </tr>
+            <tr>
+                <td>cart_id</td>
+                <td>Maintains your shopping cart</td>
+                <td>Essential</td>
+                <td>Session or 7 days</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>4. Why We Use Cookies</h2>
+    <ul>
+        <li>To authenticate users and maintain login sessions</li>
+        <li>To protect your data when submitting forms</li>
+        <li>To preserve your shopping cart across pages</li>
+    </ul>
+
+    <h2>5. Managing Cookies</h2>
+    <p>Since these cookies are essential, they cannot be disabled through our banner. However, you can configure your browser settings to block cookies, though doing so may limit the functionality of our site.</p>
+
+    <h2>6. Contact</h2>
+    <p>If you have questions about our use of cookies, please contact us at 
+        <a href="mailto:support@example.com">support@example.com</a>.
+    </p>
+</section>
+{% endblock %}

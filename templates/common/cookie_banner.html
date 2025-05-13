@@ -1,0 +1,16 @@
+{% if not request.COOKIES.cookie_notice %}
+<div id="cookie-banner" style="position: fixed; bottom: 0; background: #eee; padding: 10px;">
+   <span>
+        We use essential cookies to ensure core site functionality such as login and shopping cart. 
+        By continuing to use our site, you agree to our use of these cookies.
+        <a href="{% url 'privacy_policy' %}" style="color: #90cdf4; text-decoration: underline;">Learn more</a>.
+    </span>
+    <button onclick="dismissBanner()">OK</button>
+</div>
+<script>
+  function dismissBanner() {
+    document.cookie = "cookie_notice=shown; max-age=" + 60 * 60 * 24 * 365 + "; path=/";
+    document.getElementById("cookie-banner").style.display = "none";
+  }
+</script>
+{% endif %}

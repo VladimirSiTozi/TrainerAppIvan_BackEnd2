@@ -51,3 +51,15 @@
 .content-boxes {
     gap: 50px;
 }
+
+@media (max-width: 768px) {
+    .shop-container-product {
+        flex-direction: column;
+        margin: auto;
+        width: 80%;
+    }
+
+    .shop-products {
+        padding: 0;
+    }
+}

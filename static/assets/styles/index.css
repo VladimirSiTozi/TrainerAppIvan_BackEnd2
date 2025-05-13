@@ -28,6 +28,7 @@ body {
     font-family: "Roboto", Sans-serif;
     font-size: 60px;
     font-weight: 700;
+    text-align: center;
 }
 
 .secondary-heading-title {
@@ -329,7 +330,7 @@ a {
     display: flex;
     gap: 100px;
     justify-content: center;
-    padding: 20px 0;
+    max-width: 90%;
 }
 
 .video-img {
@@ -375,16 +376,36 @@ a {
 }
 
 /*RESPONSIVE COMMON*/
+@media (max-width: 1240px) {
+    .best-seller-img img {
+        width: 400px;
+    }
+
+    /* Youtube videos container */
+    .videos {
+        gap: 0;
+        justify-content: space-evenly;
+    }
+
+    .videos img {
+        width: 260px;
+    }
+}
+
 @media (max-width: 1025px) {
+    .main-container {
+    }
+
+    max-width: 90%;
 
     /*Best Seller*/
     .best-seller-img img {
-        width: 350px;
+        width: 300px;
     }
 
     /* Products container */
     .home-card {
-        width: 270px;
+        width: 300px;
     }
 
     /*HERO2*/
@@ -419,7 +440,8 @@ a {
 
     /* Youtube videos container */
     .videos {
-        gap: 20px;
+        gap: 15px;
+        max-width: 100%;
     }
 
     /* About */
@@ -465,6 +487,11 @@ a {
         width: 220px;
     }
 
+    .home-card-text {
+        height: 140px;
+    }
+
+
     /*HERO2*/
     .hero2-inner {
         width: 900px;
@@ -479,11 +506,6 @@ a {
     .collage-container .sml-img img {
         width: 128px;
         height: 180px;
-    }
-
-    /* Youtube videos container */
-    .videos {
-        gap: 20px;
     }
 
     .videos img {
@@ -544,25 +566,6 @@ a {
     .home-card {
         width: 180px;
     }
-}
-
-@media (max-width: 440px) {
-    /*MAIN*/
-    .main-container {
-        max-width: 320px;
-    }
-
-    .heading-title {
-        font-size: 30px;
-        font-weight: 700;
-    }
-
-    /*HERO*/
-    .hero {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px; /* smaller gap for mobile */
-    }
 
     .image-resume {
         width: 100%;
@@ -575,8 +578,26 @@ a {
         padding: 0 15px;
     }
 
-    .trainer-skills {
-        justify-content: center;
+    .video img {
+        width: 300px;
+    }
+}
+
+@media (max-width: 700px) {
+    .main-container {
+        max-width: 600px;
+    }
+
+    .heading-title {
+        font-size: 40px;
+        font-weight: 700;
+    }
+
+    /*HERO*/
+    .hero {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px; /* smaller gap for mobile */
     }
 
     /*BEST SALE*/
@@ -598,11 +619,6 @@ a {
         max-width: 90%;
     }
 
-    .best-seller-img img {
-        width: 300px;
-    }
-
-    /*HERO2*/
     .hero2 {
         max-width: 425px;
     }
@@ -611,6 +627,58 @@ a {
         max-width: 425px;
     }
 
+    .collage-container .big-img img {
+        width: 180px;
+        height: 120px;
+    }
+
+    .collage-container .sml-img img {
+        width: 90px;
+        height: 120px;
+    }
+
+    /*YOUTUBE*/
+    .videos {
+        flex-direction: column;
+        /*justify-content: center;*/
+    }
+
+    .video-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .videos .video-img img {
+        width: 300px;
+    }
+}
+
+@media (max-width: 440px) {
+    /*MAIN*/
+    .main-container {
+        max-width: 320px;
+    }
+
+    .heading-title {
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    /*HERO*/
+    .trainer-skills {
+        justify-content: center;
+    }
+
+    .image-resume {
+        width: 260px;
+    }
+
+    /*BEST SALE*/
+    .best-seller-img img {
+        width: 260px;
+    }
+
+    /*HERO2*/
     .collage-container .big-img img {
         width: 120px;
         height: 80px;
@@ -622,7 +690,6 @@ a {
     }
 
     /* Products container */
-
     .description {
         font-size: 12px;
     }
@@ -632,16 +699,17 @@ a {
     }
 
     /*Youtube videos*/
-    .videos {
-        gap: 6px;
+    .video-text {
+        margin: auto;
+        max-width: 80%;
     }
-
-    .videos img {
-        width: 106px;
-    }
-
+    /*About*/
     .about {
-        max-width: 90%;
+        margin: auto;
+        max-width: 80%;
         padding: 0;
     }
 }
+
+
+

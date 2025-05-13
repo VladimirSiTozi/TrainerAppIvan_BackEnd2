@@ -14,7 +14,7 @@
 .login-container {
   display: flex;
   max-width: 800px;
-  height: 900px;
+  height: auto;
   border-radius: 2rem;
   background: var(--white);
   margin: auto;
@@ -300,9 +300,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .login-container {
-    height: 100vh;
-  }
+
 }
 
 @media screen and (max-width: 420px) {
@@ -314,6 +312,7 @@
   }
   .login-container {
     margin: 0;
+    padding-bottom: 20px;
   }
 }
 

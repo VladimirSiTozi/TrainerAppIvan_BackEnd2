@@ -14,12 +14,17 @@
     flex-direction: column;
 }
 
-.content-boxes {
-    gap: 50px;
+.pros-cons-container {
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.coaching-inner {
-    width: 500px;
+.pros-cons-container .coaching-inner {
+    max-width: 45%;
+}
+
+.coaching-content-boxes {
+    gap: 50px;
 }
 
 /* Coach card */
@@ -79,3 +84,36 @@
 }
 
 
+/*RESPONSIVE*/
+@media (max-width: 1240px) {
+    .coaching-container {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 1025px) {
+
+}
+
+@media (max-width: 951px) {
+
+}
+
+@media (max-width: 850px) {
+
+}
+
+@media (max-width: 700px) {
+    .pros-cons-container {
+        flex-direction: column;
+    }
+
+    .pros-cons-container .coaching-inner {
+        max-width: 100%;
+    }
+
+    .coaching-content-boxes {
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.urls import reverse_lazy
+from django.views.decorators.http import require_POST
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from django.views.decorators.csrf import csrf_exempt
@@ -85,6 +86,11 @@ def auth_receiver(request):
     return redirect('home')
 
 
+# def sign_out(request):
+#     logout(request)
+#     return redirect('home')
+
+@require_POST
 def sign_out(request):
     logout(request)
     return redirect('home')

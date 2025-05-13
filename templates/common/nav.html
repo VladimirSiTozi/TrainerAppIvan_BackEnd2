@@ -18,12 +18,25 @@
         <a href="{% url 'about-us' %}">about</a>
         <a href="{% url 'cart' %}" class="cart-button">🛒 Cart</a>
         {% if not request.user.is_authenticated %}
-             <a href="{% url 'login' %}">login</a>
+            <a href="{% url 'login' %}">login</a>
         {% else %}
             <a href="{% url 'account-detail' %}">profile</a>
-            <a href="{% url 'sign-out' %}">logout</a>
-        {% endif %} 
-       
+{#            <a href="{% url 'sign-out' %}">logout</a>#}
+            <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
+                {% csrf_token %}
+            </form>
+
+            <button onclick="confirmLogout()" class="btn btn-danger">LOGOUT</button>
+
+            <script>
+                function confirmLogout() {
+                    if (confirm("Are you sure you want to logout?")) {
+                        document.getElementById('logout-form').submit();
+                    }
+                }
+            </script>
+        {% endif %}
+
     </div>
     {{ request.session.user_data.email }}
 </div>

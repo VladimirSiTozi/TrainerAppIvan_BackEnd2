@@ -9,12 +9,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', views.AccountLoginView.as_view(), name='login'),
     path('register/', views.AccountRegisterView.as_view(), name='register'),
-    # path('sign-out', views.sign_out, name='sign-out'),
     path('logout/', views.sign_out, name='logout'),
     path('auth-receiver', views.auth_receiver, name='auth_receiver'),
     path('', include('TrainerAppIvan_BackEnd2.common.urls')),
-    path('account/', include('TrainerAppIvan_BackEnd2.account.urls')),
-    # path('cart/', include('TrainerAppIvan_BackEnd2.cart.urls')),
+    path('profile/', include('TrainerAppIvan_BackEnd2.account.urls')),
     path('shop/', include('TrainerAppIvan_BackEnd2.product.urls')),
     path('articles/', include('TrainerAppIvan_BackEnd2.article.urls')),
 ]

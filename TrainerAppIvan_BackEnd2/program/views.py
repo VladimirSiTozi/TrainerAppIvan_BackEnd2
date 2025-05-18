@@ -1,30 +1,32 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
+from django.db.models import Q
 
 from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan
 
 
 # Create your views here.
 
-class WorkoutPlansListView(ListView):
+class WorkoutPlansListView(LoginRequiredMixin, ListView):
     model = WorkoutPlan
     template_name = 'programs/training-plans-list.html'
     context_object_name = 'workout_plans'
 
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset=queryset)
-
-        if self.request.user.email != obj.user.email and self.request.user != obj.trainer.user:
-            raise PermissionDenied("You do not have permission to view this workout plan.")
-
-        return obj
+    def get_queryset(self):
+        # Only show workout plans belonging to the current user
+        queryset = super().get_queryset()
+        return queryset.filter(user=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        workout_plans = WorkoutPlan.objects.filter(user=self.request.user).all()
-        context['workout_plans'] = workout_plans
 
+        def get_queryset(self):
+            return WorkoutPlan.objects.filter(
+                Q(user=self.request.user) |
+                Q(trainer__user=self.request.user)
+            ).distinct()
         return context
 
 

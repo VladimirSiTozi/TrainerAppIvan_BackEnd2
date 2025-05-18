@@ -1,5 +1,6 @@
 import os
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -9,22 +10,27 @@ from django.views.decorators.http import require_POST
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, DetailView
 
-from TrainerAppIvan_BackEnd2.account.forms import AppUserCreationForm
-from TrainerAppIvan_BackEnd2.account.models import AppUser
+from TrainerAppIvan_BackEnd2.account.forms import AppUserCreationForm, ProfileForm
+from TrainerAppIvan_BackEnd2.account.models import AppUser, Profile
 from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan
 
 UserModel = get_user_model()
 
 
-class AccountDetailView(TemplateView):
+class AccountDetailView(DetailView):
+    model = Profile
     template_name = 'account/account-profile.html'
+    context_object_name = 'profile'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        current_user = AppUser.objects.get(email=self.request.user.email)
+        profile = self.get_object()
+        current_user = profile.user
         context['current_user'] = current_user
 
         workout_plans = WorkoutPlan.objects.filter(user=self.request.user).all()
@@ -86,10 +92,6 @@ def auth_receiver(request):
     return redirect('home')
 
 
-# def sign_out(request):
-#     logout(request)
-#     return redirect('home')
-
 @require_POST
 def sign_out(request):
     logout(request)
@@ -108,3 +110,22 @@ class AccountRegisterView(CreateView):
         login(self.request, self.object)
 
         return response
+
+
+@login_required
+def complete_profile(request):
+    profile = request.user.profile
+
+    if profile.is_profile_complete:
+        return redirect('home')
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+    else:
+        form = ProfileForm(instance=profile)
+
+        return render(request, 'account/profile-completion-form.html', {'form': form})

@@ -1,0 +1,84 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="outer-complete-profile-form">
+        <div class="complete-profile-form-container">
+            <h2 class="complete-profile-form-title">User Information Form</h2>
+
+            <form action="" method="post">
+                {% csrf_token %}
+
+                <div class="complete-profile-form-group">
+                    {{ form.first_name.label_tag }}
+                    {{ form.first_name }}
+                    {% if form.first_name.errors %}
+                        <div class="form-error">{{ form.first_name.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="complete-profile-form-group">
+                    {{ form.last_name.label_tag }}
+                    {{ form.last_name }}
+                    {% if form.last_name.errors %}
+                    	<div class="form-errors">{{ form.last_name.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="complete-profile-form-group">
+                    {{ form.date_of_birth.label_tag }}
+                    {{ form.date_of_birth }}
+                    {% if form.date_of_birth.errors %}
+                        <div class="form-error">{{ form.date_of_birth.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="complete-profile-form-group">
+                    {{ form.phone_number.label_tag }}
+                    {{ form.phone_number }}
+                    {% if form.phone_number.errors %}
+                        <div class="form-error">{{ form.phone_number.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="complete-profile-form-group">
+                    {{ form.preferred_social_media.label_tag }}
+                    {{ form.preferred_social_media }}
+                    {% if form.preferred_social_media.errors %}
+                        <div class="form-error">{{ form.preferred_social_media.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div id="socialLinkContainer" class="complete-profile-form-group social-link-container">
+                    {{ form.social_media_url.label_tag }}
+                    {{ form.social_media_url }}
+                    {% if form.social_media_url.errors %}
+                        <div class="form-error">{{ form.social_media_url.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <input class="complete-profile-form-submit" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const socialSelect = document.getElementById('social');
+        const socialLinkContainer = document.getElementById('socialLinkContainer');
+
+        function toggleSocialLink() {
+            const selected = socialSelect.value.toLowerCase();
+            const showLink = ['facebook', 'instagram', 'twitter', 'other'].includes(selected);
+            socialLinkContainer.style.display = showLink ? 'block' : 'none';
+        }
+
+        // Hide on load
+        toggleSocialLink();
+
+        // Listen for changes
+        socialSelect.addEventListener('change', toggleSocialLink);
+    });
+</script>
+
+
+{% endblock %}

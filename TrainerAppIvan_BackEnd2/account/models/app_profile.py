@@ -3,6 +3,8 @@ import datetime
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from TrainerAppIvan_BackEnd2.account.choices import SocialMediaChoices
+
 UserModel = get_user_model()
 
 
@@ -28,6 +30,33 @@ class Profile(models.Model):
     date_of_birth = models.DateField(
         blank=True,
         null=True,
+    )
+
+    phone_number = models.CharField(
+        blank=True,
+        null=True,
+    )
+
+    preferred_social_media = models.CharField(
+        max_length=30,
+        choices=SocialMediaChoices.choices,
+        blank=True,
+        null=True,
+    )
+
+    social_media_url = models.URLField(
+        blank=True,
+        null=True,
+    )
+
+    slug = models.SlugField(
+        unique=True,
+        blank=True,
+        null=True,
+    )
+
+    is_profile_complete = models.BooleanField(
+        default=False,
     )
 
     def __str__(self):

@@ -20,7 +20,11 @@
         {% if not request.user.is_authenticated %}
             <a href="{% url 'login' %}">login</a>
         {% else %}
-            <a href="{% url 'account-detail' request.user.profile.slug %}">profile</a>
+            {% if request.user.profile.is_profile_complete %}
+                <a href="{% url 'account-detail' request.user.profile.slug %}">profile</a>
+            {% else %}
+                <a href="{% url 'complete-profile' %}">profile</a>
+            {% endif %}
             <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
                 {% csrf_token %}
             </form>

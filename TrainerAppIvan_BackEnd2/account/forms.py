@@ -55,7 +55,6 @@ class ProfileForm(forms.ModelForm):
                 'placeholder': 'Enter Last Name',
             }),
             'preferred_social_media': forms.Select(attrs={
-                'class': 'complete-profile-form-select',
                 'id': 'social'
             }),
             'social_media_url': forms.URLInput(attrs={
@@ -69,6 +68,10 @@ class ProfileForm(forms.ModelForm):
         # Force these fields to be required
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
+
+        for field_name, field in self.fields.items():
+            if field.required:
+                field.label = f"{field.label}*"
 
     def clean(self):
         cleaned_data = super().clean()

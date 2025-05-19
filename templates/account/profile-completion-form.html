@@ -3,7 +3,12 @@
 {% block content %}
     <div class="outer-complete-profile-form">
         <div class="complete-profile-form-container">
-            <h2 class="complete-profile-form-title">User Information Form</h2>
+            <p class="welcome-message">
+                Welcome aboard! 🎉 We're excited to have you. Please complete your profile below so we can tailor your
+                experience just for you.
+            </p>
+        
+            <h2 class="complete-profile-form-title">User Information</h2>
 
             <form action="" method="post">
                 {% csrf_token %}
@@ -20,7 +25,7 @@
                     {{ form.last_name.label_tag }}
                     {{ form.last_name }}
                     {% if form.last_name.errors %}
-                    	<div class="form-errors">{{ form.last_name.errors }}</div>
+                        <div class="form-errors">{{ form.last_name.errors }}</div>
                     {% endif %}
                 </div>
 
@@ -48,7 +53,7 @@
                     {% endif %}
                 </div>
 
-                <div id="socialLinkContainer" class="complete-profile-form-group social-link-container">
+                <div class="complete-profile-form-group-url" id="socialLinkContainer">
                     {{ form.social_media_url.label_tag }}
                     {{ form.social_media_url }}
                     {% if form.social_media_url.errors %}
@@ -62,23 +67,23 @@
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const socialSelect = document.getElementById('social');
-        const socialLinkContainer = document.getElementById('socialLinkContainer');
+        document.addEventListener('DOMContentLoaded', function () {
+            const socialSelect = document.getElementById('social');
+            const socialLinkContainer = document.getElementById('socialLinkContainer');
 
-        function toggleSocialLink() {
-            const selected = socialSelect.value.toLowerCase();
-            const showLink = ['facebook', 'instagram', 'twitter', 'other'].includes(selected);
-            socialLinkContainer.style.display = showLink ? 'block' : 'none';
-        }
+            function toggleSocialLink() {
+                const selected = socialSelect.value.toLowerCase();
+                const showLink = ['facebook', 'instagram', 'twitter', 'other'].includes(selected);
+                socialLinkContainer.style.display = showLink ? 'block' : 'none';
+            }
 
-        // Hide on load
-        toggleSocialLink();
+            // Hide on load
+            toggleSocialLink();
 
-        // Listen for changes
-        socialSelect.addEventListener('change', toggleSocialLink);
-    });
-</script>
+            // Listen for changes
+            socialSelect.addEventListener('change', toggleSocialLink);
+        });
+    </script>
 
 
 {% endblock %}

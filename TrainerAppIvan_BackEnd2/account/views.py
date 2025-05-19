@@ -79,7 +79,6 @@ def auth_receiver(request):
         return HttpResponse(status=403)
 
     # Authenticate and log in the user (not working for google oauth, only if user is created manually(TOD0:))
-
     # user = authenticate(request, email=user_email, password=None)
 
     if user is not None:
@@ -89,7 +88,7 @@ def auth_receiver(request):
         print("Authentication failed")
 
     # Redirect to the home page
-    return redirect('home')
+    return redirect('complete-profile')
 
 
 @require_POST
@@ -102,7 +101,7 @@ class AccountRegisterView(CreateView):
     model = UserModel
     form_class = AppUserCreationForm
     template_name = 'account/register.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('complete-profile')
 
     def form_valid(self, form):
         response = super().form_valid(form)

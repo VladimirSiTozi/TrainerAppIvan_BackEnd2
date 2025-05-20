@@ -1,4 +1,4 @@
-{% extends 'account/account-base.html' %}
+{% extends 'account/profile-base.html' %}
 {% load static %}
 
 {% block account-content %}
@@ -47,6 +47,8 @@
         {% if current_user.profile.social_media_url %}
         	<h3>Social Media Url: {{ current_user.profile.social_media_url }}</h3>
         {% endif %} 
+    
+        <a class="cta-button" href="{% url 'profile-edit' profile.slug %}">Edit profile</a>
     </div>
     
     

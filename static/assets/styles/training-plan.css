@@ -94,3 +94,52 @@ td input:focus {
     color: #3498db;
     text-decoration: underline;
 }
+
+.no-programs-yet-container {
+    display: flex;
+    justify-content: space-evenly; /* Changed from space-evenly */
+    align-items: center; /* Optional: vertically centers items */
+    width: 100%; /* Ensure container takes full width */
+}
+
+.no-programs-image {
+    width: 30%; /* Changed from max-width */
+    flex-shrink: 0; /* Prevents the image from shrinking */
+}
+
+.no-programs-image img {
+    max-width: 250px; /* Makes image responsive within its container */
+    height: auto;
+    display: block; /* Removes extra space below image */
+}
+
+.no-programs-content {
+    width: 65%; /* Explicit width for content */
+    flex-shrink: 0; /* Prevents content from shrinking */
+}
+
+/*@media (max-width: 1024px) {*/
+/*    .no-programs-yet-container {*/
+/*        width: 90%; !* Ensure container takes full width *!*/
+/*    }*/
+
+/*    .no-programs-content {*/
+/*        width: 50%; !* Explicit width for content *!*/
+/*        flex-shrink: 1; !* Prevents content from shrinking *!*/
+/*    }*/
+/*}*/
+
+/*@media (max-width: 768px) {*/
+/*    .no-programs-yet-container {*/
+/*        flex-direction: column-reverse;*/
+/*        width: 90%; !* Ensure container takes full width *!*/
+/*    }*/
+
+/*    .no-programs-image {*/
+/*        width: 100%;*/
+/*    }*/
+
+/*    .no-programs-content {*/
+/*        width: 100%;*/
+/*    }*/
+/*}*/

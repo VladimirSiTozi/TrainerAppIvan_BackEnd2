@@ -1,4 +1,7 @@
 import os
+
+from django.contrib.admin.views.decorators import staff_member_required
+from django.db.models import Q
 from django.utils import timezone
 
 from django.contrib.auth.decorators import login_required
@@ -267,3 +270,28 @@ def edit_profile(request, slug):
         form = ProfileForm(instance=profile)
 
         return render(request, 'account/profile-completion-form.html', {'form': form})
+
+
+@staff_member_required
+def staff_user_search(request):
+    query = request.GET.get('q', '')
+    user_results = []
+    profile_results = []
+
+    if query:
+        user_results = AppUser.objects.filter(
+            Q(email__icontains=query)
+        )
+
+        profile_results = Profile.objects.filter(
+            Q(first_name__icontains=query) |
+            Q(last_name__icontains=query)
+        )
+
+    context = {
+        'user_results': user_results,
+        'profile_results': profile_results,
+        'query': query
+    }
+
+    return render(request, 'account/accounts-list.html', context)

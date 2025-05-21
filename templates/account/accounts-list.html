@@ -1,0 +1,44 @@
+{% extends "account/profile-base.html" %}
+
+{% block account-content %}
+    <h1>Users Matched</h1>
+
+    {% if query %}
+        <h2>Results for "{{ query }}"</h2>
+
+        <h3>Users Emails</h3>
+        <div class="account-list-boxes">
+            {% if user_results %}
+                <ul>
+                    {% for user in user_results %}
+                        <li>
+                            <a href="{% url 'account-detail' user.profile.slug %}">
+                                {{ user.email }}, names: {{ user.profile.first_name }} {{ user.profile.last_name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No user results found.</p>
+            {% endif %}
+        </div>
+
+        <h3>Profiles Names</h3>
+        <div class="account-list-boxes">
+            {% if profile_results %}
+                <ul>
+                    {% for profile in profile_results %}
+                        <li>
+                            <a href="{% url 'account-detail' user.profile.slug %}">
+                                {{ profile.first_name }} {{ profile.last_name }}; email: {{ profile.user.email }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                </div>
+            {% else %}
+                <p>No profile results found.</p>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

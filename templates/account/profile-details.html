@@ -2,39 +2,60 @@
 {% load static %}
 
 {% block account-content %}
-    <div class="account-message-content">
-        <h3>Welcome to the Ivan The Beat fitness trainer app! This is your secure account overview, where everything is tailored just for you. 
-            Here, you'll find personalized tips from your trainer Ivan The Bear, along with your workout program, 
-            nutrition and recovery plans, videos, and more — all in one place.
-        </h3>
-        <h2>Stay consistent, trust the process, and let’s reach your goals together!</h2>
-    </div>
-    
-    <div class="account-content">
-        <div class="split-container">
-            <div>
-                <img src="{% static 'assets/images/ivan.jpg' %}" alt="">
-            </div>
-            <div class="split-text-content text">
-                <div class="trainer-message-box">
-                    <h2>Hello, {{ current_user.profile.first_name }} {{ current_user.profile.last_name }} 👋</h2>
-                    <p>I’m your personal trainer, here to support you every step of the way on your fitness journey. Whether you're aiming to build strength, improve endurance, or just feel healthier, I've got your back.</p>
-                
-                    <h3>💡 Trainer Tips for You</h3>
-                    <ul>
-                        <li><strong>Start Smart:</strong> Always warm up for 5–10 minutes to prepare your body and avoid injury.</li>
-                        <li><strong>Stay Consistent:</strong> Small, regular workouts are more effective than occasional intense sessions.</li>
-                        <li><strong>Hydrate:</strong> Aim to drink water before, during, and after your workouts.</li>
-                        <li><strong>Track Progress:</strong> Use this dashboard to monitor your achievements and set new goals.</li>
-                        <li><strong>Rest is Part of Training:</strong> Recovery is where real growth happens—don't skip it!</li>
-                    </ul>
-                
-                    <p>Check back here weekly for more tips and motivation. Let’s crush those goals! 💪</p>
+
+    {% if not user.is_staff %}
+        <div class="account-message-content">
+            <h3>Welcome to the Ivan The Beat fitness trainer app! This is your secure account overview, where everything
+                is tailored just for you.
+                Here, you'll find personalized tips from your trainer Ivan The Bear, along with your workout program,
+                nutrition and recovery plans, videos, and more — all in one place.
+            </h3>
+            <h2>Stay consistent, trust the process, and let’s reach your goals together!</h2>
+        </div>
+    {% endif %}
+
+    {% if not user.is_staff %}
+        <div class="account-content">
+            <div class="split-container">
+                <div>
+                    <img src="{% static 'assets/images/ivan.jpg' %}" alt="trainer-img">
+                </div>
+                <div class="split-text-content text">
+                    <div class="trainer-message-box">
+                        <h2>Hello, {{ current_user.profile.first_name }} {{ current_user.profile.last_name }} 👋</h2>
+                        <p>I’m your personal trainer, here to support you every step of the way on your fitness journey.
+                            Whether you're aiming to build strength, improve endurance, or just feel healthier, I've got
+                            your back.</p>
+
+                        <h3>💡 Trainer Tips for You</h3>
+                        <ul>
+                            <li><strong>Start Smart:</strong> Always warm up for 5–10 minutes to prepare your body and
+                                avoid
+                                injury.
+                            </li>
+                            <li><strong>Stay Consistent:</strong> Small, regular workouts are more effective than
+                                occasional
+                                intense sessions.
+                            </li>
+                            <li><strong>Hydrate:</strong> Aim to drink water before, during, and after your workouts.
+                            </li>
+                            <li><strong>Track Progress:</strong> Use this dashboard to monitor your achievements and set
+                                new
+                                goals.
+                            </li>
+                            <li><strong>Rest is Part of Training:</strong> Recovery is where real growth happens—don't
+                                skip
+                                it!
+                            </li>
+                        </ul>
+
+                        <p>Check back here weekly for more tips and motivation. Let’s crush those goals! 💪</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
+    {% endif %}
+
     <div class="account-message-content">
         <p>Make sure your details are correct so your trainer can reach you.</p>
         <h1>Account Details</h1>
@@ -45,12 +66,12 @@
         <h3>Phone Number: {{ current_user.profile.phone_number }}</h3>
         <h3>Preferred social media: {{ current_user.profile.preferred_social_media }}</h3>
         {% if current_user.profile.social_media_url %}
-        	<h3>Social Media Url: {{ current_user.profile.social_media_url }}</h3>
-        {% endif %} 
-    
+            <h3>Social Media Url: {{ current_user.profile.social_media_url }}</h3>
+        {% endif %}
+
         <a class="cta-button" href="{% url 'profile-edit' profile.slug %}">Edit profile</a>
     </div>
-    
-    
+
+
 
 {% endblock %}

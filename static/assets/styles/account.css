@@ -60,3 +60,12 @@
 .split-text-content {
     padding: 0 50px;
 }
+
+/*Account List*/
+.account-list-boxes a{
+    color: greenyellow;
+}
+
+.account-list-boxes p {
+    color: red;
+}

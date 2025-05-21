@@ -4,6 +4,7 @@ from TrainerAppIvan_BackEnd2.account import views
 from TrainerAppIvan_BackEnd2.program.views import WorkoutPlanDetailView, WorkoutPlansListView
 
 urlpatterns = [
+    path('search/', views.staff_user_search, name='staff-user-search'),
     path('login/', views.AccountLoginView.as_view(), name='login'),
     path('google-sign-in/', views.GoogleView.as_view(), name='google_sign_in'),
     path('register/', views.AccountRegisterView.as_view(), name='register'),

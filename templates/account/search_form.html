@@ -1,0 +1,8 @@
+{% if user.is_staff %}
+<div class="staff-search">
+    <form action="{% url 'staff-user-search' %}" method="get">
+        <input type="text" name="q" placeholder="Search User..." value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+</div>
+{% endif %}

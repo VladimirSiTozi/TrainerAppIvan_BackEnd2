@@ -43,8 +43,8 @@
             <!-- Horizontal Navigation -->
             <div class="container navigation-container">
                 <nav class="navigation-buttons text">
-                    <a href="{% url 'account-detail' request.user.profile.slug %}">Profile</a>
-                    <a href="{% url 'workout-plans-list' request.user.profile.slug %}">training</a>
+                    <a href="{% url 'account-detail' profile.slug %}">Profile</a>
+                    <a href="{% url 'workout-plans-list' profile.slug %}">training</a>
                     <a href="#">nutrition</a>
                     <a href="#">recovery</a>
                     <a href="#">videos</a>

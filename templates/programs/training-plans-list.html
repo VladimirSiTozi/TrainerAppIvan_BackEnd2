@@ -2,37 +2,34 @@
 {% load static %}
 
 {% block account-content %}
-
-    <div class="table-container">
-        <ul>
-            {% for workout_plan in workout_plans %}
-                <li>
-                    <a href="{% url 'workout_plan_details' slug=request.user.profile.slug pk=workout_plan.pk %}"
-                       class="workout-link">{{ workout_plan.name }}</a>
-                </li>
-
-                </ul>
-                </div>
-            {% empty %}
-                <div class="no-programs-yet-container">
-                    <div class="no-programs-image">
-                        <img src="{% static 'assets/images/boxing-gloves-blueprint.png' %}" alt="no-programs-image">
-                    </div>
-                    <div class="no-programs-content">
-                        <h2>
-                            You don't have any training plans available yet.
-                        </h2>
-                        <p>
-                            If you've purchased a personal training plan, your trainer may need a little time to create
-                            a
-                            customized
-                            plan just for you. This process usually takes up to 2–3 business days.
-                            If you haven't heard back from your trainer after that, please don't hesitate to contact us
-                            —
-                            we're here
-                            to help!
-                        </p>
-                    </div>
-                </div>
-            {% endfor %}
+    {% if workout_plans %}
+        <div class="table-container">
+            <ul>
+                {% for workout_plan in workout_plans %}
+                    <li>
+                        <a href="{% url 'workout_plan_details' slug=workout_plan.user.profile.slug pk=workout_plan.pk %}"
+                           class="workout-link">{{ workout_plan.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <div class="no-programs-yet-container">
+            <div class="no-programs-image">
+                <img src="{% static 'assets/images/boxing-gloves-blueprint.png' %}" alt="no-programs-image">
+            </div>
+            <div class="no-programs-content">
+                <h2>
+                    You don't have any training plans available yet.
+                </h2>
+                <p>
+                    If you've purchased a personal training plan, your trainer may need a little time to create
+                    a customized plan just for you. This process usually takes up to 2–3 business days.
+                    If you haven't heard back from your trainer after that, please don't hesitate to contact us —
+                    we're here to help!
+                </p>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

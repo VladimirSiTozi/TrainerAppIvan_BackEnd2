@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+import TrainerAppIvan_BackEnd2
 from TrainerAppIvan_BackEnd2.account import views
 
 urlpatterns = [
@@ -12,6 +13,7 @@ urlpatterns = [
     path('accounts/', include('TrainerAppIvan_BackEnd2.account.urls')),
     path('shop/', include('TrainerAppIvan_BackEnd2.product.urls')),
     path('articles/', include('TrainerAppIvan_BackEnd2.article.urls')),
+    path('workplan/', include('TrainerAppIvan_BackEnd2.program.urls')),
 ]
 
 if settings.DEBUG:

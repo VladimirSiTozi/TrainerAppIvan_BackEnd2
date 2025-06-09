@@ -1,6 +1,9 @@
-{% extends "account/profile-base.html" %}
+{% extends 'common/base.html' %}
+{% load static %}
 
-{% block account-content %}
+{% block content %}
+    <div class="account-container">
+        <div class="account">
     <h1>Users Matched</h1>
 
     {% if query %}
@@ -41,4 +44,5 @@
             {% endif %}
         </div>
     {% endif %}
+    </div>
 {% endblock %}

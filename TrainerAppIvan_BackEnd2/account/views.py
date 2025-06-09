@@ -1,6 +1,8 @@
 import os
 
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.utils import timezone
 
@@ -25,12 +27,22 @@ from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan
 UserModel = get_user_model()
 
 
-class AccountDetailView(DetailView):
+class AccountDetailView(LoginRequiredMixin, DetailView):
     model = Profile
     template_name = 'account/profile-details.html'
     context_object_name = 'profile'
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
+
+    def dispatch(self, request, *args, **kwargs):
+        # Call get_object early to access the profile
+        profile = self.get_object()
+
+        # Check if the current user is the profile owner or a staff member
+        if profile.user != request.user and not request.user.is_staff:
+            raise PermissionDenied("You are not allowed to view this profile.")
+
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

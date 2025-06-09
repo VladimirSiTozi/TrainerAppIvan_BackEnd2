@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third party apps
+    'django_dynamic_formset',
 
     # My apps
     "TrainerAppIvan_BackEnd2.common.apps.CommonConfig",

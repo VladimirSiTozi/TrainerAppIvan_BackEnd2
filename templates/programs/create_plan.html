@@ -1,0 +1,133 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h2>Create Workout Plan</h2>
+    <form method="post" id="workoutPlanForm" class="workout-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <h3>Periods</h3>
+        <div id="periods-formset">
+            {{ period_formset.management_form }}
+            {% for form in period_formset %}
+                <div class="period-form form-container">
+                    {{ form.as_p }}
+                    <button type="button" class="btn btn-secondary add-day-btn">Add Day</button>
+                    <div class="days-container"></div>
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" id="add-period" class="btn btn-primary">Add Period</button>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success">Save Workout Plan</button>
+        </div>
+    </form>
+</div>
+
+<!-- Hidden templates for new forms -->
+<div id="form-templates" style="display:none;">
+    <div id="period-template">
+        {{ period_formset.empty_form.as_p }}
+    </div>
+    <div id="day-template">
+        {{ DayFormSet.empty_form.as_p }}
+    </div>
+    <div id="exercise-template">
+        {{ ExerciseInstanceFormSet.empty_form.as_p }}
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/jquery.formset.js' %}"></script>
+<script>
+$(document).ready(function() {
+    // Initialize counters
+    let periodCounter = {{ period_formset.initial_form_count }};
+    let dayCounters = {};
+    let exerciseCounters = {};
+
+    // Add Period
+    $('#add-period').click(function() {
+        const newForm = $('#period-template').html()
+            .replace(/__prefix__/g, periodCounter);
+        
+        $('#periods-formset').append(`
+            <div class="period-form form-container">
+                ${newForm}
+                <button type="button" class="btn btn-secondary add-day-btn">Add Day</button>
+                <div class="days-container"></div>
+            </div>
+        `);
+        
+        // Update management form
+        const totalForms = $('#id_' + '{{ period_formset.prefix }}' + '-TOTAL_FORMS');
+        totalForms.val(parseInt(totalForms.val()) + 1);
+        
+        periodCounter++;
+    });
+
+    // Add Day (delegated event)
+    $(document).on('click', '.add-day-btn', function() {
+        const periodForm = $(this).closest('.period-form');
+        const periodPrefix = periodForm.find('input, select').first().attr('name').split('-')[0];
+        const daysContainer = $(this).siblings('.days-container');
+        
+        if (!dayCounters[periodPrefix]) {
+            dayCounters[periodPrefix] = 0;
+        }
+        
+        const newForm = $('#day-template').html()
+            .replace(/__prefix__/g, dayCounters[periodPrefix])
+            .replace(/period-\d+-/g, periodPrefix + 'day-');
+        
+        daysContainer.append(`
+            <div class="day-form form-container">
+                ${newForm}
+                <button type="button" class="btn btn-info add-exercise-btn">Add Exercise</button>
+                <div class="exercises-container"></div>
+            </div>
+        `);
+        
+        dayCounters[periodPrefix]++;
+    });
+
+    // Add Exercise (delegated event)
+    $(document).on('click', '.add-exercise-btn', function() {
+        const dayForm = $(this).closest('.day-form');
+        const dayPrefix = dayForm.find('input, select').first().attr('name').split('-')[0];
+        const exercisesContainer = $(this).siblings('.exercises-container');
+        
+        if (!exerciseCounters[dayPrefix]) {
+            exerciseCounters[dayPrefix] = 0;
+        }
+        
+        const newForm = $('#exercise-template').html()
+            .replace(/__prefix__/g, exerciseCounters[dayPrefix])
+            .replace(/day-\d+-/g, dayPrefix + 'exercise-');
+        
+        exercisesContainer.append(`
+            <div class="exercise-form form-container">
+                ${newForm}
+            </div>
+        `);
+        
+        exerciseCounters[dayPrefix]++;
+    });
+});
+</script>
+
+<style>
+.form-container {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+.btn { margin: 5px 0; }
+</style>
+{% endblock %}

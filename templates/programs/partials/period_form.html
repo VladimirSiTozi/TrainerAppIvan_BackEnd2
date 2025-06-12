@@ -1,0 +1,36 @@
+<thead>
+<tr>
+    <th>№</th>
+    <th>Продължителност (седмици)</th>
+    <th>Действия</th>
+</tr>
+</thead>
+
+<tr class="period-form">
+    <td>{{ form.number }}</td>
+    <td>{{ form.duration_weeks }}</td>
+    <td>
+        <button type="button" class="btn btn-sm btn-danger"
+        hx-delete="{% url 'delete_period_form' %}"
+        hx-target="closest tr.period-form"
+        hx-swap="outerHTML">
+    Изтрий
+</button>
+        <button type="button" class="btn btn-sm btn-info"
+                hx-get="{% url 'get_day_form' %}"
+                hx-target="next tbody.days-container"
+                hx-swap="beforeend">
+            + Ден
+        </button>
+    </td>
+</tr>
+<tr>
+    <td colspan="3">
+        <table class="table table-sm">
+            
+            <tbody class="days-container">
+            <!-- Дни ще се добавят тук -->
+            </tbody>
+        </table>
+    </td>
+</tr>

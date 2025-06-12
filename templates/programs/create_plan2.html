@@ -1,0 +1,233 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <form method="POST" class="workout-form">
+        {% csrf_token %}
+        <div class="table-container">
+            <div class="workout-plan-card">
+                <div class="card-header">
+                    <h3>Plan Details</h3>
+                </div>
+                <div class="">
+                    <div class="">
+                        <label for="{{ form.user_id.id_for_label }}">Assign To:</label>
+                        {{ form.user }}
+                    </div>
+                    <div class="">
+                        <label for="{{ form.name.id_for_label }}">Plan Name:</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="">
+                        <label for="{{ form.description.id_for_label }}">Description:</label>
+                        {{ form.description }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <h2>Workout Plan</h2>
+
+            <!-- Period Buttons -->
+            <div class="navigation-container">
+                <nav class="navigation-buttons text" id="period-buttons">
+                    <!-- JS will append period links here -->
+                </nav>
+                <button type="button" onclick="addPeriod()">+ Add Period</button>
+            </div>
+
+            <!-- Periods Content -->
+            <div id="periods-container">
+                <!-- JS will append period content here -->
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Workout Plan</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        let periodCount = 0;
+
+        function showPeriod(id) {
+            const periods = document.querySelectorAll('.period-content');
+            periods.forEach(p => p.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function addPeriod() {
+            periodCount++;
+            const periodId = `period-${periodCount}`;
+
+            // Add period button
+            const nav = document.getElementById('period-buttons');
+            const btn = document.createElement('a');
+            btn.textContent = `Period ${periodCount}`;
+            btn.href = 'javascript:void(0);';
+            btn.onclick = () => showPeriod(periodId);
+            nav.appendChild(btn);
+
+            // Add period content
+            const container = document.getElementById('periods-container');
+            const div = document.createElement('div');
+            div.className = 'period-content hidden';
+            div.id = periodId;
+            div.innerHTML = `
+        <h2>Period ${periodCount}</h2>
+        <p>Duration: <input type="number" placeholder="Weeks" style="width: 60px;"> weeks</p>
+        <div class="days-container"></div>
+        <button type="button" onclick="addDay('${periodId}')">+ Add Day</button>
+    `;
+            container.appendChild(div);
+            showPeriod(periodId);
+        }
+
+        function addDay(periodId) {
+            const periodDiv = document.getElementById(periodId);
+            const daysContainer = periodDiv.querySelector('.days-container');
+
+            const dayName = prompt("Enter day name (e.g., Monday):");
+            if (!dayName) return;
+
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'inner-table-container plan-detail';
+
+            const tableId = `table-${Math.random().toString(36).substr(2, 9)}`;
+
+            dayDiv.innerHTML = `
+        <h3>${dayName}</h3>
+        <table id="${tableId}">
+            <thead>
+                <tr>
+                    <th>Exercise</th>
+                    <th>Sets</th>
+                    <th>Reps</th>
+                    <th>Rest</th>
+                    <th>Progression</th>
+                    <th>Aim</th>
+                    <th>Focus</th>
+                    <th>Tempo</th>
+                    <th>Weight</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <button type="button" onclick="addExercise('${tableId}')">+ Add Exercise</button>
+    `;
+            daysContainer.appendChild(dayDiv);
+        }
+
+        function addExercise(tableId) {
+            const table = document.getElementById(tableId).querySelector('tbody');
+            const row = document.createElement('tr');
+
+            const fields = ['Exercise', 'Sets', 'Reps', 'Rest', 'Progression', 'Aim', 'Focus', 'Tempo', 'Weight'];
+            row.innerHTML = fields.map(() =>
+                `<td><input type="text" style="width: 100px;"></td>`
+            ).join('');
+
+            table.appendChild(row);
+        }
+    </script>
+
+    <script>
+        // ... (keep all your existing JavaScript functions)
+
+        function getWorkoutPlanData() {
+            const form = document.querySelector('.workout-form');
+            const data = {
+                user: form.querySelector('#id_user').value,
+                name: form.querySelector('#id_name').value,
+                description: form.querySelector('#id_description').value,
+                periods: []
+            };
+
+            document.querySelectorAll('.period-content').forEach(periodDiv => {
+                const period = {
+                    number: parseInt(periodDiv.id.replace('period-', '')),
+                    duration_weeks: periodDiv.querySelector('input[type="number"]').value,
+                    days: []
+                };
+
+                periodDiv.querySelectorAll('.plan-detail').forEach(dayDiv => {
+                    const day = {
+                        name: dayDiv.querySelector('h3').textContent,
+                        exercises: []
+                    };
+
+                    const table = dayDiv.querySelector('table');
+                    if (table) {
+                        const rows = table.querySelectorAll('tbody tr');
+                        rows.forEach(row => {
+                            const inputs = row.querySelectorAll('input');
+                            day.exercises.push({
+                                exercise: inputs[0].value,
+                                sets: inputs[1].value,
+                                reps: inputs[2].value,
+                                rest: inputs[3].value,
+                                progression: inputs[4].value,
+                                aim: inputs[5].value,
+                                focus: inputs[6].value,
+                                tempo: inputs[7].value,
+                                weight: inputs[8].value
+                            });
+                        });
+                    }
+                    period.days.push(day);
+                });
+                data.periods.push(period);
+            });
+            return data;
+        }
+
+        // Add form submission handler
+        document.querySelector('.workout-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formData = getWorkoutPlanData();
+
+            // Print the JSON to console
+            console.log('Workout Plan Data:', JSON.stringify(formData, null, 2));
+
+            // Optional: Show alert with the JSON
+            alert('Check console for JSON output (F12 → Console)');
+
+            // If you want to proceed with form submission after seeing the JSON
+            // this.submit(); // Uncomment this if you want to submit after logging
+        });
+
+        document.querySelector('.workout-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const form = this;
+            const formData = getWorkoutPlanData();
+
+            fetch('/workplan/create-workout-plan/', {  // <-- смени пътя, ако е различен
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to save plan');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Планът е запазен успешно!');
+                    console.log(data);
+                })
+                .catch(error => {
+                    alert('Грешка при запазване на плана.');
+                    console.error(error);
+                });
+        });
+
+    </script>
+
+{% endblock %}

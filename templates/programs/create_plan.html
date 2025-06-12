@@ -2,132 +2,390 @@
 {% load static %}
 
 {% block content %}
-<div class="container">
-    <h2>Create Workout Plan</h2>
-    <form method="post" id="workoutPlanForm" class="workout-form">
+<div class="workout-plan-container">
+    <h1 class="mb-4">Create Workout Plan</h1>
+    
+    <form method="post" id="workout-plan-form" class="workout-form">
         {% csrf_token %}
-        {{ form.as_p }}
         
-        <h3>Periods</h3>
-        <div id="periods-formset">
-            {{ period_formset.management_form }}
-            {% for form in period_formset %}
-                <div class="period-form form-container">
-                    {{ form.as_p }}
-                    <button type="button" class="btn btn-secondary add-day-btn">Add Day</button>
-                    <div class="days-container"></div>
+        <!-- Workout Plan Form -->
+        <div class="plan-card">
+            <div class="card-header">
+                <h3>Plan Details</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="{{ form.name.id_for_label }}">Plan Name:</label>
+                    {{ form.name }}
                 </div>
-            {% endfor %}
+                <div class="form-group">
+                    <label for="{{ form.description.id_for_label }}">Description:</label>
+                    {{ form.description }}
+                </div>
+            </div>
         </div>
-        <button type="button" id="add-period" class="btn btn-primary">Add Period</button>
+        
+        <!-- Periods Section -->
+        <div class="plan-card">
+            <div class="card-header">
+                <h3>Training Periods</h3>
+                <button type="button" class="btn btn-primary btn-sm" id="add-period">+ Add Period</button>
+            </div>
+            <div class="card-body compact-view" id="periods-container">
+                {{ period_formset.management_form }}
+                
+                {% for period_form in period_formset %}
+                <div class="period-form" data-index="{{ forloop.counter0 }}">
+                    <div class="period-header">
+                        <h4 class="period-title">Period {{ forloop.counter }}</h4>
+                        <button type="button" class="remove-btn remove-period">✕ Remove</button>
+                    </div>
+                    {{ period_form.id }}
+                    <div class="form-group">
+                        <label for="{{ period_form.number.id_for_label }}">Period Number:</label>
+                        {{ period_form.number }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ period_form.duration_weeks.id_for_label }}">Duration (weeks):</label>
+                        {{ period_form.duration_weeks }}
+                    </div>
+                    
+                    <!-- Days Section -->
+                    <div class="days-container">
+                        <div class="add-btn-container">
+                            <button type="button" class="btn btn-info btn-sm add-day" data-period-index="{{ forloop.counter0 }}">+ Add Day</button>
+                        </div>
+                        
+                        <div class="day-forms">
+                            {% for day_form in day_formset %}
+                            <div class="day-form" data-index="{{ forloop.counter0 }}">
+                                <div class="day-header">
+                                    <h5 class="day-title">Day {{ forloop.counter }}</h5>
+                                    <button type="button" class="remove-btn remove-day">✕ Remove</button>
+                                </div>
+                                {{ day_form.id }}
+                                <div class="form-group">
+                                    <label for="{{ day_form.number.id_for_label }}">Day Number:</label>
+                                    {{ day_form.number }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="{{ day_form.name.id_for_label }}">Day Name:</label>
+                                    {{ day_form.name }}
+                                </div>
+                                
+                                <!-- Exercises Section -->
+                                <div class="exercises-container">
+                                    <div class="add-btn-container">
+                                        <button type="button" class="btn btn-success btn-sm add-exercise" data-period-index="{{ forloop.parentloop.counter0 }}" data-day-index="{{ forloop.counter0 }}">+ Add Exercise</button>
+                                    </div>
+                                    
+                                    <div class="exercise-forms">
+                                        {% for exercise_form in exercise_formset %}
+                                        <div class="exercise-form" data-index="{{ forloop.counter0 }}">
+                                            <div class="exercise-header">
+                                                <span class="exercise-title">Exercise {{ forloop.counter }}</span>
+                                                <button type="button" class="remove-btn remove-exercise">✕ Remove</button>
+                                            </div>
+                                            {{ exercise_form.id }}
+                                            <div class="exercise-fields">
+                                                <div class="form-group">
+                                                    <label for="{{ exercise_form.exercise_template.id_for_label }}">Exercise:</label>
+                                                    {{ exercise_form.exercise_template }}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="{{ exercise_form.sets.id_for_label }}">Sets:</label>
+                                                    {{ exercise_form.sets }}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="{{ exercise_form.reps.id_for_label }}">Reps:</label>
+                                                    {{ exercise_form.reps }}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="{{ exercise_form.rest.id_for_label }}">Rest:</label>
+                                                    {{ exercise_form.rest }}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="{{ exercise_form.progression.id_for_label }}">Progression:</label>
+                                                    {{ exercise_form.progression }}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="{{ exercise_form.aim.id_for_label }}">Aim:</label>
+                                                    {{ exercise_form.aim }}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="{{ exercise_form.weight.id_for_label }}">Weight:</label>
+                                                    {{ exercise_form.weight }}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="{{ exercise_form.tempo.id_for_label }}">Tempo:</label>
+                                                    {{ exercise_form.tempo }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
         
         <div class="form-actions">
-            <button type="submit" class="btn btn-success">Save Workout Plan</button>
+            <button type="submit" class="btn btn-primary">Save Workout Plan</button>
         </div>
     </form>
 </div>
 
-<!-- Hidden templates for new forms -->
-<div id="form-templates" style="display:none;">
-    <div id="period-template">
-        {{ period_formset.empty_form.as_p }}
+<!-- Hidden empty forms for dynamic addition -->
+<div id="empty-forms" style="display:none;">
+    <!-- Empty Period Form -->
+    <div class="period-form" data-index="__prefix__">
+        <div class="period-header">
+            <h4 class="period-title">Period __prefix__</h4>
+            <button type="button" class="remove-btn remove-period">✕ Remove</button>
+        </div>
+        {{ period_formset.empty_form.id }}
+        <div class="form-group">
+            <label>Period Number:</label>
+            {{ period_formset.empty_form.number }}
+        </div>
+        <div class="form-group">
+            <label>Duration (weeks):</label>
+            {{ period_formset.empty_form.duration_weeks }}
+        </div>
+        <div class="days-container">
+            <div class="add-btn-container">
+                <button type="button" class="btn btn-info btn-sm add-day" data-period-index="__prefix__">+ Add Day</button>
+            </div>
+            <div class="day-forms"></div>
+        </div>
     </div>
-    <div id="day-template">
-        {{ DayFormSet.empty_form.as_p }}
+    
+    <!-- Empty Day Form -->
+    <div class="day-form" data-index="__prefix__">
+        <div class="day-header">
+            <h5 class="day-title">Day __prefix__</h5>
+            <button type="button" class="remove-btn remove-day">✕ Remove</button>
+        </div>
+        {{ day_formset.empty_form.id }}
+        <div class="form-group">
+            <label>Day Number:</label>
+            {{ day_formset.empty_form.number }}
+        </div>
+        <div class="form-group">
+            <label>Day Name:</label>
+            {{ day_formset.empty_form.name }}
+        </div>
+        <div class="exercises-container">
+            <div class="add-btn-container">
+                <button type="button" class="btn btn-success btn-sm add-exercise" data-period-index="__parent_prefix__" data-day-index="__prefix__">+ Add Exercise</button>
+            </div>
+            <div class="exercise-forms"></div>
+        </div>
     </div>
-    <div id="exercise-template">
-        {{ ExerciseInstanceFormSet.empty_form.as_p }}
+    
+    <!-- Empty Exercise Form -->
+    <div class="exercise-form" data-index="__prefix__">
+        <div class="exercise-header">
+            <span class="exercise-title">Exercise __prefix__</span>
+            <button type="button" class="remove-btn remove-exercise">✕ Remove</button>
+        </div>
+        {{ exercise_formset.empty_form.id }}
+        <div class="exercise-fields">
+            <div class="form-group">
+                <label>Exercise:</label>
+                {{ exercise_formset.empty_form.exercise_template }}
+            </div>
+            <div class="form-group">
+                <label>Sets:</label>
+                {{ exercise_formset.empty_form.sets }}
+            </div>
+            <div class="form-group">
+                <label>Reps:</label>
+                {{ exercise_formset.empty_form.reps }}
+            </div>
+            <div class="form-group">
+                <label>Rest:</label>
+                {{ exercise_formset.empty_form.rest }}
+            </div>
+            <div class="form-group">
+                <label>Progression:</label>
+                {{ exercise_formset.empty_form.progression }}
+            </div>
+            <div class="form-group">
+                <label>Aim:</label>
+                {{ exercise_formset.empty_form.aim }}
+            </div>
+            <div class="form-group">
+                <label>Weight:</label>
+                {{ exercise_formset.empty_form.weight }}
+            </div>
+            <div class="form-group">
+                <label>Tempo:</label>
+                {{ exercise_formset.empty_form.tempo }}
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- JavaScript -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{% static 'js/jquery.formset.js' %}"></script>
 <script>
 $(document).ready(function() {
     // Initialize counters
-    let periodCounter = {{ period_formset.initial_form_count }};
+    let periodCounter = {{ period_formset.total_form_count }};
     let dayCounters = {};
     let exerciseCounters = {};
 
+    // Function to update all name/id attributes
+    function updateAttributes($form, newPrefix) {
+        $form.find('[name]').each(function() {
+            const name = $(this).attr('name').replace(/__prefix__|__parent_prefix__/g, function(match) {
+                return match === '__prefix__' ? newPrefix : '0'; // Replace parent prefix with 0 for now
+            });
+            $(this).attr('name', name);
+            
+            const id = $(this).attr('id') ? $(this).attr('id').replace(/__prefix__|__parent_prefix__/g, function(match) {
+                return match === '__prefix__' ? newPrefix : '0';
+            }) : '';
+            if (id) $(this).attr('id', id);
+        });
+        
+        $form.find('[for]').each(function() {
+            const newFor = $(this).attr('for').replace(/__prefix__|__parent_prefix__/g, function(match) {
+                return match === '__prefix__' ? newPrefix : '0';
+            });
+            $(this).attr('for', newFor);
+        });
+    }
+
     // Add Period
     $('#add-period').click(function() {
-        const newForm = $('#period-template').html()
-            .replace(/__prefix__/g, periodCounter);
+        const newIndex = periodCounter;
+        const $newForm = $('#empty-forms .period-form').clone();
         
-        $('#periods-formset').append(`
-            <div class="period-form form-container">
-                ${newForm}
-                <button type="button" class="btn btn-secondary add-day-btn">Add Day</button>
-                <div class="days-container"></div>
-            </div>
-        `);
+        // Update data attributes
+        $newForm.attr('data-index', newIndex);
         
-        // Update management form
-        const totalForms = $('#id_' + '{{ period_formset.prefix }}' + '-TOTAL_FORMS');
-        totalForms.val(parseInt(totalForms.val()) + 1);
+        // Update all attributes
+        updateAttributes($newForm, newIndex);
         
+        // Update the period title
+        $newForm.find('.period-title').text('Period ' + (newIndex + 1));
+        
+        // Update the add-day button
+        $newForm.find('.add-day').attr('data-period-index', newIndex);
+        
+        // Add to container
+        $('#periods-container').append($newForm);
+        
+        // Update counter
         periodCounter++;
+        $('#id_periods-TOTAL_FORMS').val(periodCounter);
     });
 
-    // Add Day (delegated event)
-    $(document).on('click', '.add-day-btn', function() {
-        const periodForm = $(this).closest('.period-form');
-        const periodPrefix = periodForm.find('input, select').first().attr('name').split('-')[0];
-        const daysContainer = $(this).siblings('.days-container');
+    // Add Day
+    $(document).on('click', '.add-day', function() {
+        const periodIndex = $(this).data('period-index');
+        const $periodForm = $(this).closest('.period-form');
+        const $daysContainer = $periodForm.find('.day-forms');
+        const dayCount = $daysContainer.find('.day-form').length;
+        const newIndex = dayCount;
         
-        if (!dayCounters[periodPrefix]) {
-            dayCounters[periodPrefix] = 0;
-        }
+        const $newForm = $('#empty-forms .day-form').clone();
         
-        const newForm = $('#day-template').html()
-            .replace(/__prefix__/g, dayCounters[periodPrefix])
-            .replace(/period-\d+-/g, periodPrefix + 'day-');
+        // Update data attributes
+        $newForm.attr('data-index', newIndex);
         
-        daysContainer.append(`
-            <div class="day-form form-container">
-                ${newForm}
-                <button type="button" class="btn btn-info add-exercise-btn">Add Exercise</button>
-                <div class="exercises-container"></div>
-            </div>
-        `);
+        // Update all attributes
+        updateAttributes($newForm, newIndex);
         
-        dayCounters[periodPrefix]++;
+        // Update parent references
+        $newForm.find('[name*="__parent_prefix__"]').each(function() {
+            const name = $(this).attr('name').replace('__parent_prefix__', periodIndex);
+            $(this).attr('name', name);
+            
+            const id = $(this).attr('id') ? $(this).attr('id').replace('__parent_prefix__', periodIndex) : '';
+            if (id) $(this).attr('id', id);
+        });
+        
+        $newForm.find('[for*="__parent_prefix__"]').each(function() {
+            const newFor = $(this).attr('for').replace('__parent_prefix__', periodIndex);
+            $(this).attr('for', newFor);
+        });
+        
+        // Update the day title
+        $newForm.find('.day-title').text('Day ' + (newIndex + 1));
+        
+        // Update the add-exercise button
+        $newForm.find('.add-exercise')
+            .attr('data-period-index', periodIndex)
+            .attr('data-day-index', newIndex);
+        
+        // Add to container
+        $daysContainer.append($newForm);
     });
 
-    // Add Exercise (delegated event)
-    $(document).on('click', '.add-exercise-btn', function() {
-        const dayForm = $(this).closest('.day-form');
-        const dayPrefix = dayForm.find('input, select').first().attr('name').split('-')[0];
-        const exercisesContainer = $(this).siblings('.exercises-container');
+    // Add Exercise
+    $(document).on('click', '.add-exercise', function() {
+        const periodIndex = $(this).data('period-index');
+        const dayIndex = $(this).data('day-index');
+        const $dayForm = $(this).closest('.day-form');
+        const $exercisesContainer = $dayForm.find('.exercise-forms');
+        const exerciseCount = $exercisesContainer.find('.exercise-form').length;
+        const newIndex = exerciseCount;
         
-        if (!exerciseCounters[dayPrefix]) {
-            exerciseCounters[dayPrefix] = 0;
-        }
+        const $newForm = $('#empty-forms .exercise-form').clone();
         
-        const newForm = $('#exercise-template').html()
-            .replace(/__prefix__/g, exerciseCounters[dayPrefix])
-            .replace(/day-\d+-/g, dayPrefix + 'exercise-');
+        // Update data attributes
+        $newForm.attr('data-index', newIndex);
         
-        exercisesContainer.append(`
-            <div class="exercise-form form-container">
-                ${newForm}
-            </div>
-        `);
+        // Update all attributes
+        updateAttributes($newForm, newIndex);
         
-        exerciseCounters[dayPrefix]++;
+        // Update parent references
+        $newForm.find('[name*="__parent_prefix__"]').each(function() {
+            const name = $(this).attr('name')
+                .replace('periods-__parent_prefix__', 'periods-' + periodIndex)
+                .replace('days-__parent_prefix__', 'days-' + periodIndex + '-' + dayIndex);
+            $(this).attr('name', name);
+            
+            const id = $(this).attr('id') ? $(this).attr('id')
+                .replace('periods-__parent_prefix__', 'periods-' + periodIndex)
+                .replace('days-__parent_prefix__', 'days-' + periodIndex + '-' + dayIndex) : '';
+            if (id) $(this).attr('id', id);
+        });
+        
+        $newForm.find('[for*="__parent_prefix__"]').each(function() {
+            const newFor = $(this).attr('for')
+                .replace('periods-__parent_prefix__', 'periods-' + periodIndex)
+                .replace('days-__parent_prefix__', 'days-' + periodIndex + '-' + dayIndex);
+            $(this).attr('for', newFor);
+        });
+        
+        // Update the exercise title
+        $newForm.find('.exercise-title').text('Exercise ' + (newIndex + 1));
+        
+        // Add to container
+        $exercisesContainer.append($newForm);
+    });
+
+    // Remove forms
+    $(document).on('click', '.remove-period', function() {
+        $(this).closest('.period-form').remove();
+        $('#id_periods-TOTAL_FORMS').val($('#periods-container .period-form').length);
+    });
+    
+    $(document).on('click', '.remove-day', function() {
+        $(this).closest('.day-form').remove();
+    });
+    
+    $(document).on('click', '.remove-exercise', function() {
+        $(this).closest('.exercise-form').remove();
     });
 });
 </script>
-
-<style>
-.form-container {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-.btn { margin: 5px 0; }
-</style>
 {% endblock %}

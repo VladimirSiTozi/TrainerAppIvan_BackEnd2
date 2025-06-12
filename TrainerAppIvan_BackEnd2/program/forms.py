@@ -5,7 +5,7 @@ from .models import WorkoutPlan, Period, Day, ExerciseInstance, ExerciseTemplate
 class WorkoutPlanForm(forms.ModelForm):
     class Meta:
         model = WorkoutPlan
-        fields = ['name', 'description']
+        fields = ['name', 'description', 'user']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 3}),
         }

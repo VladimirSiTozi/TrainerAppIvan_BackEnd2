@@ -1,0 +1,47 @@
+<thead>
+            <tr>
+                <th>Ден</th>
+                <th>Име</th>
+                <th>Действия</th>
+            </tr>
+            </thead><tr class="day-form">
+    <td>Ден</td>
+    <td>{{ form.name }}</td>
+    <td>
+        <button type="button" class="btn btn-sm btn-danger"
+                hx-delete="{% url 'delete_day_form' %}"
+                hx-target="closest tr.day-form"
+                hx-swap="outerHTML">
+            Изтрий
+        </button>
+        <button type="button" class="btn btn-sm btn-success"
+                hx-get="{% url 'get_exercise_form' %}"
+                hx-target="next tbody.exercises-container"
+                hx-swap="beforeend">
+            + Упражнение
+        </button>
+    </td>
+</tr>
+<tr>
+    <td colspan="3">
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th>Упражнение</th>
+                    <th>Серии</th>
+                    <th>Повторения</th>
+                    <th>Почивка</th>
+                    <th>Прогресия</th>
+                    <th>Цел</th>
+                    <th>Фокус</th>
+                    <th>Темпо</th>
+                    <th>Тежест</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="exercises-container">
+                <!-- Упражненията ще се добавят тук -->
+            </tbody>
+        </table>
+    </td>
+</tr>

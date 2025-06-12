@@ -1,101 +1,217 @@
-.create-plan-container {
-    width: 80%;
-    margin: auto;
+/* Base Styles */
+.workout-plan-container {
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-.create-plan-container h4,
-.create-plan-container h5 {
-    margin: 0;
+/* Card Styles */
+.plan-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    height: auto;
 }
 
-/* Card styling */
-.card {
-    border: 1px solid #ddd;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-
-.create-plan-card-header {
-    background-color: #2c3e50;
-    border-bottom: 1px solid #ddd;
-    border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
+.card-header {
+    background: #4a6fa5;
+    color: white;
+    padding: 12px 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Form Styles */
+.workout-form {
+    display: grid;
     gap: 20px;
 }
 
-.create-plan-card-body {
-    padding: 1rem;
+.form-group {
+    margin-bottom: 15px;
 }
 
-/* Form controls */
-input[type="number"],
-input[type="text"],
-select,
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+}
+
 .form-control {
     width: 100%;
-    padding: 0.4rem 0.6rem;
-    margin-bottom: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 0.25rem;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
-/* Buttons */
-button.btn {
-    margin-right: 0.5rem;
+/* Compact Exercise Form */
+.exercise-form {
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    position: relative;
 }
 
-button.btn i {
-    margin-right: 0.2rem;
+.exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.exercise-title {
+    font-weight: 600;
+    color: #333;
+}
+
+.exercise-fields {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.exercise-fields .form-group {
+    margin-bottom: 0;
+}
+
+/* Compact Day Form */
+.day-form {
+    background: #f0f4f8;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.day-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+/* Compact Period Form */
+.period-form {
+    background: #e8f0fe;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.period-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.period-title {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #1a365d;
+}
+
+/* Button Styles */
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: #4a6fa5;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #3a5a80;
+}
+
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #218838;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-info:hover {
+    background: #138496;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c82333;
 }
 
 .btn-sm {
-    font-size: 0.875rem;
-    padding: 0.3rem 0.6rem;
+    padding: 5px 10px;
+    font-size: 12px;
 }
 
-/* Nested forms */
-.period-form,
-.day-form,
-.exercise-form {
-    border-left: 4px solid #007bff;
-    margin-top: 1rem;
+/* Add buttons */
+.add-btn-container {
+    margin: 10px 0;
+    text-align: right;
 }
 
-.day-form {
-    border-left-color: #0f9b0f;
+/* Remove buttons */
+.remove-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
 }
 
-.exercise-form {
-    border-left-color: #ffc107;
+/* Compact layout for many items */
+.compact-view {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
-/* Spacing helpers */
-.mb-2 { margin-bottom: 0.5rem; }
-.mb-3 { margin-bottom: 1rem; }
-.mb-4 { margin-bottom: 1.5rem; }
-.mt-3 { margin-top: 1rem; }
-.mt-4 { margin-top: 1.5rem; }
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -0.5rem;
-    margin-left: -0.5rem;
-}
-
-.col-md-2, .col-md-4 {
-    padding: 0 0.5rem;
-}
-
-.col-md-2 { flex: 0 0 16.6667%; max-width: 16.6667%; }
-.col-md-4 { flex: 0 0 33.3333%; max-width: 33.3333%; }
-
-/* Responsive enhancements */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .col-md-2, .col-md-4 {
-        flex: 0 0 100%;
-        max-width: 100%;
+    .exercise-fields {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .exercise-fields {
+        grid-template-columns: 1fr;
     }
 }

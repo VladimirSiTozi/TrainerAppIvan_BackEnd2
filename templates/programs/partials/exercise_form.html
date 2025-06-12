@@ -1,0 +1,19 @@
+<tr class="exercise-form">
+    <td>{{ form.exercise_template }}</td>
+    <td>{{ form.sets }}</td>
+    <td>{{ form.reps }}</td>
+    <td>{{ form.rest }}</td>
+    <td>{{ form.progression }}</td>
+    <td>{{ form.aim }}</td>
+    <td>{{ form.focus }}</td>
+    <td>{{ form.tempo }}</td>
+    <td>{{ form.weight }}</td>
+    <td>
+        <button type="button" class="btn btn-sm btn-outline-danger"
+                hx-delete="{% url 'delete_exercise_form' %}"
+                hx-target="closest tr.exercise-form"
+                hx-swap="outerHTML">
+            ✕
+        </button>
+    </td>
+</tr>

@@ -6,10 +6,11 @@ from django.core.exceptions import PermissionDenied
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-from django.views.generic import DetailView, ListView, CreateView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.db.models import Q
 
 from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan, Trainer
@@ -82,12 +83,14 @@ class WorkoutPlanDetailView(DetailView, ProfileContextMixin):
         plan_data = []
         for period in plan.periods.all():
             period_data = {
+                'pk': period.pk,
                 'period': period.number,
                 'duration_weeks': period.duration_weeks,
                 'days': []
             }
             for day in period.days.all():
                 period_data['days'].append({
+                    'pk': day.pk,
                     'day': day.name,
                     'exercises': day.exercises.all()
                 })
@@ -171,78 +174,78 @@ class WorkoutPlanCreateView(CreateView):
     form_class = WorkoutPlanForm
     template_name = 'programs/create_plan2.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if self.request.POST:
-            context['period_formset'] = PeriodFormSet(self.request.POST, prefix='periods')
-        else:
-            context['period_formset'] = PeriodFormSet(prefix='periods')
-        return context
-
-    def form_valid(self, form):
-        context = self.get_context_data()
-        period_formset = context['period_formset']
-
-        if not period_formset.is_valid():
-            return self.render_to_response(self.get_context_data(form=form))
-
-        self.object = form.save(commit=False)
-        self.object.trainer = self.request.user.trainer_profile
-        self.object.save()
-
-        periods = period_formset.save(commit=False)
-        for period in periods:
-            period.workout_plan = self.object
-            period.save()
-
-            day_prefix = f'day-{period.pk}'
-            day_formset = DayFormSet(
-                self.request.POST,
-                prefix=day_prefix,
-                instance=period
-            )
-
-            if day_formset.is_valid():
-                days = day_formset.save(commit=False)
-                for day in days:
-                    day.period = period
-                    day.save()
-
-                    exercise_prefix = f'exercise-{day.pk}'
-                    exercise_formset = ExerciseInstanceFormSet(
-                        self.request.POST,
-                        prefix=exercise_prefix,
-                        instance=day
-                    )
-
-                    if exercise_formset.is_valid():
-                        exercises = exercise_formset.save(commit=False)
-                        for exercise in exercises:
-                            exercise.day = day
-                            exercise.save()
-                    else:
-                        return self.form_invalid(form)
-            else:
-                return self.form_invalid(form)
-
-        return redirect(self.object.get_absolute_url())
-
-
-# Formsets дефиниции
-PeriodFormSet = inlineformset_factory(
-    WorkoutPlan, Period, form=PeriodForm,
-    extra=1, can_delete=True, fields='__all__'
-)
-
-DayFormSet = inlineformset_factory(
-    Period, Day, form=DayForm,
-    extra=1, can_delete=True, fields='__all__'
-)
-
-ExerciseInstanceFormSet = inlineformset_factory(
-    Day, ExerciseInstance, form=ExerciseInstanceForm,
-    extra=1, can_delete=True, fields='__all__'
-)
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         if self.request.POST:
+#             context['period_formset'] = PeriodFormSet(self.request.POST, prefix='periods')
+#         else:
+#             context['period_formset'] = PeriodFormSet(prefix='periods')
+#         return context
+#
+#     def form_valid(self, form):
+#         context = self.get_context_data()
+#         period_formset = context['period_formset']
+#
+#         if not period_formset.is_valid():
+#             return self.render_to_response(self.get_context_data(form=form))
+#
+#         self.object = form.save(commit=False)
+#         self.object.trainer = self.request.user.trainer_profile
+#         self.object.save()
+#
+#         periods = period_formset.save(commit=False)
+#         for period in periods:
+#             period.workout_plan = self.object
+#             period.save()
+#
+#             day_prefix = f'day-{period.pk}'
+#             day_formset = DayFormSet(
+#                 self.request.POST,
+#                 prefix=day_prefix,
+#                 instance=period
+#             )
+#
+#             if day_formset.is_valid():
+#                 days = day_formset.save(commit=False)
+#                 for day in days:
+#                     day.period = period
+#                     day.save()
+#
+#                     exercise_prefix = f'exercise-{day.pk}'
+#                     exercise_formset = ExerciseInstanceFormSet(
+#                         self.request.POST,
+#                         prefix=exercise_prefix,
+#                         instance=day
+#                     )
+#
+#                     if exercise_formset.is_valid():
+#                         exercises = exercise_formset.save(commit=False)
+#                         for exercise in exercises:
+#                             exercise.day = day
+#                             exercise.save()
+#                     else:
+#                         return self.form_invalid(form)
+#             else:
+#                 return self.form_invalid(form)
+#
+#         return redirect(self.object.get_absolute_url())
+#
+#
+# # Formsets дефиниции
+# PeriodFormSet = inlineformset_factory(
+#     WorkoutPlan, Period, form=PeriodForm,
+#     extra=1, can_delete=True, fields='__all__'
+# )
+#
+# DayFormSet = inlineformset_factory(
+#     Period, Day, form=DayForm,
+#     extra=1, can_delete=True, fields='__all__'
+# )
+#
+# ExerciseInstanceFormSet = inlineformset_factory(
+#     Day, ExerciseInstance, form=ExerciseInstanceForm,
+#     extra=1, can_delete=True, fields='__all__'
+# )
 
 
 # # Create Plan 3
@@ -375,3 +378,147 @@ def create_workout_plan(request):
 
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+
+# EDIT VIEWS
+class EditExerciseView(LoginRequiredMixin, UpdateView):
+    model = ExerciseInstance
+    form_class = ExerciseInstanceForm
+    template_name = 'programs/edit-exercise.html'
+    context_object_name = 'exercise'
+
+    def get_success_url(self):
+        # return reverse_lazy('workout_plan_details', kwargs={'pk': self.object.pk})
+        return reverse_lazy('home')
+
+
+class EditDayView(LoginRequiredMixin, UpdateView):
+    model = Day
+    form_class = DayForm
+    template_name = 'programs/edit-day.html'
+    context_object_name = 'day'
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+class EditPeriodView(LoginRequiredMixin, UpdateView):
+    model = Period
+    form_class = PeriodForm
+    template_name = 'programs/edit-period.html'
+    context_object_name = 'period'
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+class EditWorkoutPlanView(LoginRequiredMixin, UpdateView):
+    model = WorkoutPlan
+    form_class = WorkoutPlanForm
+    template_name = 'programs/edit-workout.html'
+    context_object_name = 'workout_plan'
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+# CREATE VIEWS
+class CreateExerciseTemplateView(LoginRequiredMixin, CreateView):
+    model = ExerciseTemplate
+    form_class = ExerciseInstanceForm
+    template_name = 'programs/add-exercise.html'
+    context_object_name = 'exercise'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.day = get_object_or_404(Day, pk=self.kwargs['pk'])
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.instance.day = self.day
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['day'] = self.day
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+class CreateDayView(LoginRequiredMixin, CreateView):
+    model = Day
+    form_class = DayForm
+    template_name = 'programs/add-day.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.period = get_object_or_404(Period, pk=self.kwargs['pk'])
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.instance.period = self.period
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['period'] = self.period
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+class CreatePeriodView(LoginRequiredMixin, CreateView):
+    model = Period
+    form_class = PeriodForm
+    template_name = 'programs/add-period.html'
+    context_object_name = 'period'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.workout_plan = get_object_or_404(WorkoutPlan, pk=self.kwargs['pk'])
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.instance.workout_plan = self.workout_plan
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['workout_plan'] = self.workout_plan
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+# DELETE VIEWS
+class DeleteExerciseInstanceView(LoginRequiredMixin, DeleteView):
+    model = ExerciseInstance
+    context_object_name = 'exercise'
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+class DeleteDayView(LoginRequiredMixin, DeleteView):
+    model = Day
+    context_object_name = 'day'
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+class DeletePeriodView(LoginRequiredMixin, DeleteView):
+    model = Period
+    context_object_name = 'period'
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+class DeleteWorkoutPlanView(LoginRequiredMixin, DeleteView):
+    model = WorkoutPlan
+    context_object_name = 'workout_plan'
+
+    def get_success_url(self):
+        return reverse_lazy('home')

@@ -174,6 +174,7 @@ class WorkoutPlanCreateView(CreateView):
     form_class = WorkoutPlanForm
     template_name = 'programs/create_plan2.html'
 
+
 #     def get_context_data(self, **kwargs):
 #         context = super().get_context_data(**kwargs)
 #         if self.request.POST:
@@ -318,8 +319,6 @@ class WorkoutPlanCreateView(CreateView):
 #     return HttpResponse('')
 
 
-
-
 # views.py
 
 
@@ -330,7 +329,6 @@ def create_workout_plan(request):
 
     try:
         data = json.loads(request.body)
-        print(data)
 
         user = AppUser.objects.get(id=data['user'])
         trainer = Trainer.objects.get(user=request.user)  # или подай от фронта
@@ -341,7 +339,6 @@ def create_workout_plan(request):
             name=data['name'],
             description=data.get('description', '')
         )
-        print(plan)
 
         for period_data in data.get('periods', []):
             period = Period.objects.create(
@@ -388,8 +385,9 @@ class EditExerciseView(LoginRequiredMixin, UpdateView):
     context_object_name = 'exercise'
 
     def get_success_url(self):
-        # return reverse_lazy('workout_plan_details', kwargs={'pk': self.object.pk})
-        return reverse_lazy('home')
+        workout_plan = self.object.day.period.workout_plan
+        return reverse_lazy('workout_plan_details',
+                            kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
 class EditDayView(LoginRequiredMixin, UpdateView):
@@ -399,7 +397,9 @@ class EditDayView(LoginRequiredMixin, UpdateView):
     context_object_name = 'day'
 
     def get_success_url(self):
-        return reverse_lazy('home')
+        workout_plan = self.object.period.workout_plan
+        return reverse_lazy('workout_plan_details',
+                            kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
 class EditPeriodView(LoginRequiredMixin, UpdateView):
@@ -409,7 +409,9 @@ class EditPeriodView(LoginRequiredMixin, UpdateView):
     context_object_name = 'period'
 
     def get_success_url(self):
-        return reverse_lazy('home')
+        workout_plan = self.object.workout_plan
+        return reverse_lazy('workout_plan_details',
+                            kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
 class EditWorkoutPlanView(LoginRequiredMixin, UpdateView):
@@ -443,7 +445,9 @@ class CreateExerciseTemplateView(LoginRequiredMixin, CreateView):
         return context
 
     def get_success_url(self):
-        return reverse_lazy('home')
+        workout_plan = self.object.day.period.workout_plan
+        return reverse_lazy('workout_plan_details',
+                            kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
 class CreateDayView(LoginRequiredMixin, CreateView):
@@ -465,7 +469,9 @@ class CreateDayView(LoginRequiredMixin, CreateView):
         return context
 
     def get_success_url(self):
-        return reverse_lazy('home')
+        workout_plan = self.object.period.workout_plan
+        return reverse_lazy('workout_plan_details',
+                            kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
 class CreatePeriodView(LoginRequiredMixin, CreateView):
@@ -488,7 +494,9 @@ class CreatePeriodView(LoginRequiredMixin, CreateView):
         return context
 
     def get_success_url(self):
-        return reverse_lazy('home')
+        workout_plan = self.object.workout_plan
+        return reverse_lazy('workout_plan_details',
+                            kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
 # DELETE VIEWS
@@ -497,7 +505,9 @@ class DeleteExerciseInstanceView(LoginRequiredMixin, DeleteView):
     context_object_name = 'exercise'
 
     def get_success_url(self):
-        return reverse_lazy('home')
+        workout_plan = self.object.day.period.workout_plan
+        return reverse_lazy('workout_plan_details',
+                            kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
 class DeleteDayView(LoginRequiredMixin, DeleteView):
@@ -505,7 +515,9 @@ class DeleteDayView(LoginRequiredMixin, DeleteView):
     context_object_name = 'day'
 
     def get_success_url(self):
-        return reverse_lazy('home')
+        workout_plan = self.object.period.workout_plan
+        return reverse_lazy('workout_plan_details',
+                            kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
 class DeletePeriodView(LoginRequiredMixin, DeleteView):
@@ -513,7 +525,9 @@ class DeletePeriodView(LoginRequiredMixin, DeleteView):
     context_object_name = 'period'
 
     def get_success_url(self):
-        return reverse_lazy('home')
+        workout_plan = self.object.workout_plan
+        return reverse_lazy('workout_plan_details',
+                            kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
 class DeleteWorkoutPlanView(LoginRequiredMixin, DeleteView):
@@ -521,4 +535,5 @@ class DeleteWorkoutPlanView(LoginRequiredMixin, DeleteView):
     context_object_name = 'workout_plan'
 
     def get_success_url(self):
-        return reverse_lazy('home')
+        profile = self.object.user.profile
+        return reverse_lazy('account-detail', kwargs={'slug': profile.slug})

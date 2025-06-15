@@ -24,6 +24,13 @@
     border-radius: 8px;
 }
 
+.account-admin {
+    padding: 20px;
+    margin: 20px;
+    background-color: #c21500;
+    border-radius: 8px;
+}
+
 
 /* Account content styling */
 .account-content {

@@ -13,6 +13,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_POST
 from google.oauth2 import id_token
 from google.auth.transport import requests
@@ -307,3 +308,9 @@ def staff_user_search(request):
     }
 
     return render(request, 'account/accounts-list.html', context)
+
+
+@method_decorator(staff_member_required, name='dispatch')
+class AdminHubView(TemplateView):
+    template_name = 'account/admin-hub.html'
+

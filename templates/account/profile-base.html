@@ -6,7 +6,7 @@
         <div class="account">
         
             {% if user.is_staff %}
-                <div class="account-message-content">
+                <div class="account-admin">
                     <div class="admin-view-indicator">
                         <div class="admin-header">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -33,6 +33,9 @@
                                     <line x1="12" y1="16" x2="12.01" y2="16"></line>
                                 </svg>
                                 <span>Remember to log out after completing administrative tasks</span>
+                                <div>
+                                    <a href="{% url 'admin-hub' slug=user.profile.slug %}" class="cta-button">AdminHub</a>
+                                </div>
                             </div>
                         </div>
                     </div>

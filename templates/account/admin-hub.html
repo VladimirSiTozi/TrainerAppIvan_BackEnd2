@@ -1,0 +1,21 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="account-container">
+        <div class="account">
+            {% if user.is_staff %}
+                <div class="account-admin">
+                    <h3>Welcome to the Admin Hub
+                        You're now in the central dashboard where you can manage and update key content.
+                    </h3>
+                    <h4>Here, you can: Add or edit programs, Publish articles, Manage users and more.</h4>
+                    <ul>
+                        <li><a href="" class="">Add Program</a></li>
+                        <li><a href="">Add Article</a></li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -4,12 +4,21 @@ from django.db import models
 from django.contrib.sessions.models import Session
 
 from TrainerAppIvan_BackEnd2.account.models import AppUser
+from TrainerAppIvan_BackEnd2.product.choices import ProductCategoryChoices, ProductTypeChoices
 
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
-    type = models.CharField(max_length=100)
-    category = models.CharField(max_length=100)
+    type = models.CharField(
+        max_length=100,
+        choices=ProductTypeChoices.CHOICES,
+        default=ProductTypeChoices.TRAINING_PLAN
+    )
+    category = models.CharField(
+        max_length=100,
+        choices=ProductCategoryChoices.CHOICES,
+        default=ProductCategoryChoices.GYM
+    )
     image = models.ImageField(upload_to='products/images/')
     brief_description = models.CharField(max_length=500)
     description = models.TextField()

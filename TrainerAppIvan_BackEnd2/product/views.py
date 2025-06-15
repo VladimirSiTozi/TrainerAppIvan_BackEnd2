@@ -1,17 +1,19 @@
 import stripe
+from django.contrib.admin.views.decorators import staff_member_required
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
 
+from TrainerAppIvan_BackEnd2.product.forms import ProductForm
 from TrainerAppIvan_BackEnd2.product.models import Product, CartItem, Cart
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -268,3 +270,41 @@ class SuccessPaymentView(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class CancelPaymentView(TemplateView):
     template_name = 'common/cancel-payment.html'
+
+
+# Products Create, Edit, Delete
+@method_decorator(staff_member_required, name='dispatch')
+class CreateProductView(CreateView):
+    model = Product
+    template_name = 'product/product-create.html'
+    form_class = ProductForm
+    success_url = reverse_lazy('shop-home')
+
+    def form_valid(self, form):
+        product = form.save(commit=False)
+        product.active = self.request.user
+        form.save()
+        return super().form_valid(form)
+
+
+@method_decorator(staff_member_required, name='dispatch')
+class EditProductView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'product/product-edit.html'
+    success_url = reverse_lazy('shop-home')
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+@method_decorator(staff_member_required, name='dispatch')
+class DeleteProductView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('shop-home')
+
+    def get(self, request, *args, **kwargs):
+        return redirect('product-edit', pk=self.kwargs['pk'])
+
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)

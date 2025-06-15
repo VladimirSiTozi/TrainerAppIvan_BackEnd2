@@ -4,7 +4,15 @@ from TrainerAppIvan_BackEnd2.product import views
 
 urlpatterns = [
     path('', views.ProductHomeListView.as_view(), name='shop-home'),
-    path('product/<int:pk>/', views.ProductDetailView.as_view(), name='product-detail', ),
+    path('product/', include([
+        path('add/', views.CreateProductView.as_view(), name='product-create'),
+        path('<int:pk>/', include([
+            path('', views.ProductDetailView.as_view(), name='product-detail'),
+            path('edit/', views.EditProductView.as_view(), name='product-edit'),
+            path('delete/', views.DeleteProductView.as_view(), name='product-delete'),
+        ])),
+
+    ])),
     path('cart/', include([
         path('', views.view_cart, name='cart'),
         path('add/<int:product_id>/', views.add_to_cart, name='add_to_cart'),

@@ -1,0 +1,13 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+  <div class="table-container">
+    <h2>Add Article</h2>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+{% endblock %}

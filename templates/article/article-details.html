@@ -3,18 +3,22 @@
 
 {% block content %}
     <link
-        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,500;0,700;0,900;1,300;1,500;1,700&display=swap"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,500;0,700;0,900;1,300;1,500;1,700&display=swap"
+            rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
+
     <article>
         <h2 class="article-title">{{ article.name }}</h2>
+        {% if user.is_staff %}
+            <p><a href="{% url 'article-edit' article.id %}" class="cta-button">Edit Article</a></p>
+        {% endif %}
         <h4 class="article-brief">{{ article.brief_description }}</h4>
         <p>{{ article.paragraph1 }}</p>
         <figure>
             <img src="{{ article.image1.url }}" alt="article-image1"/>
             <figcaption>Lil Bub, a Hoosier cat who became internet famous and helped her owners raise thousands of
-                dollars for homeless pets</figcaption>
+                dollars for homeless pets
+            </figcaption>
         </figure>
         <h3>{{ article.name }}</h3>
         <p>{{ article.paragraph2 }}</p>

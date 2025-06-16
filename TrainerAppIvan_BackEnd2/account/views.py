@@ -18,7 +18,7 @@ from django.views.decorators.http import require_POST
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import TemplateView, CreateView, DetailView, ListView
+from django.views.generic import TemplateView, CreateView, DetailView, ListView, UpdateView
 
 from TrainerAppIvan_BackEnd2 import settings
 from TrainerAppIvan_BackEnd2.account.forms import AppUserCreationForm, ProfileForm
@@ -269,21 +269,21 @@ def complete_profile(request):
         return render(request, 'account/profile-completion-form.html', {'form': form})
 
 
-@login_required
-def edit_profile(request, slug):
-    profile = request.user.profile
+class EditProfileView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    form_class = ProfileForm
+    template_name = 'account/profile-completion-form.html'
 
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
+    def get_object(self, queryset=None):
+        # If user is staff, allow editing any profile by slug
+        if self.request.user.is_staff:
+            return get_object_or_404(Profile, slug=self.kwargs['slug'])
+        # Otherwise, only allow editing their own profile
+        return self.request.user.profile
 
-            return redirect('account-detail', slug)
-
-    else:
-        form = ProfileForm(instance=profile)
-
-        return render(request, 'account/profile-completion-form.html', {'form': form})
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return redirect('account-detail', slug=self.request.user.profile.slug)
 
 
 @staff_member_required

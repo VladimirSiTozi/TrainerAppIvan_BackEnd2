@@ -23,7 +23,7 @@ urlpatterns = [
             path('products-list/', ProductsListView.as_view(), name='products-list'),
             path('artciles-list/', ArticleListView.as_view(), name='articles-list'),
         ])),
-        path('edit/', views.edit_profile, name='profile-edit'),
+        path('edit/', views.EditProfileView.as_view(), name='profile-edit'),
         path('workout-plans/', include([
             path('list/', WorkoutPlansListView.as_view(), name='workout-plans-list'),
             path('<int:pk>/details/', WorkoutPlanDetailView.as_view(), name='workout_plan_details'),

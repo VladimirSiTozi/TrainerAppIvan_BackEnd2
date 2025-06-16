@@ -5,8 +5,9 @@
     font-family: Arial, sans-serif;
 }
 
-.form-group {
+.contact-form .form-group label{
     margin-bottom: 20px;
+    color: #FFFFFF;
 }
 
 .success-message {

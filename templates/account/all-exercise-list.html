@@ -1,0 +1,22 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+  <div class="admin-container">
+    <h2>Exercises List</h2>
+  
+        {% if exercises %}
+        <ol>
+            {% for exercise in exercises %}
+                <li>
+                    <strong>{{ exercise.name }}</strong> | <a href="{% url 'edit_exercise_template' pk=exercise.pk %}" >Edit</a><br>
+                    {% if exercise.focus %}<em>Focus:</em> {{ exercise.focus }}<br>{% endif %}
+                    {% if exercise.description %}<p>Desc: {{ exercise.description }}</p>{% endif %}
+                </li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p>No exercises available.</p>
+    {% endif %}
+  
+  </div>
+{% endblock %}

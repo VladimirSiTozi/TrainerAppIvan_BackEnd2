@@ -41,7 +41,6 @@ class ProductDetailView(DetailView):
         context['related_products'] = Product.objects.filter(
             category=product.category
         ).exclude(id=product.id).order_by('-created_at')[:3]
-        print(context['related_products'])
         return context
 
 

@@ -18,12 +18,13 @@ from django.views.decorators.http import require_POST
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import TemplateView, CreateView, DetailView
+from django.views.generic import TemplateView, CreateView, DetailView, ListView
 
 from TrainerAppIvan_BackEnd2 import settings
 from TrainerAppIvan_BackEnd2.account.forms import AppUserCreationForm, ProfileForm
 from TrainerAppIvan_BackEnd2.account.models import AppUser, Profile
-from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan
+from TrainerAppIvan_BackEnd2.mixins import StaffRequiredMixin
+from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan, ExerciseTemplate
 
 UserModel = get_user_model()
 
@@ -310,7 +311,12 @@ def staff_user_search(request):
     return render(request, 'account/accounts-list.html', context)
 
 
-@method_decorator(staff_member_required, name='dispatch')
-class AdminHubView(TemplateView):
+class AdminHubView(StaffRequiredMixin, TemplateView):
     template_name = 'account/admin-hub.html'
 
+
+class ExercisesListView(StaffRequiredMixin, ListView):
+    model = ExerciseTemplate
+    template_name = 'account/all-exercise-list.html'
+    context_object_name = 'exercises'
+    queryset = ExerciseTemplate.objects.order_by('name')

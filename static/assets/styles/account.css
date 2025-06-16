@@ -76,3 +76,16 @@
 .account-list-boxes p {
     color: red;
 }
+
+.admin-container {
+    max-width: 1000px;
+    width: 100%;
+    margin: auto;
+    padding: 50px;
+    border-radius: 12px;
+    background-color: #333;
+}
+
+.admin-container a {
+    color: red;
+}

@@ -19,7 +19,7 @@ from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan, Trainer
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 from .models import WorkoutPlan, Period, Day, ExerciseInstance, ExerciseTemplate
-from .forms import WorkoutPlanForm, PeriodForm, DayForm, ExerciseInstanceForm
+from .forms import WorkoutPlanForm, PeriodForm, DayForm, ExerciseInstanceForm, ExerciseTemplateForm
 from ..account.models import Profile, AppUser
 from ..mixins import ProfileContextMixin, StaffRequiredMixin
 
@@ -381,6 +381,19 @@ def create_workout_plan(request):
 
 
 # EDIT VIEWS
+class EditExerciseTemplateView(StaffRequiredMixin, UpdateView):
+    model = ExerciseTemplate
+    form_class = ExerciseTemplateForm
+    template_name = 'programs/edit-exercise-template.html'
+    context_object_name = 'exercise'
+
+    def get_success_url(self):
+        return reverse_lazy('exercises-list', kwargs={'slug': self.request.user.profile.slug})
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
 class EditExerciseView(StaffRequiredMixin, UpdateView):
     model = ExerciseInstance
     form_class = ExerciseInstanceForm
@@ -429,6 +442,18 @@ class EditWorkoutPlanView(StaffRequiredMixin, UpdateView):
 
 # CREATE VIEWS
 class CreateExerciseTemplateView(StaffRequiredMixin, CreateView):
+    model = ExerciseTemplate
+    form_class = ExerciseTemplateForm
+    template_name = 'programs/create-new-exercise-template.html'
+
+    def get_success_url(self):
+        return reverse_lazy('exercises-list', kwargs={'slug': self.request.user.profile.slug})
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+class CreateExerciseInstanceView(StaffRequiredMixin, CreateView):
     model = ExerciseTemplate
     form_class = ExerciseInstanceForm
     template_name = 'programs/add-exercise.html'
@@ -503,6 +528,14 @@ class CreatePeriodView(StaffRequiredMixin, CreateView):
 
 
 # DELETE VIEWS
+class DeleteExerciseTemplateView(StaffRequiredMixin, DeleteView):
+    model = ExerciseTemplate
+    context_object_name = 'exercise'
+
+    def get_success_url(self):
+        return reverse_lazy('exercises-list', kwargs={'slug': self.request.user.profile.slug})
+
+
 class DeleteExerciseInstanceView(StaffRequiredMixin, DeleteView):
     model = ExerciseInstance
     context_object_name = 'exercise'

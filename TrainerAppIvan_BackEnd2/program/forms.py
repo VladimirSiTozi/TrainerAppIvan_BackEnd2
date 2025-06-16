@@ -48,3 +48,18 @@ class ExerciseInstanceForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['exercise_template'].queryset = ExerciseTemplate.objects.all().order_by('name')
         self.empty_permitted = True
+
+
+class ExerciseTemplateForm(forms.ModelForm):
+    class Meta:
+        model = ExerciseTemplate
+        fields = ['name', 'description', 'focus']
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 4}),
+            'focus': forms.TextInput(attrs={'placeholder': 'e.g., Chest, Legs'}),
+        }
+        labels = {
+            'name': 'Exercise Name',
+            'description': 'Description (optional)',
+            'focus': 'Target Muscle Group',
+        }

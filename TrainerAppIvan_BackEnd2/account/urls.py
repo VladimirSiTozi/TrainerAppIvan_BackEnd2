@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from TrainerAppIvan_BackEnd2.account import views
-from TrainerAppIvan_BackEnd2.account.views import AdminHubView
+from TrainerAppIvan_BackEnd2.account.views import AdminHubView, ExercisesListView
 from TrainerAppIvan_BackEnd2.program.views import WorkoutPlanDetailView, WorkoutPlansListView
 
 urlpatterns = [
@@ -13,7 +13,10 @@ urlpatterns = [
     path('complete-profile/', views.complete_profile, name='complete-profile'),
     path('<slug:slug>/', include([
         path('', views.AccountDetailView.as_view(), name='account-detail'),
-        path('adminhub/', AdminHubView.as_view(), name='admin-hub'),
+        path('adminhub/', include([
+            path('', AdminHubView.as_view(), name='admin-hub'),
+            path('exercises-list/', ExercisesListView.as_view(), name='exercises-list'),
+        ])),
         path('edit/', views.edit_profile, name='profile-edit'),
         path('workout-plans/', include([
             path('list/', WorkoutPlansListView.as_view(), name='workout-plans-list'),

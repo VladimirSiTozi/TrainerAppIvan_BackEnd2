@@ -13,15 +13,23 @@ class ProductForm(forms.ModelForm):
             'brief_description',
             'description',
             'will_learn',
-            'author',
             'price',
             'discount',
             'is_active',
         ]
         widgets = {
-            'will_learn': forms.Textarea(attrs={'placeholder': 'Enter a JSON array like ["Point 1", "Point 2"]'}),
-            'description': forms.Textarea(attrs={'rows': 5}),
+            'will_learn': forms.Textarea(attrs={'placeholder': 'Enter a JSON array like '
+                                                               '["Improve strength", "Increase flexibility"]'}),
+            'description': forms.Textarea(attrs={'rows': 5},),
             'brief_description': forms.Textarea(attrs={'rows': 2}),
+        }
+
+        help_texts = {
+            'will_learn': 'Enter a JSON array of learning points, e.g. ["Improve strength", "Increase flexibility"]. '
+                          'Use square brackets [] with double quotes"".',
+            'brief_description': 'A short summary of the item, up to 500 characters.',
+            'description': 'A detailed, full description of the item or content. '
+                           'This can include key features, purpose, usage, and any other relevant information.'
         }
 
     def __init__(self, *args, **kwargs):

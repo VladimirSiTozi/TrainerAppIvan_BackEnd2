@@ -1,5 +1,6 @@
 from django import forms
 from .models import WorkoutPlan, Period, Day, ExerciseInstance, ExerciseTemplate
+from ..account.models import AppUser
 
 
 class WorkoutPlanForm(forms.ModelForm):
@@ -9,6 +10,10 @@ class WorkoutPlanForm(forms.ModelForm):
         widgets = {
             'description': forms.Textarea(attrs={'rows': 3}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['user'].queryset = AppUser.objects.all().order_by('email')
 
 
 class PeriodForm(forms.ModelForm):
@@ -41,5 +46,5 @@ class ExerciseInstanceForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['exercise_template'].queryset = ExerciseTemplate.objects.all()
+        self.fields['exercise_template'].queryset = ExerciseTemplate.objects.all().order_by('name')
         self.empty_permitted = True

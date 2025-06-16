@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
 
+from TrainerAppIvan_BackEnd2.mixins import StaffRequiredMixin
 from TrainerAppIvan_BackEnd2.product.forms import ProductForm
 from TrainerAppIvan_BackEnd2.product.models import Product, CartItem, Cart
 
@@ -273,8 +274,7 @@ class CancelPaymentView(TemplateView):
 
 
 # Products Create, Edit, Delete
-@method_decorator(staff_member_required, name='dispatch')
-class CreateProductView(CreateView):
+class CreateProductView(StaffRequiredMixin, CreateView):
     model = Product
     template_name = 'product/product-create.html'
     form_class = ProductForm
@@ -287,8 +287,7 @@ class CreateProductView(CreateView):
         return super().form_valid(form)
 
 
-@method_decorator(staff_member_required, name='dispatch')
-class EditProductView(UpdateView):
+class EditProductView(StaffRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     template_name = 'product/product-edit.html'
@@ -298,8 +297,7 @@ class EditProductView(UpdateView):
         return super().form_valid(form)
 
 
-@method_decorator(staff_member_required, name='dispatch')
-class DeleteProductView(DeleteView):
+class DeleteProductView(StaffRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('shop-home')
 

@@ -4,7 +4,10 @@
     <div class="outer-product-container">
         <div class="inner-product-container">
             <div class="product-title">
-                <h2 class="underline-text heading-title">{{ product.name }}</h2>
+                <h2 class="underline-text heading-title">{{ product.name }} </h2>
+                {% if user.is_staff %}
+                    <p><a href="{% url 'product-edit' product.id %}" class="cta-button">Edit Product</a></p>
+                {% endif %}
             </div>
             <div class="product-container">
                 <div class="product-image">

@@ -3,15 +3,18 @@
 {% block account-content %}
     <div class="table-container">
         <h2>Workout Plan {{ workout_plan }}</h2>
-        <p><a href="{% url 'workout-plan-edit' workout_plan.pk %}">Edit Workout Plan</a> | 
-            <a href="{% url 'create-period' workout_plan.pk %}">Add Period</a>
-        </p>
-
+        {% if user.is_staff %}
+            <p>
+                <a href="{% url 'workout-plan-edit' workout_plan.pk %}">Edit Workout Plan</a> |
+                <a href="{% url 'create-period' workout_plan.pk %}">Add Period</a>
+            </p>
+        {% endif %}
         <!-- Navigation Buttons for Periods -->
         <div class="navigation-container">
             <nav class="navigation-buttons text">
                 {% for period_data in plan_data %}
-                    <a href="javascript:void(0);" onclick="showPeriod('period-{{ period_data.period }}')">Period {{ period_data.period }}</a>
+                    <a href="javascript:void(0);"
+                       onclick="showPeriod('period-{{ period_data.period }}')">Period {{ period_data.period }}</a>
                 {% endfor %}
             </nav>
         </div>
@@ -20,46 +23,54 @@
         {% for period_data in plan_data %}
             <div id="period-{{ period_data.period }}" class="period-content" style="display: none;">
                 <h2>Period {{ period_data.period }}</h2>
-                <p><a href="{% url 'period-edit' period_data.pk %}">Edit Period</a> | 
-                    <a href="{% url 'create-day' period_data.pk %}">Add Day</a>
-                </p>
+                {% if user.is_staff %}
+                    <p>
+                        <a href="{% url 'period-edit' period_data.pk %}">Edit Period</a> |
+                        <a href="{% url 'create-day' period_data.pk %}">Add Day</a>
+                    </p>
+                {% endif %}
                 <p>Duration: {{ period_data.duration_weeks }} weeks</p>
 
                 {% for day_data in period_data.days %}
                     <div class="inner-table-container plan-detail">
                         <h3>{{ day_data.day }}</h3>
-                        <p><a href="{% url 'day-edit' day_data.pk %}">Edit Day</a> | 
-                            <a href="{% url 'create_exercise' day_data.pk %}">Add Exercise</a>
-                        </p>
+                        {% if user.is_staff %}
+                            <p>
+                                <a href="{% url 'day-edit' day_data.pk %}">Edit Day</a> |
+                                <a href="{% url 'create_exercise' day_data.pk %}">Add Exercise</a>
+                            </p>
+                        {% endif %}
                         <table>
                             <thead>
-                                <tr>
-                                    <th>Exercise</th>
-                                    <th>Sets</th>
-                                    <th>Reps</th>
-                                    <th>Rest</th>
-                                    <th>Progression</th>
-                                    <th>Aim</th>
-                                    <th>Focus</th>
-                                    <th>Tempo</th>
-                                    <th>Weight</th>
-                                </tr>
+                            <tr>
+                                <th>Exercise</th>
+                                <th>Sets</th>
+                                <th>Reps</th>
+                                <th>Rest</th>
+                                <th>Progression</th>
+                                <th>Aim</th>
+                                <th>Focus</th>
+                                <th>Tempo</th>
+                                <th>Weight</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                {% for exercise in day_data.exercises %}
-                                    <tr>
-                                        <td>{{ exercise.exercise_template.name }}</td>
-                                        <td>{{ exercise.sets }}</td>
-                                        <td>{{ exercise.reps }}</td>
-                                        <td>{{ exercise.rest }}</td>
-                                        <td>{{ exercise.progression }}</td>
-                                        <td>{{ exercise.aim }}</td>
-                                        <td>{{ exercise.exercise_template.focus }}</td>
-                                        <td>{{ exercise.tempo }}</td>
-                                        <td>{{ exercise.weight }}</td>
+                            {% for exercise in day_data.exercises %}
+                                <tr>
+                                    <td>{{ exercise.exercise_template.name }}</td>
+                                    <td>{{ exercise.sets }}</td>
+                                    <td>{{ exercise.reps }}</td>
+                                    <td>{{ exercise.rest }}</td>
+                                    <td>{{ exercise.progression }}</td>
+                                    <td>{{ exercise.aim }}</td>
+                                    <td>{{ exercise.exercise_template.focus }}</td>
+                                    <td>{{ exercise.tempo }}</td>
+                                    <td>{{ exercise.weight }}</td>
+                                    {% if user.is_staff %}
                                         <th><a href="{% url 'exercise-edit' exercise.id %}">Edit</a></th>
-                                    </tr>
-                                {% endfor %}
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -72,7 +83,7 @@
     <script>
         function showPeriod(periodId) {
             // Hide all period content
-            document.querySelectorAll('.period-content').forEach(function(element) {
+            document.querySelectorAll('.period-content').forEach(function (element) {
                 element.style.display = 'none';
             });
 
@@ -81,7 +92,7 @@
         }
 
         // Show the first period by default
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             showPeriod('period-1');
         });
     </script>

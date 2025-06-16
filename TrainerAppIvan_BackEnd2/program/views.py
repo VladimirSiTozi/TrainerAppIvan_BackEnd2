@@ -1,6 +1,7 @@
 import json
 
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.http import JsonResponse, HttpResponse
@@ -20,9 +21,10 @@ from django.forms import inlineformset_factory
 from .models import WorkoutPlan, Period, Day, ExerciseInstance, ExerciseTemplate
 from .forms import WorkoutPlanForm, PeriodForm, DayForm, ExerciseInstanceForm
 from ..account.models import Profile, AppUser
-from ..mixins import ProfileContextMixin
+from ..mixins import ProfileContextMixin, StaffRequiredMixin
 
 
+@method_decorator(login_required, name='dispatch')
 class WorkoutPlansListView(LoginRequiredMixin, ListView):
     model = WorkoutPlan
     template_name = 'programs/training-plans-list.html'
@@ -57,6 +59,7 @@ class WorkoutPlansListView(LoginRequiredMixin, ListView):
         return context
 
 
+@method_decorator(login_required, name='dispatch')
 class WorkoutPlanDetailView(DetailView, ProfileContextMixin):
     model = WorkoutPlan
     template_name = 'programs/training-plan.html'
@@ -168,8 +171,7 @@ class WorkoutPlanDetailView(DetailView, ProfileContextMixin):
 #
 #         return redirect(self.object.get_absolute_url())
 
-@method_decorator(staff_member_required, name='dispatch')
-class WorkoutPlanCreateView(CreateView):
+class WorkoutPlanCreateView(StaffRequiredMixin, CreateView):
     model = WorkoutPlan
     form_class = WorkoutPlanForm
     template_name = 'programs/create_plan2.html'
@@ -323,6 +325,7 @@ class WorkoutPlanCreateView(CreateView):
 
 
 @csrf_exempt
+@staff_member_required
 def create_workout_plan(request):
     if request.method != 'POST':
         return JsonResponse({'error': 'Invalid method'}, status=405)
@@ -378,7 +381,7 @@ def create_workout_plan(request):
 
 
 # EDIT VIEWS
-class EditExerciseView(LoginRequiredMixin, UpdateView):
+class EditExerciseView(StaffRequiredMixin, UpdateView):
     model = ExerciseInstance
     form_class = ExerciseInstanceForm
     template_name = 'programs/edit-exercise.html'
@@ -390,7 +393,7 @@ class EditExerciseView(LoginRequiredMixin, UpdateView):
                             kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
-class EditDayView(LoginRequiredMixin, UpdateView):
+class EditDayView(StaffRequiredMixin, UpdateView):
     model = Day
     form_class = DayForm
     template_name = 'programs/edit-day.html'
@@ -402,7 +405,7 @@ class EditDayView(LoginRequiredMixin, UpdateView):
                             kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
-class EditPeriodView(LoginRequiredMixin, UpdateView):
+class EditPeriodView(StaffRequiredMixin, UpdateView):
     model = Period
     form_class = PeriodForm
     template_name = 'programs/edit-period.html'
@@ -414,7 +417,7 @@ class EditPeriodView(LoginRequiredMixin, UpdateView):
                             kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
-class EditWorkoutPlanView(LoginRequiredMixin, UpdateView):
+class EditWorkoutPlanView(StaffRequiredMixin, UpdateView):
     model = WorkoutPlan
     form_class = WorkoutPlanForm
     template_name = 'programs/edit-workout.html'
@@ -425,7 +428,7 @@ class EditWorkoutPlanView(LoginRequiredMixin, UpdateView):
 
 
 # CREATE VIEWS
-class CreateExerciseTemplateView(LoginRequiredMixin, CreateView):
+class CreateExerciseTemplateView(StaffRequiredMixin, CreateView):
     model = ExerciseTemplate
     form_class = ExerciseInstanceForm
     template_name = 'programs/add-exercise.html'
@@ -450,7 +453,7 @@ class CreateExerciseTemplateView(LoginRequiredMixin, CreateView):
                             kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
-class CreateDayView(LoginRequiredMixin, CreateView):
+class CreateDayView(StaffRequiredMixin, CreateView):
     model = Day
     form_class = DayForm
     template_name = 'programs/add-day.html'
@@ -474,7 +477,7 @@ class CreateDayView(LoginRequiredMixin, CreateView):
                             kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
-class CreatePeriodView(LoginRequiredMixin, CreateView):
+class CreatePeriodView(StaffRequiredMixin, CreateView):
     model = Period
     form_class = PeriodForm
     template_name = 'programs/add-period.html'
@@ -500,7 +503,7 @@ class CreatePeriodView(LoginRequiredMixin, CreateView):
 
 
 # DELETE VIEWS
-class DeleteExerciseInstanceView(LoginRequiredMixin, DeleteView):
+class DeleteExerciseInstanceView(StaffRequiredMixin, DeleteView):
     model = ExerciseInstance
     context_object_name = 'exercise'
 
@@ -510,7 +513,7 @@ class DeleteExerciseInstanceView(LoginRequiredMixin, DeleteView):
                             kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
-class DeleteDayView(LoginRequiredMixin, DeleteView):
+class DeleteDayView(StaffRequiredMixin, DeleteView):
     model = Day
     context_object_name = 'day'
 
@@ -520,7 +523,7 @@ class DeleteDayView(LoginRequiredMixin, DeleteView):
                             kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
-class DeletePeriodView(LoginRequiredMixin, DeleteView):
+class DeletePeriodView(StaffRequiredMixin, DeleteView):
     model = Period
     context_object_name = 'period'
 
@@ -530,7 +533,7 @@ class DeletePeriodView(LoginRequiredMixin, DeleteView):
                             kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
-class DeleteWorkoutPlanView(LoginRequiredMixin, DeleteView):
+class DeleteWorkoutPlanView(StaffRequiredMixin, DeleteView):
     model = WorkoutPlan
     context_object_name = 'workout_plan'
 

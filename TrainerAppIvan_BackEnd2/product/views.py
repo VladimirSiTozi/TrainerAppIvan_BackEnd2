@@ -305,3 +305,12 @@ class DeleteProductView(StaffRequiredMixin, DeleteView):
 
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
+
+
+class ProductsListView(StaffRequiredMixin, ListView):
+    model = Product
+    template_name = 'product/products-list.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        return Product.objects.all().order_by('name')

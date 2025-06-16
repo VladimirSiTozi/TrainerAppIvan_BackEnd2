@@ -17,6 +17,11 @@
 
 <header>
     {% include 'common/nav.html' %}
+    {% if user.is_staff %}
+    	<div class="admin-nav-bar">
+            <p>You are currently logged in as a staff member with elevated access rights.</p>
+        </div>
+    {% endif %}
 </header>
 
 <main>

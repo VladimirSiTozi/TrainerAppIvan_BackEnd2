@@ -51,3 +51,13 @@ class DeleteArticleView(StaffRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('articles-home')
+
+
+class ArticleListView(StaffRequiredMixin, ListView):
+    model = Article
+    template_name = "article/articles-list.html"
+    context_object_name = "articles"
+
+    def get_queryset(self):
+        # return Article.objects.only("id", "name", "brief_description", "image1")
+        return Article.objects.all().order_by("created_at")

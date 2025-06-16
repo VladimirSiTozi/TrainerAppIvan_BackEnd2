@@ -582,7 +582,7 @@ class ExercisesListView(StaffRequiredMixin, ListView):
     queryset = ExerciseTemplate.objects.order_by('name')
 
 
-class AllWorkoutPlanListView(ListView):
+class AllWorkoutPlanListView(StaffRequiredMixin, ListView):
     model = WorkoutPlan
     template_name = 'programs/workouts-list.html'
     context_object_name = 'workouts'

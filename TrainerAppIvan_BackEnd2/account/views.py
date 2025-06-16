@@ -315,7 +315,7 @@ class AdminHubView(StaffRequiredMixin, TemplateView):
     template_name = 'account/admin-hub.html'
 
 
-class UsersListView(ListView):
+class UsersListView(StaffRequiredMixin, ListView):
     model = AppUser
     template_name = 'account/users-list.html'
     context_object_name = 'users'

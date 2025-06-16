@@ -24,15 +24,24 @@
     border-radius: 8px;
 }
 
+/* Account content styling */
+.admin-nav-bar{
+    background-color: #CAC531;
+    color: #000000;
+    text-align: center;
+}
 .account-admin {
     padding: 20px;
     margin: 20px;
-    background-color: #c21500;
+    background-color: #CAC531;
+    color: #000000;
     border-radius: 8px;
 }
 
+.account-admin a {
+    color: blue;
+}
 
-/* Account content styling */
 .account-content {
     padding: 20px;
 }
@@ -80,7 +89,7 @@
 .admin-container {
     max-width: 1000px;
     width: 100%;
-    margin: auto;
+    margin: 50px auto;
     padding: 50px;
     border-radius: 12px;
     background-color: #333;

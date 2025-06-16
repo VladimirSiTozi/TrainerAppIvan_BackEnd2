@@ -1,6 +1,8 @@
 from django.urls import path, include
 
 from TrainerAppIvan_BackEnd2.account import views
+from TrainerAppIvan_BackEnd2.article.views import ArticleListView
+from TrainerAppIvan_BackEnd2.product.views import ProductsListView
 from TrainerAppIvan_BackEnd2.program.views import WorkoutPlanDetailView, WorkoutPlansListView, ExercisesListView, \
     AllWorkoutPlanListView
 
@@ -18,6 +20,8 @@ urlpatterns = [
             path('exercises-list/', ExercisesListView.as_view(), name='exercises-list'),
             path('users-list/', views.UsersListView.as_view(), name='users-list'),
             path('workplans-list/', AllWorkoutPlanListView.as_view(), name='all-workouts-list'),
+            path('products-list/', ProductsListView.as_view(), name='products-list'),
+            path('artciles-list/', ArticleListView.as_view(), name='articles-list'),
         ])),
         path('edit/', views.edit_profile, name='profile-edit'),
         path('workout-plans/', include([

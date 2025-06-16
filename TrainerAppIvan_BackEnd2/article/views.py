@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from TrainerAppIvan_BackEnd2.account.models import AppUser
 from TrainerAppIvan_BackEnd2.article.forms import ArticleForm
 from TrainerAppIvan_BackEnd2.article.models import Article
 from TrainerAppIvan_BackEnd2.mixins import StaffRequiredMixin

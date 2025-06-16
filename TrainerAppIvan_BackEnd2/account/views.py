@@ -308,15 +308,18 @@ def staff_user_search(request):
         'query': query
     }
 
-    return render(request, 'account/accounts-list.html', context)
+    return render(request, 'account/users-search.html', context)
 
 
 class AdminHubView(StaffRequiredMixin, TemplateView):
     template_name = 'account/admin-hub.html'
 
 
-class ExercisesListView(StaffRequiredMixin, ListView):
-    model = ExerciseTemplate
-    template_name = 'account/all-exercise-list.html'
-    context_object_name = 'exercises'
-    queryset = ExerciseTemplate.objects.order_by('name')
+class UsersListView(ListView):
+    model = AppUser
+    template_name = 'account/users-list.html'
+    context_object_name = 'users'
+
+    def get_queryset(self):
+        return AppUser.objects.all().order_by('email')
+

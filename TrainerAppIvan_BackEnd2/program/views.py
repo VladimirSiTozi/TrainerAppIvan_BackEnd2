@@ -573,3 +573,10 @@ class DeleteWorkoutPlanView(StaffRequiredMixin, DeleteView):
     def get_success_url(self):
         profile = self.object.user.profile
         return reverse_lazy('account-detail', kwargs={'slug': profile.slug})
+
+
+class ExercisesListView(StaffRequiredMixin, ListView):
+    model = ExerciseTemplate
+    template_name = 'account/../../templates/programs/all-exercise-list.html'
+    context_object_name = 'exercises'
+    queryset = ExerciseTemplate.objects.order_by('name')

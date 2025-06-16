@@ -89,3 +89,11 @@
 .admin-container a {
     color: red;
 }
+
+.admin-container .active-green a {
+    color: limegreen;
+}
+
+.admin-container .not-active-red a {
+    color: red;
+}

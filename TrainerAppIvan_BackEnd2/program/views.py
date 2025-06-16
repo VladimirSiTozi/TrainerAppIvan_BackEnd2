@@ -580,3 +580,12 @@ class ExercisesListView(StaffRequiredMixin, ListView):
     template_name = 'account/../../templates/programs/all-exercise-list.html'
     context_object_name = 'exercises'
     queryset = ExerciseTemplate.objects.order_by('name')
+
+
+class AllWorkoutPlanListView(ListView):
+    model = WorkoutPlan
+    template_name = 'programs/workouts-list.html'
+    context_object_name = 'workouts'
+
+    def get_queryset(self):
+        return WorkoutPlan.objects.all().order_by('id')

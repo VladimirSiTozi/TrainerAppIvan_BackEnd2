@@ -1,0 +1,33 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="admin-container">
+        {% if meals %}
+            <h2>All Meals</h2>
+            <ol>
+                {% for meal in meals %}
+                    <li>
+                        <div class="admin-list-templates">
+                            <h3>{{ meal.name }} |
+                                {% if user.is_staff %}
+                                    <a href="{% url 'edit-meal-template' meal.pk %}">Edit</a>
+                                {% endif %}
+                            </h3>
+
+                            <p><strong>Calories:</strong> {{ meal.calories }}</p>
+                            <p>
+                                <strong>Protein:</strong> {{ meal.protein_grams }}g |
+                                <strong>Carbs:</strong> {{ meal.carbs_grams }}g |
+                                <strong>Fats:</strong> {{ meal.fats_grams }}g
+                            </p>
+
+                            <p><strong>Foods:</strong> {{ meal.foods_description }}</p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <p>No meals have been added yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}

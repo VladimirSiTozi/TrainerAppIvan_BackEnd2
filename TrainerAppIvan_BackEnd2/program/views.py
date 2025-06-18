@@ -14,13 +14,13 @@ from django.views.decorators.http import require_http_methods
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.db.models import Q
 
-from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan, Trainer, NutritionPlan, MealInstance
+from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan, Trainer, NutritionPlan, MealInstance, Meal
 
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 from .models import WorkoutPlan, Period, Day, ExerciseInstance, ExerciseTemplate
 from .forms import WorkoutPlanForm, PeriodForm, DayForm, ExerciseInstanceForm, ExerciseTemplateForm, NutritionPlanForm, \
-    MealInstanceForm
+    MealInstanceForm, MealForm
 from ..account.models import Profile, AppUser
 from ..mixins import ProfileContextMixin, StaffRequiredMixin
 
@@ -712,7 +712,6 @@ class CreateMealInstanceView(StaffRequiredMixin, CreateView):
 
     def get_success_url(self):
         profile = self.object.nutrition_plan.user.profile
-
         return reverse_lazy('nutrition-plan-details', kwargs={'slug': profile.slug, 'pk': self.nutrition_plan.pk})
 
 
@@ -736,3 +735,44 @@ class DeleteMealInstance(StaffRequiredMixin, DeleteView):
         nutrition_plan = self.object.nutrition_plan
         return reverse_lazy('nutrition-plan-details',
                             kwargs={'pk': nutrition_plan.id, 'slug': nutrition_plan.user.profile.slug})
+
+
+class CreateMealView(StaffRequiredMixin, CreateView):
+    model = Meal
+    form_class = MealForm
+    template_name = 'programs/nutrition/meal-create.html'
+    success_url = reverse_lazy('home')
+
+
+class EditMealView(StaffRequiredMixin, UpdateView):
+    model = Meal
+    form_class = MealForm
+    template_name = 'programs/nutrition/meal-edit.html'
+    context_object_name = 'meal'
+
+    def get_success_url(self):
+        return reverse_lazy('meals-list', kwargs={'slug': self.request.user.profile.slug})
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+class DeleteMealView(StaffRequiredMixin, DeleteView):
+    model = Meal
+    context_object_name = 'meal'
+
+    def get_success_url(self):
+        return reverse_lazy('meals-list', kwargs={'slug': self.request.user.profile.slug})
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+class MealsListView(StaffRequiredMixin, ListView):
+    model = Meal
+    template_name = 'programs/nutrition/meals-list.html'
+    context_object_name = "meals"
+
+    def get_queryset(self):
+        return Meal.objects.all().order_by('name')
+

@@ -6,6 +6,15 @@ urlpatterns = [
     path('create-workout/', views.WorkoutPlanCreateView.as_view(), name='create_workout'),
     path('create-workout-plan/', views.create_workout_plan, name='create_workout_plan'),
 
+    path('meal/', include([
+        path('create/', views.CreateMealView.as_view(), name='create-meal-template'),
+        path('<int:pk>/', include([
+            path('edit/', views.EditMealView.as_view(), name='edit-meal-template'),
+            path('delete/', views.DeleteMealView.as_view(), name='delete-meal-template'),
+        ])),
+
+    ])),
+
     path('exercise-template/', include([
         path('create-new-template/', views.CreateExerciseTemplateView.as_view(), name='create_new_exercise'),
         path('<int:pk>/', include([

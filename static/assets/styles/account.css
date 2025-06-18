@@ -106,3 +106,10 @@
 .admin-container .not-active-red a {
     color: red;
 }
+
+.admin-list-templates {
+    background-color: #1a365d;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}

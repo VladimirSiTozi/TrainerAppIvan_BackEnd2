@@ -1,8 +1,7 @@
 from django.db import models
 
-from django.db import models
-
 from TrainerAppIvan_BackEnd2.account.models import AppUser
+from TrainerAppIvan_BackEnd2.program.choices import MealTimeChoices
 
 
 class Trainer(models.Model):
@@ -63,3 +62,61 @@ class ExerciseInstance(models.Model):
 
     def __str__(self):
         return f"{self.exercise_template.name} on {self.day}"
+
+
+# NutritionPlan
+class NutritionPlan(models.Model):
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+
+    # Use JSONField for multiple notes
+    trainer_notes = models.JSONField(blank=True, null=True, default=list)
+    meal_timing_notes = models.JSONField(blank=True, null=True, default=list)
+
+    target_calories = models.CharField(max_length=50)
+    protein_grams = models.CharField(max_length=50)
+    carbs_grams = models.CharField(max_length=50)
+    fats_grams = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} of {self.user.profile.get_full_name() or self.user.email}"
+
+
+class Meal(models.Model):
+    name = models.CharField(max_length=100)  # e.g., "Grilled Chicken Bowl"
+
+    calories = models.PositiveIntegerField()
+    protein_grams = models.FloatField()
+    carbs_grams = models.FloatField()
+    fats_grams = models.FloatField()
+
+    foods_description = models.TextField(help_text="List of foods and portions included in the meal")
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class MealInstance(models.Model):
+    nutrition_plan = models.ForeignKey(NutritionPlan, related_name='meal_instances', on_delete=models.CASCADE)
+    meal_template = models.ForeignKey(Meal, on_delete=models.CASCADE)
+
+    time_of_day = models.CharField(
+        max_length=50,
+        blank=True,
+        choices=MealTimeChoices.choices,
+    )
+
+    def __str__(self):
+        return f"{self.time_of_day} – {self.meal_template.name}"
+
+
+class Supplement(models.Model):
+    nutrition_plan = models.ForeignKey(NutritionPlan, related_name='supplements', on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    dosage = models.CharField(max_length=100, blank=True)
+    protein_grams = models.FloatField(blank=True, null=True, help_text="Protein content per serving (optional)")
+
+    def __str__(self):
+        return self.name

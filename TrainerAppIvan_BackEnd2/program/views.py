@@ -14,12 +14,13 @@ from django.views.decorators.http import require_http_methods
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.db.models import Q
 
-from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan, Trainer
+from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan, Trainer, NutritionPlan, MealInstance
 
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 from .models import WorkoutPlan, Period, Day, ExerciseInstance, ExerciseTemplate
-from .forms import WorkoutPlanForm, PeriodForm, DayForm, ExerciseInstanceForm, ExerciseTemplateForm
+from .forms import WorkoutPlanForm, PeriodForm, DayForm, ExerciseInstanceForm, ExerciseTemplateForm, NutritionPlanForm, \
+    MealInstanceForm
 from ..account.models import Profile, AppUser
 from ..mixins import ProfileContextMixin, StaffRequiredMixin
 
@@ -437,7 +438,9 @@ class EditWorkoutPlanView(StaffRequiredMixin, UpdateView):
     context_object_name = 'workout_plan'
 
     def get_success_url(self):
-        return reverse_lazy('home')
+        workout_plan = self.object.workout_plan
+        return reverse_lazy('workout_plan_details',
+                            kwargs={'pk': workout_plan.id, 'slug': workout_plan.user.profile.slug})
 
 
 # CREATE VIEWS
@@ -589,3 +592,147 @@ class AllWorkoutPlanListView(StaffRequiredMixin, ListView):
 
     def get_queryset(self):
         return WorkoutPlan.objects.all().order_by('id')
+
+
+@method_decorator(login_required, name='dispatch')
+class NutritionPlansListView(LoginRequiredMixin, ListView):
+    model = NutritionPlan
+    template_name = 'programs/nutrition/nutrition-plans-list.html'
+    context_object_name = 'nutrition_plans'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.profile = get_object_or_404(Profile, slug=self.kwargs['slug'])
+
+        # logged-in user
+        user = request.user
+
+        # check access
+        is_owner = self.profile.user == user
+
+        if not user.is_staff and not is_owner:
+            raise PermissionDenied("You do not have permission to view this user's workout plans.")
+
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return NutritionPlan.objects.filter(user=self.profile.user_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['profile'] = self.profile  # user being viewed
+        context['current_user'] = self.request.user  # logged-in user
+        return context
+
+
+class NutritionPlanDetailView(LoginRequiredMixin, DetailView):
+    model = NutritionPlan
+    template_name = 'programs/nutrition/nutrition-details.html'
+    context_object_name = 'nutrition_plan'
+
+    def get_queryset(self):
+        # Optionally restrict staff access to users they manage
+        queryset = super().get_queryset()
+        if self.request.user.is_staff:
+            return queryset
+        return queryset.filter(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        nutrition_plan = self.object
+        context['profile'] = nutrition_plan.user.profile
+        context['meals'] = nutrition_plan.meal_instances.all()
+        context['breakfast'] = nutrition_plan.meal_instances.filter(time_of_day='Breakfast')
+        context['morning_snack'] = nutrition_plan.meal_instances.filter(time_of_day='Morning Snack')
+        context['lunch'] = nutrition_plan.meal_instances.filter(time_of_day='Lunch')
+        context['afternoon_snack'] = nutrition_plan.meal_instances.filter(time_of_day='Afternoon Snack')
+        context['dinner'] = nutrition_plan.meal_instances.filter(time_of_day='Dinner')
+        context['evening_snack'] = nutrition_plan.meal_instances.filter(time_of_day='Evening Snack')
+
+        return context
+
+
+class CreateNutritionView(StaffRequiredMixin, CreateView):
+    model = NutritionPlan
+    form_class = NutritionPlanForm
+    template_name = 'programs/nutrition/nutrition-create.html'
+    context_object_name = 'nutrition_plan'
+
+    def get_success_url(self):
+        nutrition_plan = self.object
+        return reverse_lazy('home')
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+class EditNutritionView(StaffRequiredMixin, UpdateView):
+    model = NutritionPlan
+    form_class = NutritionPlanForm
+    template_name = 'programs/nutrition/nutrition-edit.html'
+    context_object_name = 'nutrition_plan'
+
+    def get_success_url(self):
+        nutrition_plan = self.object
+        print(nutrition_plan.user.profile.slug)
+        return reverse_lazy('nutrition-plan-details', kwargs={'slug': nutrition_plan.user.profile.slug,
+                                                              'pk': nutrition_plan.pk})
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+class DeleteNutritionView(StaffRequiredMixin, DeleteView):
+    model = NutritionPlan
+    context_object_name = 'nutrition_plan'
+
+    def get_success_url(self):
+        profile = self.object.user.profile
+        return reverse_lazy('account-detail', kwargs={'slug': profile.slug})
+
+
+class CreateMealInstanceView(StaffRequiredMixin, CreateView):
+    model = MealInstance
+    form_class = MealInstanceForm
+    template_name = 'programs/nutrition/meal-instance-create.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        # Get the nutrition plan from the URL
+        self.nutrition_plan = get_object_or_404(NutritionPlan, pk=kwargs['pk'])
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        # Set the nutrition plan automatically before saving
+        form.instance.nutrition_plan = self.nutrition_plan
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['nutrition_plan'] = self.nutrition_plan
+        return context
+
+    def get_success_url(self):
+        profile = self.object.nutrition_plan.user.profile
+
+        return reverse_lazy('nutrition-plan-details', kwargs={'slug': profile.slug, 'pk': self.nutrition_plan.pk})
+
+
+class EditMealInstanceView(StaffRequiredMixin, UpdateView):
+    model = MealInstance
+    form_class = MealInstanceForm
+    template_name = 'programs/nutrition/meal-instance-edit.html'
+    context_object_name = 'meal_instance'
+
+    def get_success_url(self):
+        nutrition_plan = self.object.nutrition_plan
+        return reverse_lazy('nutrition-plan-details',
+                            kwargs={'pk': nutrition_plan.id, 'slug': nutrition_plan.user.profile.slug})
+
+
+class DeleteMealInstance(StaffRequiredMixin, DeleteView):
+    model = MealInstance
+    context_object_name = 'meal_instance'
+
+    def get_success_url(self):
+        nutrition_plan = self.object.nutrition_plan
+        return reverse_lazy('nutrition-plan-details',
+                            kwargs={'pk': nutrition_plan.id, 'slug': nutrition_plan.user.profile.slug})

@@ -4,7 +4,7 @@ from TrainerAppIvan_BackEnd2.account import views
 from TrainerAppIvan_BackEnd2.article.views import ArticleListView
 from TrainerAppIvan_BackEnd2.product.views import ProductsListView
 from TrainerAppIvan_BackEnd2.program.views import WorkoutPlanDetailView, WorkoutPlansListView, ExercisesListView, \
-    AllWorkoutPlanListView
+    AllWorkoutPlanListView, NutritionPlanDetailView, NutritionPlansListView
 
 urlpatterns = [
     path('search/', views.staff_user_search, name='staff-user-search'),
@@ -13,6 +13,7 @@ urlpatterns = [
     path('register/', views.AccountRegisterView.as_view(), name='register'),
     path('logout/', views.sign_out, name='logout'),
     path('complete-profile/', views.complete_profile, name='complete-profile'),
+
     path('<slug:slug>/', include([
         path('', views.AccountDetailView.as_view(), name='account-detail'),
         path('adminhub/', include([
@@ -23,10 +24,18 @@ urlpatterns = [
             path('products-list/', ProductsListView.as_view(), name='products-list'),
             path('artciles-list/', ArticleListView.as_view(), name='articles-list'),
         ])),
+
         path('edit/', views.EditProfileView.as_view(), name='profile-edit'),
         path('workout-plans/', include([
             path('list/', WorkoutPlansListView.as_view(), name='workout-plans-list'),
             path('<int:pk>/details/', WorkoutPlanDetailView.as_view(), name='workout_plan_details'),
+        ])),
+        path('nutrition-plans/', include([
+            path('list/', NutritionPlansListView.as_view(), name='nutrition-plans-list'),
+        ])),
+
+        path('nutrition/', include([
+            path('<int:pk>/details/', NutritionPlanDetailView.as_view(), name='nutrition-plan-details'),
         ])),
     ])),
 ]

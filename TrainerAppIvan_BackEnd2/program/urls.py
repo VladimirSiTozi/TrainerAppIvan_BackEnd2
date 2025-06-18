@@ -8,8 +8,8 @@ urlpatterns = [
 
     path('exercise-template/', include([
         path('create-new-template/', views.CreateExerciseTemplateView.as_view(), name='create_new_exercise'),
-        path('<int:pk>', include([
-            path('/edit/', views.EditExerciseTemplateView.as_view(), name='edit_exercise_template'),
+        path('<int:pk>/', include([
+            path('edit/', views.EditExerciseTemplateView.as_view(), name='edit_exercise_template'),
             path('delete/', views.DeleteExerciseTemplateView.as_view(), name='delete_exercise_template'),
         ])),
     ])),
@@ -37,5 +37,16 @@ urlpatterns = [
         path('edit/', views.EditWorkoutPlanView.as_view(), name='workout-plan-edit'),
         path('period/create/', views.CreatePeriodView.as_view(), name='create-period'),
         path('delete/', views.DeleteWorkoutPlanView.as_view(), name='workout-plan-delete'),
+    ])),
+
+    path('nutrition-plan/create/', views.CreateNutritionView.as_view(), name='create-nutrition-plan'),
+    path('nutrition-plan/<int:pk>/', include([
+        path('edit/', views.EditNutritionView.as_view(), name='nutrition-plan-edit'),
+        path('delete/', views.DeleteNutritionView.as_view(), name='nutrition-plan-delete'),
+        path('meal/', include([
+            path('create/', views.CreateMealInstanceView.as_view(), name='create-meal'),
+            path('edit/', views.EditMealInstanceView.as_view(), name='edit-meal'),
+            path('delete/', views.DeleteMealInstance.as_view(), name='delete-meal'),
+        ])),
     ])),
 ]

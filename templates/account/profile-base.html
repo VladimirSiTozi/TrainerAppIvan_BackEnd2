@@ -48,7 +48,7 @@
                 <nav class="navigation-buttons text">
                     <a href="{% url 'account-detail' profile.slug %}">Profile</a>
                     <a href="{% url 'workout-plans-list' profile.slug %}">training</a>
-                    <a href="#">nutrition</a>
+                    <a href="{% url 'nutrition-plans-list' profile.slug %}">nutrition</a>
                     <a href="#">recovery</a>
                     <a href="#">videos</a>
                 </nav>

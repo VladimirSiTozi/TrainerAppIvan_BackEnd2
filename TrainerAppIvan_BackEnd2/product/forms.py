@@ -1,3 +1,5 @@
+import json
+
 from django import forms
 from TrainerAppIvan_BackEnd2.product.models import Product
 
@@ -39,7 +41,6 @@ class ProductForm(forms.ModelForm):
             self.fields['image'].required = False
 
     def clean_will_learn(self):
-        import json
         data = self.cleaned_data['will_learn']
         if isinstance(data, str):
             try:

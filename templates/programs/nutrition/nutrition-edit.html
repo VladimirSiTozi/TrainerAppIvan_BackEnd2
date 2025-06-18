@@ -1,0 +1,26 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="table-container">
+        <h2>Edit Nutrition Plan: {{ nutrition_plan }}</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Changes</button>
+        </form>
+
+
+        <hr>
+        <form method="post" action="{% url 'nutrition-plan-delete' nutrition_plan.pk %}" onsubmit="return confirmDelete();">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">🗑️ Delete Day</button>
+        </form>
+
+        <script>
+            function confirmDelete() {
+                return confirm("Do you really want to delete this day?");
+            }
+        </script>
+    </div>
+{% endblock %}

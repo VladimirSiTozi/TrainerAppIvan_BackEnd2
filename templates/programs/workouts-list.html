@@ -7,12 +7,13 @@
         {% if workouts %}
             <ol class="active-green">
                 {% for workout in workouts %}
-                        <li>
-                            <a href="{% url 'workout_plan_details' slug=workout.user.profile.slug pk=workout.pk%}">{{ workout.name }} - {{ workout.user.email }}</a><br>
-                        </li>
+                    <li>
+                        <a href="{% url 'workout_plan_details' slug=workout.user.profile.slug pk=workout.pk %}">{{ workout.name }}
+                            - {{ workout.user.email }}</a><br>
+                    </li>
                 {% endfor %}
             </ol>
-            
+
         {% else %}
             <p>No workouts existing.</p>
         {% endif %}

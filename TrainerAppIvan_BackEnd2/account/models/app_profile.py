@@ -69,3 +69,6 @@ class Profile(models.Model):
                     (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day)
             )
         return None
+
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}"

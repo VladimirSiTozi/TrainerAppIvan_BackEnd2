@@ -113,10 +113,15 @@ class MealInstance(models.Model):
 
 
 class Supplement(models.Model):
-    nutrition_plan = models.ForeignKey(NutritionPlan, related_name='supplements', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    dosage = models.CharField(max_length=100, blank=True)
-    protein_grams = models.FloatField(blank=True, null=True, help_text="Protein content per serving (optional)")
 
     def __str__(self):
         return self.name
+
+
+class SupplementInstance(models.Model):
+    nutrition_plan = models.ForeignKey(NutritionPlan, related_name='supplements', on_delete=models.CASCADE)
+    supplement_template = models.ForeignKey(Supplement, on_delete=models.CASCADE)
+    dosage = models.CharField(max_length=100, blank=True)
+    protein_grams = models.FloatField(blank=True, null=True, help_text="Protein content per serving (optional)")
+

@@ -4,7 +4,7 @@ from django import forms
 
 from .choices import MealTimeChoices
 from .models import WorkoutPlan, Period, Day, ExerciseInstance, ExerciseTemplate, NutritionPlan, Meal, Supplement, \
-    MealInstance
+    MealInstance, SupplementInstance
 from ..account.models import AppUser
 
 
@@ -156,9 +156,15 @@ class MealInstanceForm(forms.ModelForm):
 class SupplementForm(forms.ModelForm):
     class Meta:
         model = Supplement
-        fields = [
-            'nutrition_plan',
-            'name',
-            'dosage',
-            'protein_grams'
-        ]
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].queryset = Supplement.objects.order_by('name')
+
+
+class SupplementInstanceForm(forms.ModelForm):
+    class Meta:
+        model = SupplementInstance
+        exclude = ['nutrition_plan']
+

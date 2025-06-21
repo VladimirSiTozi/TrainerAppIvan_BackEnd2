@@ -6,6 +6,16 @@ urlpatterns = [
     path('create-workout/', views.WorkoutPlanCreateView.as_view(), name='create_workout'),
     path('create-workout-plan/', views.create_workout_plan, name='create_workout_plan'),
 
+    path('supplement/', include([
+        path('create/', include([
+            path('template/', views.CreateSupplementView.as_view(), name='create-supplement-template'),
+        ])),
+        path('<int:pk>/', include([
+            path('edit/', views.EditSupplementView.as_view(), name='edit-supplement-template'),
+            path('delete/', views.DeleteSupplementView.as_view(), name='delete-supplement-template'),
+        ]))
+    ])),
+
     path('meal/', include([
         path('create/', views.CreateMealView.as_view(), name='create-meal-template'),
         path('<int:pk>/', include([
@@ -57,5 +67,10 @@ urlpatterns = [
             path('edit/', views.EditMealInstanceView.as_view(), name='edit-meal'),
             path('delete/', views.DeleteMealInstance.as_view(), name='delete-meal'),
         ])),
+        path('supplement/', include([
+            path('create/', views.CreateSupplementInstanceView.as_view(), name='create-supplement'),
+            path('edit/', views.EditSupplementInstanceView.as_view(), name='edit-supplement'),
+            path('delete/', views.DeleteSupplementInstanceView.as_view(), name='delete-supplement'),
+        ]))
     ])),
 ]

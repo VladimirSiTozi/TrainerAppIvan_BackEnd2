@@ -8,7 +8,7 @@
             <p>
                 <a href="{% url 'nutrition-plan-edit' nutrition_plan.pk %}">Edit Nutrition Plan</a> |
                 <a href="{% url 'create-meal' nutrition_plan.pk %}">Add Meal</a> |
-                <a href="#">Add Supplement</a>
+                <a href="{% url 'create-supplement' nutrition_plan.pk %}">Add Supplement</a>
             </p>
         {% endif %}
 
@@ -166,13 +166,14 @@
         <h3>Supplements</h3>
         {% for supplement in nutrition_plan.supplements.all %}
             <div class="inner-table-container">
-                <p><strong>{{ supplement.name }}</strong>{% if supplement.dosage %} – {{ supplement.dosage }}{% endif %}
+                <p><strong>{{ supplement.supplement_template.name }}</strong>{% if supplement.dosage %} –
+                    {{ supplement.dosage }}{% endif %}
                 </p>
-                {% if supplement.protein_grams %}
-                    <p><strong>Protein:</strong> {{ supplement.protein_grams }}g</p>
-                {% endif %}
                 {% if user.is_staff %}
-                    <p><a href="{% url 'supplement-edit' supplement.pk %}">Edit Supplement</a></p>
+                    <p><a href="{% url 'edit-supplement' supplement.pk %}">Edit Supplement</a></p>
+                {% endif %}
+                {% if supplement.protein_grams %}
+                    <p><strong>Grams:</strong> {{ supplement.protein_grams }}g</p>
                 {% endif %}
             </div>
         {% empty %}

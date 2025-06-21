@@ -14,13 +14,14 @@ from django.views.decorators.http import require_http_methods
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.db.models import Q
 
-from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan, Trainer, NutritionPlan, MealInstance, Meal
+from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan, Trainer, NutritionPlan, MealInstance, Meal, Supplement, \
+    SupplementInstance
 
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 from .models import WorkoutPlan, Period, Day, ExerciseInstance, ExerciseTemplate
 from .forms import WorkoutPlanForm, PeriodForm, DayForm, ExerciseInstanceForm, ExerciseTemplateForm, NutritionPlanForm, \
-    MealInstanceForm, MealForm
+    MealInstanceForm, MealForm, SupplementForm, SupplementInstanceForm
 from ..account.models import Profile, AppUser
 from ..mixins import ProfileContextMixin, StaffRequiredMixin
 
@@ -741,7 +742,12 @@ class CreateMealView(StaffRequiredMixin, CreateView):
     model = Meal
     form_class = MealForm
     template_name = 'programs/nutrition/meal-create.html'
-    success_url = reverse_lazy('home')
+
+    def get_success_url(self):
+        return reverse_lazy('meals-list', kwargs={'slug': self.request.user.profile.slug})
+
+    def form_valid(self, form):
+        return super().form_valid(form)
 
 
 class EditMealView(StaffRequiredMixin, UpdateView):
@@ -776,3 +782,90 @@ class MealsListView(StaffRequiredMixin, ListView):
     def get_queryset(self):
         return Meal.objects.all().order_by('name')
 
+
+class CreateSupplementView(StaffRequiredMixin, CreateView):
+    model = Supplement
+    form_class = SupplementForm
+    template_name = 'programs/nutrition/supplement-create.html'
+
+    def get_success_url(self):
+        return reverse_lazy('supplement-list', kwargs={'slug': self.request.user.profile.slug})
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+class SupplementListView(StaffRequiredMixin, ListView):
+    model = Supplement
+    template_name = 'programs/nutrition/supplements-list.html'
+    context_object_name = "supplements"
+
+    def get_queryset(self):
+        return Supplement.objects.all().order_by('name')
+
+
+class EditSupplementView(StaffRequiredMixin, UpdateView):
+    model = Supplement
+    form_class = SupplementForm
+    template_name = 'programs/nutrition/supplement-edit.html'
+    context_object_name = 'supplement'
+
+    def get_success_url(self):
+        return reverse_lazy('supplement-list', kwargs={'slug': self.request.user.profile.slug})
+
+
+class DeleteSupplementView(StaffRequiredMixin, DeleteView):
+    model = Supplement
+    context_object_name = 'supplement'
+
+    def get_success_url(self):
+        return reverse_lazy('supplement-list', kwargs={'slug': self.request.user.profile.slug})
+
+
+class CreateSupplementInstanceView(StaffRequiredMixin, CreateView):
+    model = SupplementInstance
+    form_class = SupplementInstanceForm
+    template_name = 'programs/nutrition/supplement-instance-create.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        # Get the NutritionPlan object based on the primary key from the URL
+        self.nutrition_plan = get_object_or_404(NutritionPlan, pk=kwargs['pk'])
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        # Associate the supplement instance with the fetched nutrition plan
+        form.instance.nutrition_plan = self.nutrition_plan
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['nutrition_plan'] = self.nutrition_plan
+        return context
+
+    def get_success_url(self):
+        profile = self.object.nutrition_plan.user.profile
+        return reverse_lazy('nutrition-plan-details', kwargs={
+            'slug': profile.slug,
+            'pk': self.nutrition_plan.pk
+        })
+
+
+class EditSupplementInstanceView(StaffRequiredMixin, UpdateView):
+    model = SupplementInstance
+    form_class = SupplementInstanceForm
+    template_name = 'programs/nutrition/supplement-instance-edit.html'
+    context_object_name = 'supplement'
+
+    def get_success_url(self):
+        nutrition_plan = self.object.nutrition_plan
+        return reverse_lazy('nutrition-plan-details',
+                            kwargs={'pk': nutrition_plan.id, 'slug': nutrition_plan.user.profile.slug})
+
+
+class DeleteSupplementInstanceView(StaffRequiredMixin, DeleteView):
+    model = SupplementInstance
+
+    def get_success_url(self):
+        nutrition_plan = self.object.nutrition_plan
+        return reverse_lazy('nutrition-plan-details',
+                            kwargs={'pk': nutrition_plan.id, 'slug': nutrition_plan.user.profile.slug})

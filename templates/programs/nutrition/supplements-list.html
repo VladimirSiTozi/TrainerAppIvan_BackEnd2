@@ -1,0 +1,24 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="admin-container">
+        <h2>All Supplements</h2>
+        {% if supplements %}
+            <ol>
+                {% for supplement in supplements %}
+                    <li>
+                        <div class="admin-list-templates">
+                            <h3>{{ supplement.name }} |
+                                {% if user.is_staff %}
+                                    <a href="{% url 'edit-supplement-template' supplement.pk %}">Edit</a>
+                                {% endif %}
+                            </h3>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <p>No supplements have been added yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}

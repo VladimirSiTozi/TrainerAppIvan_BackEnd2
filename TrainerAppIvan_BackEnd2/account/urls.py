@@ -4,7 +4,7 @@ from TrainerAppIvan_BackEnd2.account import views
 from TrainerAppIvan_BackEnd2.article.views import ArticleListView
 from TrainerAppIvan_BackEnd2.product.views import ProductsListView
 from TrainerAppIvan_BackEnd2.program.views import WorkoutPlanDetailView, WorkoutPlansListView, ExercisesListView, \
-    AllWorkoutPlanListView, NutritionPlanDetailView, NutritionPlansListView, MealsListView
+    AllWorkoutPlanListView, NutritionPlanDetailView, NutritionPlansListView, MealsListView, SupplementListView
 
 urlpatterns = [
     path('search/', views.staff_user_search, name='staff-user-search'),
@@ -24,6 +24,7 @@ urlpatterns = [
             path('products-list/', ProductsListView.as_view(), name='products-list'),
             path('artciles-list/', ArticleListView.as_view(), name='articles-list'),
             path('meals/list/', MealsListView.as_view(), name='meals-list'),
+            path('supplemnt/', SupplementListView.as_view(), name='supplement-list'),
         ])),
 
         path('edit/', views.EditProfileView.as_view(), name='profile-edit'),

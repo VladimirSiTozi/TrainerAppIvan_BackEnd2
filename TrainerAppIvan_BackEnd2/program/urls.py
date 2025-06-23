@@ -73,4 +73,10 @@ urlpatterns = [
             path('delete/', views.DeleteSupplementInstanceView.as_view(), name='delete-supplement'),
         ]))
     ])),
+
+    path('recovery-plan/create/', views.RecoveryCreateView.as_view(), name='create-recovery-plan'),
+    path('recovery-plan/<int:pk>/', include([
+        path('edit/', views.RecoveryEditView.as_view(), name='recovery-edit'),
+        path('delete/', views.RecoveryDeleteView.as_view(), name='recovery-delete'),
+    ]))
 ]

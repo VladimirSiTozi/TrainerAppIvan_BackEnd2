@@ -15,13 +15,13 @@ from django.views.generic import DetailView, ListView, CreateView, UpdateView, D
 from django.db.models import Q
 
 from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan, Trainer, NutritionPlan, MealInstance, Meal, Supplement, \
-    SupplementInstance
+    SupplementInstance, RecoveryPlan
 
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 from .models import WorkoutPlan, Period, Day, ExerciseInstance, ExerciseTemplate
 from .forms import WorkoutPlanForm, PeriodForm, DayForm, ExerciseInstanceForm, ExerciseTemplateForm, NutritionPlanForm, \
-    MealInstanceForm, MealForm, SupplementForm, SupplementInstanceForm
+    MealInstanceForm, MealForm, SupplementForm, SupplementInstanceForm, RecoveryPlanForm
 from ..account.models import Profile, AppUser
 from ..mixins import ProfileContextMixin, StaffRequiredMixin
 
@@ -878,3 +878,100 @@ class DeleteSupplementInstanceView(StaffRequiredMixin, DeleteView):
         nutrition_plan = self.object.nutrition_plan
         return reverse_lazy('nutrition-plan-details',
                             kwargs={'pk': nutrition_plan.id, 'slug': nutrition_plan.user.profile.slug})
+
+
+# RecoveryPlan
+class RecoveryPlansListView(LoginRequiredMixin, ListView):
+    model = RecoveryPlan
+    template_name = 'programs/recovery/recovery-plans-list.html'
+    context_object_name = 'recovery_plans'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.profile = get_object_or_404(Profile, slug=self.kwargs['slug'])
+
+        # logged-in user
+        user = request.user
+
+        # check access
+        is_owner = self.profile.user == user
+        is_trainer = WorkoutPlan.objects.filter(
+            user=self.profile.user,
+            trainer__user=user
+        ).exists()
+
+        if not user.is_staff and not is_owner and not is_trainer:
+            raise PermissionDenied("You do not have permission to view this user's workout plans.")
+
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return RecoveryPlan.objects.filter(user=self.profile.user_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['profile'] = self.profile  # user being viewed
+        context['current_user'] = self.request.user  # logged-in user
+        context['recovery_plans'] = RecoveryPlan.objects.filter(user_id=self.profile.user_id)
+        return context
+
+
+class RecoveryDetailView(LoginRequiredMixin, DetailView):
+    model = RecoveryPlan
+    template_name = 'programs/recovery/recovery-details.html'
+    context_object_name = 'recovery_plan'
+
+    def get_queryset(self):
+        # Optionally restrict staff access to users they manage
+        queryset = super().get_queryset()
+        if self.request.user.is_staff:
+            return queryset
+        return queryset.filter(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        recovery_plan = self.object
+        context['profile'] = recovery_plan.user.profile
+
+        return context
+
+
+class RecoveryCreateView(StaffRequiredMixin, CreateView):
+    model = RecoveryPlan
+    form_class = RecoveryPlanForm
+    template_name = 'programs/recovery/recovery-create.html'
+    context_object_name = 'recovery_plan'
+
+    def get_success_url(self):
+        recovery_plan = self.object
+        return reverse_lazy('home')
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+class RecoveryEditView(StaffRequiredMixin, UpdateView):
+    model = RecoveryPlan
+    context_object_name = 'recovery_plan'
+    form_class = RecoveryPlanForm
+    template_name = 'programs/recovery/recovery-edit.html'
+
+    def get_success_url(self):
+        recovery_plan = self.object
+        return reverse_lazy('home')
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+class RecoveryDeleteView(StaffRequiredMixin, DeleteView):
+    model = RecoveryPlan
+    success_url = reverse_lazy('home')
+
+
+class RecoveryPlanAdminListView(StaffRequiredMixin, ListView):
+    model = RecoveryPlan
+    template_name = 'programs/recovery/recovery-list-admin.html'
+    context_object_name = 'recovery_plans'
+
+    def get_queryset(self):
+        return RecoveryPlan.objects.all().order_by('id')

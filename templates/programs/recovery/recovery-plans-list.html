@@ -1,0 +1,35 @@
+{% extends 'account/profile-base.html' %}
+{% load static %}
+
+{% block account-content %}
+    {% if recovery_plans %}
+        <div class="table-container">
+            <ul>
+                {% for recovery_plan in recovery_plans %}
+                    <li>
+                        <a href="{% url 'recovery-plan_details' slug=recovery_plan.user.profile.slug pk=recovery_plan.pk %}"
+                           class="workout-link">{{ recovery_plan.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <div class="no-programs-yet-container">
+            <div class="no-programs-image">
+                <img src="{% static 'assets/images/boxing-gloves-blueprint.png' %}" alt="no-programs-image">
+            </div>
+            <div class="no-programs-content">
+                <h2>
+                    You don't have any recovery plans available yet.
+                </h2>
+                <p>
+                    If you've purchased a personal recovery plan, your trainer may need a little time to create
+                    a customized plan just for you. This process usually takes up to 2–3 business days.
+                    If you haven't heard back from your trainer after that, please don't hesitate to contact us —
+                    we're here to help!
+                </p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

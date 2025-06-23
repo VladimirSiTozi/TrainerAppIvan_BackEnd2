@@ -125,3 +125,17 @@ class SupplementInstance(models.Model):
     dosage = models.CharField(max_length=100, blank=True)
     protein_grams = models.FloatField(blank=True, null=True, help_text="Protein content per serving (optional)")
 
+
+class RecoveryPlan(models.Model):
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    active_recovery = models.TextField(blank=True, null=True)
+    sleep_and_rest = models.TextField(blank=True, null=True)
+    self_care = models.TextField(blank=True, null=True)
+    monitoring_follow_up = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name} of {self.user.trainer_profile.get_full_name() or self.user.email}"

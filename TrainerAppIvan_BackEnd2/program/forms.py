@@ -4,7 +4,7 @@ from django import forms
 
 from .choices import MealTimeChoices
 from .models import WorkoutPlan, Period, Day, ExerciseInstance, ExerciseTemplate, NutritionPlan, Meal, Supplement, \
-    MealInstance, SupplementInstance
+    MealInstance, SupplementInstance, RecoveryPlan
 from ..account.models import AppUser
 
 
@@ -168,3 +168,52 @@ class SupplementInstanceForm(forms.ModelForm):
         model = SupplementInstance
         exclude = ['nutrition_plan']
 
+
+from django import forms
+from .models import RecoveryPlan
+
+class RecoveryPlanForm(forms.ModelForm):
+    class Meta:
+        model = RecoveryPlan
+        fields = '__all__'
+
+        help_texts = {
+            'name': 'Enter a title for the recovery plan (e.g. "Post-Marathon Recovery").',
+            'description': 'Optional. Add an overview of the recovery strategy.',
+            'active_recovery': 'Add every new item in a new line',
+            'sleep_and_rest': 'Add every new item in a new line',
+            'self_care': 'Add every new item in a new line',
+            'monitoring_follow_up': 'Add every new item in a new line',
+        }
+
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Recovery Plan Title',
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Brief description of the plan',
+                'rows': 3,
+            }),
+            'active_recovery': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'List active recovery strategies...',
+                'rows': 4,
+            }),
+            'sleep_and_rest': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Sleep hygiene, naps, rest periods...',
+                'rows': 4,
+            }),
+            'self_care': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Massage, foam rolling, sauna, etc.',
+                'rows': 4,
+            }),
+            'monitoring_follow_up': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Check-ins, adjustments, metrics...',
+                'rows': 4,
+            }),
+        }

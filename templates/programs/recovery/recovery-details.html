@@ -1,0 +1,65 @@
+{% extends 'account/profile-base.html' %}
+
+
+{% block account-content %}
+    <div class="table-container">
+        <h2>{{ recovery_plan.name }}</h2>
+
+        {% if user.is_staff %}
+            <p>
+                <a href="{% url 'recovery-edit' recovery_plan.pk %}">Edit Recovery Plan</a>
+            </p>
+        {% endif %}
+
+        <div class="plan-detail">
+            {% if recovery_plan.description %}
+                <p><strong>Description:</strong> {{ recovery_plan.description }}</p>
+            {% endif %}
+{#            <p><strong>Created At:</strong> {{ recovery_plan.created_at|date:"F j, Y" }}</p>#}
+        </div>
+
+        {% if recovery_plan.active_recovery %}
+            <h3>Active Recovery</h3>
+            <ul>
+                {% for item in recovery_plan.active_recovery.splitlines %}
+                    {% if item %}
+                        <li>{{ item }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if recovery_plan.sleep_and_rest %}
+            <h3>Sleep & Rest</h3>
+            <ul>
+                {% for item in recovery_plan.sleep_and_rest.splitlines %}
+                    {% if item %}
+                        <li>{{ item }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if recovery_plan.self_care %}
+            <h3>Self-Care & Stress Management</h3>
+            <ul>
+                {% for item in recovery_plan.self_care.splitlines %}
+                    {% if item %}
+                        <li>{{ item }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if recovery_plan.monitoring_follow_up %}
+            <h3>Monitoring & Follow-Up</h3>
+            <ul>
+                {% for item in recovery_plan.monitoring_follow_up.splitlines %}
+                    {% if item %}
+                        <li>{{ item }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

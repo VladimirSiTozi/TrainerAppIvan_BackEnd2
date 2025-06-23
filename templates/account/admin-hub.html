@@ -13,20 +13,21 @@
                     <h2>Lists</h2>
                     <ul>
                         <li><a href="{% url 'users-list' slug=slug %}">Users List</a></li>
-                        <li><a href="{% url 'all-workouts-list' slug=slug %}">Workouts List</a></li>
+                        <li><a href="{% url 'all-workouts-list' slug=slug %}">Workout Plans List</a></li>
+                        <li><a href="{% url 'all-nutrition-plan-list' slug=slug %}">Nutrition Plans List</a></li>
                         <li><a href="{% url 'products-list' slug=slug %}">Products List</a></li>
-                        <li><a href="{% url 'exercises-list' slug=slug %}">Exercises List</a></li>
                         <li><a href="{% url 'articles-list' slug=slug %}">Articles List</a></li>
+                        <li><a href="{% url 'exercises-list' slug=slug %}">Exercise's Templates List</a></li>
                         <li><a href="{% url 'meals-list' slug=slug %}">Meal's Templates List</a></li>
                         <li><a href="{% url 'supplement-list' slug=slug %}">Supplement's Templates List</a></li>
                     </ul>
                     <h2>Create Options</h2>
                     <ul>
                         <li><a href="{% url 'create_workout' %}">Create Workout plan</a></li>
-                        <li><a href="{% url 'product-create' %}" class="">Create Program</a></li>
-                        <li><a href="{% url 'create_new_exercise' %}">Create Exercise Template</a></li>
-                        <li><a href="{% url 'create-article' %}">Create Article</a></li>
                         <li><a href="{% url 'create-nutrition-plan' %}">Create Nutrition plan</a></li>
+                        <li><a href="{% url 'product-create' %}" class="">Create Program</a></li>
+                        <li><a href="{% url 'create-article' %}">Create Article</a></li>
+                        <li><a href="{% url 'create_new_exercise' %}">Create Exercise Template</a></li>
                         <li><a href="{% url 'create-meal-template' %}">Create Meal Template </a></li>
                         <li><a href="{% url 'create-supplement-template' %}">Create Supplement Template </a></li>
                     </ul>

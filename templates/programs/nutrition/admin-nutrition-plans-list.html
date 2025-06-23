@@ -1,0 +1,26 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="admin-container">
+        <h2>Exercises List</h2>
+
+        {% if nutrition_plans %}
+            <ol>
+                {% for nutrition_plan in nutrition_plans %}
+                    <li>
+                        <div class="admin-list-templates">
+                            <h3>{{ nutrition_plan.name }} of {{ nutrition_plan.user.profile.get_full_name }}
+                                {% if user.is_staff %}
+                                    <a href="{% url 'nutrition-plan-details' pk=nutrition_plan.pk slug=nutrition_plan.user.profile.slug %}">Edit</a>
+                                {% endif %}
+                            </h3>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <p>No exercises available.</p>
+        {% endif %}
+
+    </div>
+{% endblock %}

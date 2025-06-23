@@ -581,7 +581,7 @@ class DeleteWorkoutPlanView(StaffRequiredMixin, DeleteView):
 
 class ExercisesListView(StaffRequiredMixin, ListView):
     model = ExerciseTemplate
-    template_name = 'account/../../templates/programs/all-exercise-list.html'
+    template_name = 'account/../../templates/programs/admin-exercise-list.html'
     context_object_name = 'exercises'
     queryset = ExerciseTemplate.objects.order_by('name')
 
@@ -593,6 +593,15 @@ class AllWorkoutPlanListView(StaffRequiredMixin, ListView):
 
     def get_queryset(self):
         return WorkoutPlan.objects.all().order_by('id')
+
+
+class AllNutritionPlanListView(StaffRequiredMixin, ListView):
+    model = NutritionPlan
+    template_name = 'programs/nutrition/admin-nutrition-plans-list.html'
+    context_object_name = 'nutrition_plans'
+
+    def get_queryset(self):
+        return NutritionPlan.objects.all().order_by('id')
 
 
 @method_decorator(login_required, name='dispatch')

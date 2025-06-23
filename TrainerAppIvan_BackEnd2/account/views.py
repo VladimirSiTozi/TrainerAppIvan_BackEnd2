@@ -59,7 +59,7 @@ class AccountDetailView(LoginRequiredMixin, DetailView):
 
 
 class AccountNutritionView(TemplateView):
-    template_name = 'programs/training-plan.html'
+    template_name = 'programs/workout-plan-details.html'
 
 
 class AccountLoginView(LoginView):

@@ -93,4 +93,4 @@ class BusinessCardView(TemplateView):
 
 
 def privacy_policy(request):
-    return render(request, 'common/privacy_policy.html')
+    return render(request, 'common/privacy-policy.html')

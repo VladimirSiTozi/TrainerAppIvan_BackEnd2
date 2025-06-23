@@ -3,6 +3,7 @@
 {% block account-content %}
     <div class="table-container">
         <h2>Workout Plan {{ workout_plan }}</h2>
+        <h4>{{ workout_plan.description }}</h4>
         {% if user.is_staff %}
             <p>
                 <a href="{% url 'workout-plan-edit' workout_plan.pk %}">Edit Workout Plan</a> |

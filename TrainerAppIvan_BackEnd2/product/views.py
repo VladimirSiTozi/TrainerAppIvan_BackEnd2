@@ -26,7 +26,7 @@ class ProductHomeListView(ListView):
     context_object_name = 'products'
 
     def get_queryset(self):
-        return Product.objects.only('id', 'name', 'brief_description', 'image')
+        return Product.objects.only('id', 'name', 'brief_description', 'image').filter(is_active=True)
 
 
 class ProductDetailView(DetailView):
@@ -309,7 +309,7 @@ class DeleteProductView(StaffRequiredMixin, DeleteView):
 
 class ProductsListView(StaffRequiredMixin, ListView):
     model = Product
-    template_name = 'product/products-list.html'
+    template_name = 'product/products-list-admin.html'
     context_object_name = 'products'
 
     def get_queryset(self):

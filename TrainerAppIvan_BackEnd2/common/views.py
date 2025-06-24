@@ -14,8 +14,8 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['first_products'] = Product.objects.filter(is_active=True, category='Martial Arts').order_by('-created_at')[:3]
-        context['second_products'] = Product.objects.filter(is_active=True, category='Gym').order_by('-created_at')[:3]
+        context['first_products'] = Product.objects.filter(is_active=True, category='martial_arts').order_by('-created_at')[:3]
+        context['second_products'] = Product.objects.filter(is_active=True, category='gym').order_by('-created_at')[:3]
         return context
 
 

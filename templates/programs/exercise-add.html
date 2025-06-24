@@ -3,6 +3,7 @@
 {% block content %}
   <div class="table-container">
     <h2>Add Exercise</h2>
+      <h3>In {{day.name }} of {{ day.period }}</h3>
 
     <form method="post">
       {% csrf_token %}

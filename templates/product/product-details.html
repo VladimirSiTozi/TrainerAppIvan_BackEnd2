@@ -40,7 +40,7 @@
                 </div>
                 <div>
                     <ul>
-                        {% for item in product.will_learn %}
+                        {% for item in product.will_learn.splitlines %}
                             <li>{{ item }}</li>
                         {% endfor %}
                     </ul>

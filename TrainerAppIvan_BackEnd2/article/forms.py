@@ -13,17 +13,21 @@ class ArticleForm(forms.ModelForm):
             'paragraph6', 'paragraph7', 'paragraph8', 'paragraph9', 'paragraph10',
         ]
         widgets = {
-            'brief_description': forms.Textarea(attrs={'rows': 3}),
-            'paragraph1': forms.Textarea(attrs={'rows': 4}),
-            'paragraph2': forms.Textarea(attrs={'rows': 4}),
-            'paragraph3': forms.Textarea(attrs={'rows': 4}),
-            'paragraph4': forms.Textarea(attrs={'rows': 4}),
-            'paragraph5': forms.Textarea(attrs={'rows': 4}),
-            'paragraph6': forms.Textarea(attrs={'rows': 4}),
-            'paragraph7': forms.Textarea(attrs={'rows': 4}),
-            'paragraph8': forms.Textarea(attrs={'rows': 4}),
-            'paragraph9': forms.Textarea(attrs={'rows': 4}),
-            'paragraph10': forms.Textarea(attrs={'rows': 4}),
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Name of the Article',
+                }),
+            'brief_description': forms.Textarea(attrs={
+                'rows': 3,
+                'placeholder': 'A short summary of the article '
+                               '(e.g., This article explores the fundamentals of strength training)...',
+            }),
+            **{
+                f'paragraph{i}': forms.Textarea(attrs={
+                    'rows': 4,
+                    'placeholder': 'Write a section of the article here...',
+                }) for i in range(1, 11)
+            }
         }
         labels = {
             'name': 'Title',
@@ -37,4 +41,3 @@ class ArticleForm(forms.ModelForm):
             'image2': 'Preferred orientation: landscape',
             'image3': 'Preferred orientation: landscape',
         }
-

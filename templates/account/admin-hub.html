@@ -10,25 +10,40 @@
                         You're now in the central dashboard where you can manage and update key content.
                     </h3>
                     <h4>Here, you can: Add or edit programs, Publish articles, Manage users and more.</h4>
-                    <h2>Lists</h2>
+                    <h1>Listing Options</h1>
+                    <h4>General</h4>
                     <ul>
                         <li><a href="{% url 'users-list' slug=slug %}">Users List</a></li>
-                        <li><a href="{% url 'all-workouts-list' slug=slug %}">Workout Plans List</a></li>
-                        <li><a href="{% url 'all-nutrition-plan-list' slug=slug %}">Nutrition Plans List</a></li>
-                        <li><a href="{% url 'recovery-plan-admin-list' slug=slug %}">Recovery Plans List</a></li>
                         <li><a href="{% url 'products-list' slug=slug %}">Products List</a></li>
                         <li><a href="{% url 'articles-list' slug=slug %}">Articles List</a></li>
-                        <li><a href="{% url 'exercises-list' slug=slug %}">Exercise's Templates List</a></li>
-                        <li><a href="{% url 'meals-list' slug=slug %}">Meal's Templates List</a></li>
-                        <li><a href="{% url 'supplement-list' slug=slug %}">Supplement's Templates List</a></li>
                     </ul>
-                    <h2>Create Options</h2>
+                    <h4>Plans</h4>
+                    <ul>
+                        <li><a href="{% url 'all-workouts-list' slug=slug %}">Workout Plans List</a></li>
+                        <li><a href="{% url 'all-nutrition-plan-list' slug=slug %}">Nutrition Plans List</a></li>
+                        <li><a href="{% url 'recovery-plan-admin' slug=slug %}">Recovery Plans List</a></li>
+                    </ul>
+                    <h4>Templates</h4>
+                    <ul>
+                        <li><a href="{% url 'exercises-list' slug=slug %}">Exercise Templates List</a></li>
+                        <li><a href="{% url 'meals-list' slug=slug %}">Meal Templates List</a></li>
+                        <li><a href="{% url 'supplement-list' slug=slug %}">Supplement Templates List</a></li>
+                    </ul>
+
+                    <h1>Creating Options</h1>
+                    <h4>General</h4>
+                    <ul>
+                        <li><a href="{% url 'product-create' %}" class="">Create Product</a></li>
+                        <li><a href="{% url 'create-article' %}">Create Article</a></li>
+                    </ul>
+                    <h4>Plans</h4>
                     <ul>
                         <li><a href="{% url 'create_workout' %}">Create Workout plan</a></li>
                         <li><a href="{% url 'create-nutrition-plan' %}">Create Nutrition plan</a></li>
                         <li><a href="{% url 'create-recovery-plan' %}">Create Recovery plan</a></li>
-                        <li><a href="{% url 'product-create' %}" class="">Create Program</a></li>
-                        <li><a href="{% url 'create-article' %}">Create Article</a></li>
+                    </ul>
+                    <h4>Templates</h4>
+                    <ul>
                         <li><a href="{% url 'create_new_exercise' %}">Create Exercise Template</a></li>
                         <li><a href="{% url 'create-meal-template' %}">Create Meal Template </a></li>
                         <li><a href="{% url 'create-supplement-template' %}">Create Supplement Template </a></li>

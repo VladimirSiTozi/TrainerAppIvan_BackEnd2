@@ -4,7 +4,7 @@ from TrainerAppIvan_BackEnd2.article import views
 
 urlpatterns = [
     path('', views.ArticleHomeListView.as_view(), name='articles-home'),
-    path('create-article/', views.CreateArticleView.as_view(), name='create-article'),
+    path('create/', views.CreateArticleView.as_view(), name='create-article'),
     path('<int:pk>/', include([
         path('', views.ArticleDetailView.as_view(), name='article-detail'),
         path('edit/', views.EditArticleView.as_view(), name='article-edit'),

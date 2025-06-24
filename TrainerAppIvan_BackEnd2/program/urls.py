@@ -3,7 +3,7 @@ from django.urls import path, include
 from TrainerAppIvan_BackEnd2.program import views
 
 urlpatterns = [
-    path('create-workout/', views.WorkoutPlanCreateView.as_view(), name='create_workout'),
+    path('create/', views.WorkoutPlanCreateView.as_view(), name='create_workout'),
     path('create-workout-plan/', views.create_workout_plan, name='create_workout_plan'),
 
     path('supplement/', include([
@@ -25,8 +25,8 @@ urlpatterns = [
 
     ])),
 
-    path('exercise-template/', include([
-        path('create-new-template/', views.CreateExerciseTemplateView.as_view(), name='create_new_exercise'),
+    path('exercise/template/', include([
+        path('create/', views.CreateExerciseTemplateView.as_view(), name='create_new_exercise'),
         path('<int:pk>/', include([
             path('edit/', views.EditExerciseTemplateView.as_view(), name='edit_exercise_template'),
             path('delete/', views.DeleteExerciseTemplateView.as_view(), name='delete_exercise_template'),

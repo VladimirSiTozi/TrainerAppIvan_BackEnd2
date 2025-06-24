@@ -13,7 +13,7 @@ urlpatterns = [
     path('accounts/', include('TrainerAppIvan_BackEnd2.account.urls')),
     path('shop/', include('TrainerAppIvan_BackEnd2.product.urls')),
     path('articles/', include('TrainerAppIvan_BackEnd2.article.urls')),
-    path('workplan/', include('TrainerAppIvan_BackEnd2.program.urls')),
+    path('workout/plan/', include('TrainerAppIvan_BackEnd2.program.urls')),
 ]
 
 if settings.DEBUG:

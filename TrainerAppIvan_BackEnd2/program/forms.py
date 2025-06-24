@@ -13,7 +13,15 @@ class WorkoutPlanForm(forms.ModelForm):
         model = WorkoutPlan
         fields = ['name', 'description', 'user']
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 3}),
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Workout Plan Title (e.g., 4-Week Strength Program)',
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'Brief overview of the workout plan (e.g., Full-body strength training, 3 days/week)...',
+            }),
         }
 
     def __init__(self, *args, **kwargs):
@@ -60,27 +68,42 @@ class ExerciseTemplateForm(forms.ModelForm):
         model = ExerciseTemplate
         fields = ['name', 'description', 'focus']
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 4}),
-            'focus': forms.TextInput(attrs={'placeholder': 'e.g., Chest, Legs'}),
+            'name': forms.TextInput(attrs={
+                'placeholder': 'Enter exercise template name (e.g., Bench Press, Squat, Pull-Ups)',
+            }),
+            'description': forms.Textarea(attrs={
+                'rows': 4,
+                'placeholder': 'Describe the workout exercise '
+                               '(e.g., Targets chest and triceps; performed on a flat bench with controlled motion)...',
+            }),
+            'focus': forms.TextInput(attrs={
+                'placeholder': 'e.g., Chest, Legs, Full Body, Core',
+            }),
         }
         labels = {
             'name': 'Exercise Name',
-            'description': 'Description (optional)',
-            'focus': 'Target Muscle Group',
+            'description': 'Description',
+            'focus': 'Target Muscle Group/s',
         }
 
 
 # Nutrition
 class NutritionPlanForm(forms.ModelForm):
     trainer_notes = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': 4}),
+        widget=forms.Textarea(attrs={
+            'rows': 4,
+            'placeholder': 'E.g., Include more protein-rich foods\nLimit processed sugars\nStay hydrated\n...'
+        }),
         required=False,
-        help_text='Enter a JSON list, e.g., ["note 1", "note 2"]'
+        help_text='Add every item in a new line',
     )
     meal_timing_notes = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': 4}),
+        widget=forms.Textarea(attrs={
+            'rows': 4,
+            'placeholder': 'E.g., Breakfast at 7:30 AM\nSnack at 10:00 AM\nLunch at 1:00 PM\nDinner before 8:00 PM'
+        }),
         required=False,
-        help_text='Enter a JSON list, e.g., ["Breakfast", "Lunch"]'
+        help_text='Add every item in a new line',
     )
 
     class Meta:
@@ -97,35 +120,41 @@ class NutritionPlanForm(forms.ModelForm):
             'fats_grams',
         ]
 
-    def clean_trainer_notes(self):
-        data = self.cleaned_data['trainer_notes']
-        print(data)
-        if isinstance(data, str):
-            try:
-                parsed = json.loads(data)
-                if not isinstance(parsed, list):
-                    raise forms.ValidationError("Must be a list of trainer notes.")
-                return parsed
-            except json.JSONDecodeError:
-                raise forms.ValidationError("Enter valid JSON.")
-        return data
-
-    def clean_meal_timing_notes(self):
-        data = self.cleaned_data.get('meal_timing_notes', '')
-        try:
-            parsed = json.loads(data)
-            if not isinstance(parsed, list):
-                raise forms.ValidationError("Meal timing notes must be a JSON list.")
-            return parsed
-        except json.JSONDecodeError:
-            raise forms.ValidationError("Enter a valid JSON list for meal timing notes.")
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Nutrition Plan Title',
+            }),
+            'user': forms.Select(attrs={
+                'class': 'form-control',
+                'placeholder': 'Select User',
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'Brief description of the nutrition plan...',
+            }),
+            'target_calories': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g., 2000',
+            }),
+            'protein_grams': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g., 150',
+            }),
+            'carbs_grams': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g., 250',
+            }),
+            'fats_grams': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g., 70',
+            }),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        print("Instance trainer_notes:", self.instance.trainer_notes)
-        if self.instance and self.instance.pk:
-            self.fields['trainer_notes'].initial = json.dumps(self.instance.trainer_notes or [])
-            self.fields['meal_timing_notes'].initial = json.dumps(self.instance.meal_timing_notes or [])
+        self.fields['user'].queryset = AppUser.objects.all().order_by('email')
 
 
 class MealForm(forms.ModelForm):
@@ -139,8 +168,41 @@ class MealForm(forms.ModelForm):
             'fats_grams',
             'foods_description',
         ]
+        labels = {
+            'name': 'Meal Name',
+            'calories': 'Total Calories',
+            'protein_grams': 'Protein (grams)',
+            'carbs_grams': 'Carbohydrates (grams)',
+            'fats_grams': 'Fats (grams)',
+            'foods_description': 'Description of Foods...',
+        }
         widgets = {
-            'foods_description': forms.Textarea(attrs={'rows': 3}),
+            'name': forms.TextInput(attrs={
+                'placeholder': 'E.g., Breakfast, Post-workout Snack',
+                'class': 'form-control',
+            }),
+            'calories': forms.NumberInput(attrs={
+                'placeholder': 'E.g., 450',
+                'class': 'form-control',
+            }),
+            'protein_grams': forms.NumberInput(attrs={
+                'placeholder': 'E.g., 30',
+                'class': 'form-control',
+            }),
+            'carbs_grams': forms.NumberInput(attrs={
+                'placeholder': 'E.g., 50',
+                'class': 'form-control',
+            }),
+            'fats_grams': forms.NumberInput(attrs={
+                'placeholder': 'E.g., 15',
+                'class': 'form-control',
+            }),
+            'foods_description': forms.Textarea(attrs={
+                'rows': 3,
+                'placeholder': 'List all foods included in this meal with quantities '
+                               '(e.g., 2 eggs, 1 slice whole wheat toast, 1 cup spinach)...',
+                'class': 'form-control',
+            }),
         }
 
 
@@ -152,11 +214,26 @@ class MealInstanceForm(forms.ModelForm):
             'time_of_day': forms.Select(choices=MealTimeChoices.choices),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['meal_template'].queryset = Meal.objects.all().order_by('name')
+
 
 class SupplementForm(forms.ModelForm):
     class Meta:
         model = Supplement
         fields = '__all__'
+
+        labels = {
+            'name': 'Supplement Name',
+        }
+
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Supplement Name...',
+            })
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -168,9 +245,16 @@ class SupplementInstanceForm(forms.ModelForm):
         model = SupplementInstance
         exclude = ['nutrition_plan']
 
+        widgets = {
+            'dosage': forms.TextInput(attrs={
+                'placeholder': 'e.g., 3 times daily',
+            }),
+        }
 
-from django import forms
-from .models import RecoveryPlan
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['supplement_template'].queryset = Supplement.objects.all().order_by('name')
+
 
 class RecoveryPlanForm(forms.ModelForm):
     class Meta:
@@ -179,7 +263,7 @@ class RecoveryPlanForm(forms.ModelForm):
 
         help_texts = {
             'name': 'Enter a title for the recovery plan (e.g. "Post-Marathon Recovery").',
-            'description': 'Optional. Add an overview of the recovery strategy.',
+            'description': 'Optional. Add an overview of the recovery strategy...',
             'active_recovery': 'Add every new item in a new line',
             'sleep_and_rest': 'Add every new item in a new line',
             'self_care': 'Add every new item in a new line',
@@ -193,27 +277,32 @@ class RecoveryPlanForm(forms.ModelForm):
             }),
             'description': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Brief description of the plan',
+                'placeholder': 'Brief description of the plan...',
                 'rows': 3,
             }),
             'active_recovery': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'List active recovery strategies...',
+                'placeholder': 'E.g., Light yoga on rest days\nWalking for 30 minutes\n'
+                               'Foam rolling after workouts\nStretching before bed',
                 'rows': 4,
             }),
             'sleep_and_rest': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Sleep hygiene, naps, rest periods...',
+                'placeholder': 'Sleep hygiene\nnaps\nrest periods\n...',
                 'rows': 4,
             }),
             'self_care': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Massage, foam rolling, sauna, etc.',
+                'placeholder': 'Massage\nfoam rolling\nsauna\netc.',
                 'rows': 4,
             }),
             'monitoring_follow_up': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Check-ins, adjustments, metrics...',
+                'placeholder': 'Check-ins\nadjustments\nmetrics\n...',
                 'rows': 4,
             }),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['user'].queryset = AppUser.objects.all().order_by('email')

@@ -2,14 +2,17 @@
 
 {% block account-content %}
     <div class="table-container">
-        <h2>{{ nutrition_plan }}</h2>
+        
 
         {% if user.is_staff %}
+            <h2>{{ nutrition_plan }}</h2>
             <p>
                 <a href="{% url 'nutrition-plan-edit' nutrition_plan.pk %}">Edit Nutrition Plan</a> |
                 <a href="{% url 'create-meal' nutrition_plan.pk %}">Add Meal</a> |
                 <a href="{% url 'create-supplement' nutrition_plan.pk %}">Add Supplement</a>
             </p>
+        {% else %}
+            <h2>{{ nutrition_plan.name }}</h2>
         {% endif %}
 
         <div class="plan-detail">
@@ -23,7 +26,7 @@
         {% if nutrition_plan.trainer_notes %}
             <h3>Trainer Notes</h3>
             <ul>
-                {% for note in nutrition_plan.trainer_notes %}
+                {% for note in nutrition_plan.trainer_notes.splitlines %}
                     <li>{{ note }}</li>
                 {% endfor %}
             </ul>
@@ -32,7 +35,7 @@
         {% if nutrition_plan.meal_timing_notes %}
             <h3>Meal Timing Notes</h3>
             <ul>
-                {% for note in nutrition_plan.meal_timing_notes %}
+                {% for note in nutrition_plan.meal_timing_notes.splitlines %}
                     <li>{{ note }}</li>
                 {% endfor %}
             </ul>
@@ -53,7 +56,7 @@
                             <a href="{% url 'edit-meal' meal.pk %}">Edit Meal</a>
                         </p>
                     {% endif %}
-                    <p><strong>Calories:</strong> {{ meal.meal_template.calories }}</p>
+                    <p><strong>Calories:</strong> {{ meal.meal_template.calories }}kcal</p>
                     <p><strong>Protein:</strong> {{ meal.meal_template.protein_grams }}g |
                         <strong>Carbs:</strong> {{ meal.meal_template.carbs_grams }}g |
                         <strong>Fats:</strong> {{ meal.meal_template.fats_grams }}g</p>

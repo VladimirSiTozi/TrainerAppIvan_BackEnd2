@@ -22,7 +22,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/images/')
     brief_description = models.CharField(max_length=500)
     description = models.TextField()
-    will_learn = models.JSONField()  # List of learning points
+    will_learn = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(AppUser, on_delete=models.SET_NULL, null=True, related_name='products')
     price = models.DecimalField(max_digits=10, decimal_places=2)

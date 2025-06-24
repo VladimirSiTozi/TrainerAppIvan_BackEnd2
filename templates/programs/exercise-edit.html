@@ -2,7 +2,8 @@
 
 {% block content %}
     <div class="table-container">
-        <h2>Edit Exercise: {{ exercise.exercise_template.name }}</h2>
+        <h2>Edit Exercise</h2>
+        <h3>{{ exercise.exercise_template.name }} ---> {{ exercise.day }} </h3>
 
         <form method="post">
             {% csrf_token %}

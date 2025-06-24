@@ -2,7 +2,8 @@
 
 {% block content %}
     <div class="table-container">
-        <h2>Delete Supplement: {{ supplement.name }}</h2>
+        <h2>Edit Supplement</h2>
+        <h3>{{ supplement.supplement_template.name }} in {{ supplement.nutrition_plan }}</h3>
 
         <form method="post">
             {% csrf_token %}

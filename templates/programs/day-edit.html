@@ -2,7 +2,8 @@
 
 {% block content %}
     <div class="table-container">
-        <h2>Edit Day: {{ day.name }}</h2>
+        <h2>Edit Day</h2>
+        <h3>Day {{ day.name }} ---> {{ day.period }} of {{ day.period.workout_plan }}</h3>
 
         <form method="post">
             {% csrf_token %}

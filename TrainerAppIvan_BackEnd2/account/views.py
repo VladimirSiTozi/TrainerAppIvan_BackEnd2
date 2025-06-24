@@ -282,8 +282,10 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
         return self.request.user.profile
 
     def form_valid(self, form):
-        response = super().form_valid(form)
-        return redirect('account-detail', slug=self.request.user.profile.slug)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('account-detail', kwargs={'slug': self.get_object().slug})
 
 
 @staff_member_required

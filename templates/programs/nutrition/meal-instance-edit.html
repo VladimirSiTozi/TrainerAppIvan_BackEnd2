@@ -2,7 +2,8 @@
 
 {% block content %}
     <div class="table-container">
-        <h2>Add Meal Instance</h2>
+        <h2>Edit Meal</h2>
+        <h3>{{ meal_instance.meal_template }} of {{ meal_instance.nutrition_plan }}</h3>
 
         <form method="post">
             {% csrf_token %}

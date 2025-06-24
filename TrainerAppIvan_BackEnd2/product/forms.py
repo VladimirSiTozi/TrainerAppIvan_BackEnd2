@@ -20,15 +20,33 @@ class ProductForm(forms.ModelForm):
             'is_active',
         ]
         widgets = {
-            'will_learn': forms.Textarea(attrs={'placeholder': 'Enter a JSON array like '
-                                                               '["Improve strength", "Increase flexibility"]'}),
-            'description': forms.Textarea(attrs={'rows': 5},),
-            'brief_description': forms.Textarea(attrs={'rows': 2}),
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Name of the product',
+            }),
+            'will_learn': forms.Textarea(attrs={
+                'placeholder': 'E.g., Basics of nutrition\nMeal planning skills\nUnderstanding macronutrients\n...',
+                'rows': 4,
+            }),
+            'description': forms.Textarea(attrs={
+                'rows': 5,
+                'placeholder': 'Provide a detailed course or plan description '
+                               '(e.g., This program covers meal timing, portion control, and sustainable habits)...',
+            }),
+            'brief_description': forms.Textarea(attrs={
+                'rows': 2,
+                'placeholder': 'A short summary (e.g., Learn how to build a balanced, sustainable nutrition plan)...',
+            }),
+            'price': forms.NumberInput(attrs={
+                'placeholder': 'e.g., 20.00',
+            }),
+            'discount': forms.NumberInput(attrs={
+                'placeholder': 'e.g. 5',
+            })
         }
 
         help_texts = {
-            'will_learn': 'Enter a JSON array of learning points, e.g. ["Improve strength", "Increase flexibility"]. '
-                          'Use square brackets [] with double quotes"".',
+            'will_learn': 'Add every item in a new line',
             'brief_description': 'A short summary of the item, up to 500 characters.',
             'description': 'A detailed, full description of the item or content. '
                            'This can include key features, purpose, usage, and any other relevant information.'
@@ -39,15 +57,3 @@ class ProductForm(forms.ModelForm):
         # When editing an existing product, image is not required
         if self.instance and self.instance.pk:
             self.fields['image'].required = False
-
-    def clean_will_learn(self):
-        data = self.cleaned_data['will_learn']
-        if isinstance(data, str):
-            try:
-                parsed = json.loads(data)
-                if not isinstance(parsed, list):
-                    raise forms.ValidationError("Must be a list of learning points.")
-                return parsed
-            except json.JSONDecodeError:
-                raise forms.ValidationError("Enter valid JSON.")
-        return data

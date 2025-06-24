@@ -732,7 +732,7 @@ class RecoveryCreateView(StaffRequiredMixin, CreateView):
 
     def get_success_url(self):
         recovery_plan = self.object
-        return reverse_lazy('home')
+        return reverse_lazy('recovery-plan_details', kwargs={'pk': recovery_plan.id, 'slug':recovery_plan.user.profile.slug})
 
     def form_valid(self, form):
         return super().form_valid(form)
@@ -746,7 +746,7 @@ class RecoveryEditView(StaffRequiredMixin, UpdateView):
 
     def get_success_url(self):
         recovery_plan = self.object
-        return reverse_lazy('home')
+        return reverse_lazy('recovery-plan_details', kwargs={'pk': recovery_plan.id, 'slug':recovery_plan.user.profile.slug})
 
     def form_valid(self, form):
         return super().form_valid(form)
@@ -754,7 +754,10 @@ class RecoveryEditView(StaffRequiredMixin, UpdateView):
 
 class RecoveryDeleteView(StaffRequiredMixin, DeleteView):
     model = RecoveryPlan
-    success_url = reverse_lazy('home')
+
+    def get_success_url(self):
+        profile = self.object.user.profile
+        return reverse_lazy('account-detail', kwargs={'slug': profile.slug})
 
 
 class RecoveryPlanAdminListView(StaffRequiredMixin, ListView):

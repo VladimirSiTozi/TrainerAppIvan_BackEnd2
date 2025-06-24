@@ -58,7 +58,8 @@ class ProfileForm(forms.ModelForm):
                 'id': 'social'
             }),
             'social_media_url': forms.URLInput(attrs={
-                'placeholder': 'Enter Social Media URL',
+                'class': 'form-control',
+                'placeholder': 'Enter Social Media URL (e.g., https://www.instagram.com/yourprofile)',
             }),
         }
 

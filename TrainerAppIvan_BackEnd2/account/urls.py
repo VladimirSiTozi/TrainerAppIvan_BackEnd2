@@ -19,32 +19,30 @@ urlpatterns = [
         path('', views.AccountDetailView.as_view(), name='account-detail'),
         path('adminhub/', include([
             path('', views.AdminHubView.as_view(), name='admin-hub'),
-            path('exercises-list/', ExercisesListView.as_view(), name='exercises-list'),
-            path('users-list/', views.UsersListView.as_view(), name='users-list'),
-            path('workplans-list/', AllWorkoutPlanListView.as_view(), name='all-workouts-list'),
-            path('nutrition/plans/list', AllNutritionPlanListView.as_view(), name='all-nutrition-plan-list'),
-            path('products-list/', ProductsListView.as_view(), name='products-list'),
-            path('artciles-list/', ArticleListView.as_view(), name='articles-list'),
+            path('exercises/list/', ExercisesListView.as_view(), name='exercises-list'),
+            path('users/list/', views.UsersListView.as_view(), name='users-list'),
+            path('workplans/list/', AllWorkoutPlanListView.as_view(), name='all-workouts-list'),
+            path('nutrition/plans/list/', AllNutritionPlanListView.as_view(), name='all-nutrition-plan-list'),
+            path('recovery/plans/list/', RecoveryPlanAdminListView.as_view(), name='recovery-plan-admin'),
+            path('products/list/', ProductsListView.as_view(), name='products-list'),
+            path('artciles/list/', ArticleListView.as_view(), name='articles-list'),
             path('meals/list/', MealsListView.as_view(), name='meals-list'),
-            path('supplemnt/', SupplementListView.as_view(), name='supplement-list'),
+            path('supplement/', SupplementListView.as_view(), name='supplement-list'),
         ])),
 
         path('edit/', views.EditProfileView.as_view(), name='profile-edit'),
-        path('workout-plans/', include([
+        path('workout/plans/', include([
             path('list/', WorkoutPlansListView.as_view(), name='workout-plans-list'),
             path('<int:pk>/details/', WorkoutPlanDetailView.as_view(), name='workout_plan_details'),
         ])),
-        path('nutrition-plans/', include([
+        path('nutrition/plans/', include([
             path('list/', NutritionPlansListView.as_view(), name='nutrition-plans-list'),
+            path('<int:pk>/details/', NutritionPlanDetailView.as_view(), name='nutrition-plan-details'),
         ])),
         path('recovery/plans/', include([
             path('list/', RecoveryPlansListView.as_view(), name='recovery-plans-list'),
             path('<int:pk>/', RecoveryDetailView.as_view(), name='recovery-plan_details'),
         ])),
 
-        path('nutrition/', include([
-            path('list/', RecoveryPlanAdminListView.as_view(), name='recovery-plan-admin-list'),
-            path('<int:pk>/details/', NutritionPlanDetailView.as_view(), name='nutrition-plan-details'),
-        ])),
     ])),
 ]

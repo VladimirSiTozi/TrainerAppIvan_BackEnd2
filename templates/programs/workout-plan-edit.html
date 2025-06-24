@@ -2,7 +2,8 @@
 
 {% block content %}
     <div class="table-container">
-        <h2>Edit Workout Plan: {{ workout_plan.name }}</h2>
+        <h2>Edit Workout Plan</h2>
+        <h3>{{ workout_plan.name }} of {{ workout_plan.user.profile.get_full_name }}</h3>
 
         <form method="post">
             {% csrf_token %}

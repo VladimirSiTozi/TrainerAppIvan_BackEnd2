@@ -19,7 +19,7 @@ class WorkoutPlan(models.Model):
     description = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f'{self.name} of {self.user}'
+        return f'{self.name} of {self.user.profile.get_full_name()}'
 
 
 class Period(models.Model):
@@ -28,7 +28,7 @@ class Period(models.Model):
     duration_weeks = models.PositiveIntegerField()  # Duration in weeks
 
     def __str__(self):
-        return f"Period {self.number} of {self.workout_plan.name} of {self.workout_plan.user}"
+        return f"Period {self.number} of {self.workout_plan.name} of {self.workout_plan.user.profile.get_full_name()}"
 
 
 class Day(models.Model):
@@ -37,7 +37,7 @@ class Day(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)  # Optional: e.g., "Leg Day"
 
     def __str__(self):
-        return f"Day {self.number} of Period {self.period.number} of {self.period.workout_plan.name} of {self.period.workout_plan.user}"
+        return f"Day {self.number} of Period {self.period.number} of {self.period.workout_plan.name} of {self.period.workout_plan.user.profile.get_full_name()}"
 
 
 class ExerciseTemplate(models.Model):
@@ -70,9 +70,8 @@ class NutritionPlan(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
 
-    # Use JSONField for multiple notes
-    trainer_notes = models.JSONField(blank=True, null=True, default=list)
-    meal_timing_notes = models.JSONField(blank=True, null=True, default=list)
+    trainer_notes = models.TextField(blank=True, null=True, default=list)
+    meal_timing_notes = models.TextField(blank=True, null=True, default=list)
 
     target_calories = models.CharField(max_length=50)
     protein_grams = models.CharField(max_length=50)
@@ -138,4 +137,4 @@ class RecoveryPlan(models.Model):
     monitoring_follow_up = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.name} of {self.user.trainer_profile.get_full_name() or self.user.email}"
+        return f"{self.name} of {self.user.profile.get_full_name() or self.user.email}"

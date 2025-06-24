@@ -2,14 +2,21 @@
 
 {% block account-content %}
     <div class="table-container">
-        <h2>Workout Plan {{ workout_plan }}</h2>
+        {% if user.is_staff %}
+        	<h2>Workout Plan {{ workout_plan }}</h2>
+        {% else %}
+            <h2>Workout Plan {{ workout_plan.name }}</h2>
+        {% endif %}
+    
         <h4>{{ workout_plan.description }}</h4>
+    
         {% if user.is_staff %}
             <p>
                 <a href="{% url 'workout-plan-edit' workout_plan.pk %}">Edit Workout Plan</a> |
                 <a href="{% url 'create-period' workout_plan.pk %}">Add Period</a>
             </p>
         {% endif %}
+    
         <!-- Navigation Buttons for Periods -->
         <div class="navigation-container">
             <nav class="navigation-buttons text">

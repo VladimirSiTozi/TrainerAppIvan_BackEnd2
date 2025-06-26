@@ -1,5 +1,7 @@
 {% extends 'common/base.html' %}
 
+{#<th>Focus</th>; 'Focus',  ;focus: inputs[6].value,#}
+
 {% block content %}
     <form method="POST" class="workout-form">
         {% csrf_token %}
@@ -106,7 +108,7 @@
                     <th>Rest</th>
                     <th>Progression</th>
                     <th>Aim</th>
-                    <th>Focus</th>
+
                     <th>Tempo</th>
                     <th>Weight</th>
                 </tr>
@@ -123,7 +125,7 @@
             const table = document.getElementById(tableId).querySelector('tbody');
             const row = document.createElement('tr');
 
-            const fields = ['Exercise', 'Sets', 'Reps', 'Rest', 'Progression', 'Aim', 'Focus', 'Tempo', 'Weight'];
+            const fields = ['Exercise', 'Sets', 'Reps', 'Rest', 'Progression', 'Aim', 'Tempo', 'Weight'];
             row.innerHTML = fields.map(() =>
                 `<td><input type="text" style="width: 100px;"></td>`
             ).join('');
@@ -169,9 +171,8 @@
                                 rest: inputs[3].value,
                                 progression: inputs[4].value,
                                 aim: inputs[5].value,
-                                focus: inputs[6].value,
-                                tempo: inputs[7].value,
-                                weight: inputs[8].value
+                                tempo: inputs[6].value,
+                                weight: inputs[7].value
                             });
                         });
                     }
@@ -202,7 +203,7 @@
             const form = this;
             const formData = getWorkoutPlanData();
 
-            fetch('/workplan/create-workout-plan/', {  // <-- смени пътя, ако е различен
+            fetch('/workout/plan/create-workout-plan/', {  // <-- смени пътя, ако е различен
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

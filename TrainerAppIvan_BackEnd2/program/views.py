@@ -162,7 +162,12 @@ def create_workout_plan(request):
                         tempo=exercise_data.get('tempo', ''),
                     )
 
-        return JsonResponse({'status': 'success', 'message': 'Workout plan created'})
+        # return redirect('workout_plan_details', pk=plan.pk, slug=plan.user.profile.slug)
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Workout plan created',
+        })
 
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)

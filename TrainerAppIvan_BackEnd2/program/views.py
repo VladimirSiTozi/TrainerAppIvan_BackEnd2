@@ -94,7 +94,7 @@ class WorkoutPlanDetailView(LoginRequiredMixin, DetailView, ProfileContextMixin)
                 'duration_weeks': period.duration_weeks,
                 'days': []
             }
-            for day in period.days.all():
+            for day in period.days.all().order_by('number'):
                 period_data['days'].append({
                     'pk': day.pk,
                     'day': day.name,

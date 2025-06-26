@@ -44,19 +44,32 @@
         
             {% include "account/search_form.html" %}
             <!-- Horizontal Navigation -->
-            <div class="container navigation-container">
-                <nav class="navigation-buttons text">
-                    <a href="{% url 'account-detail' profile.slug %}">Profile</a>
-                    <a href="{% url 'workout-plans-list' profile.slug %}">training</a>
-                    <a href="{% url 'nutrition-plans-list' profile.slug %}">nutrition</a>
-                    <a href="{% url 'recovery-plans-list' profile.slug %}">recovery</a>
-                    <a href="#">videos</a>
-                </nav>
-            </div>
+  <div class="container navigation-container">
+    <!-- Hamburger Icon -->
+    <div class="hamburger" onclick="toggleProfileMenu()">
+        &#9776;
+    </div>
+
+    <!-- Collapsible Nav -->
+    <div class="navigation-buttons text" id="navProfileMenu">
+        <a href="{% url 'account-detail' profile.slug %}">Profile</a>
+        <a href="{% url 'workout-plans-list' profile.slug %}">training</a>
+        <a href="{% url 'nutrition-plans-list' profile.slug %}">nutrition</a>
+        <a href="{% url 'recovery-plans-list' profile.slug %}">recovery</a>
+        <a href="#">videos</a>
+    </div>
+</div>
 
             <!-- Account Content -->
             {% block account-content %}
             {% endblock %}
         </div>
     </div>
+    
+    <script>
+    function toggleProfileMenu() {
+        const nav = document.getElementById("navProfileMenu");
+        nav.classList.toggle("show");
+    }
+</script>
 {% endblock %}

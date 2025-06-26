@@ -42,20 +42,22 @@
     /* Smaller shadow when active */
 }
 
-@media (max-width: 1025px) {
+@media (max-width: 1240px) {
+    .navigation-buttons a {
+        padding: 4px 8px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 1024px) {
     .navigation-buttons {
         gap: 6px;
-    }
-
-    .navigation-buttons a {
-        padding: 8px 16px;
-        font-size: 16px;
     }
 }
 
 @media (max-width: 850px) {
     .navigation-buttons a {
-        padding: 4px 12px;
+        padding: 4px;
         font-size: 14px;
     }
 }

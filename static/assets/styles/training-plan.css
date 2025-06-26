@@ -118,6 +118,12 @@ td input:focus {
     flex-shrink: 0; /* Prevents content from shrinking */
 }
 
+@media (max-width: 1024px) {
+    .table-container {
+        padding: 0;
+    }
+}
+
 /*@media (max-width: 1024px) {*/
 /*    .no-programs-yet-container {*/
 /*        width: 90%; !* Ensure container takes full width *!*/

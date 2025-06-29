@@ -1,28 +1,34 @@
 {% extends 'account/profile-base.html' %}
 
 {% block account-content %}
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <div class="table-container">
         {% if user.is_staff %}
-        	<h2>Workout Plan {{ workout_plan }}</h2>
+            <h2 class="text-3xl font-semibold my-3">Workout Plan {{ workout_plan }}</h2>
         {% else %}
-            <h2>Workout Plan {{ workout_plan.name }}</h2>
+            <h2 class="text-3xl font-semibold my-3">Workout Plan {{ workout_plan.name }}</h2>
         {% endif %}
-    
+
         <h4>{{ workout_plan.description }}</h4>
-    
+
         {% if user.is_staff %}
             <p>
                 <a href="{% url 'workout-plan-edit' workout_plan.pk %}">Edit Workout Plan</a> |
                 <a href="{% url 'create-period' workout_plan.pk %}">Add Period</a>
             </p>
         {% endif %}
-    
+
         <!-- Navigation Buttons for Periods -->
-        <div class="navigation-container">
-            <nav class="navigation-buttons text">
+        <div class="navigation-container overflow-x-auto mb-4">
+            <nav class="flex space-x-2 sm:justify-center px-2">
                 {% for period_data in plan_data %}
-                    <a href="javascript:void(0);"
-                       onclick="showPeriod('period-{{ period_data.period }}')">Period {{ period_data.period }}</a>
+                    <button
+                            onclick="showPeriod('period-{{ period_data.period }}', this)"
+                            data-period="{{ period_data.period }}"
+                            class="period-btn whitespace-nowrap text-black bg-gray-200 py-2 px-4 rounded-lg font-semibold shadow-sm transition duration-200">
+                        Period {{ period_data.period }}
+                    </button>
                 {% endfor %}
             </nav>
         </div>
@@ -30,7 +36,7 @@
         <!-- Period Content -->
         {% for period_data in plan_data %}
             <div id="period-{{ period_data.period }}" class="period-content" style="display: none;">
-                <h2>Period {{ period_data.period }}</h2>
+                <h3 class="text-2xl font-semibold my-2">Period {{ period_data.period }}</h3>
                 {% if user.is_staff %}
                     <p>
                         <a href="{% url 'period-edit' period_data.pk %}">Edit Period</a> |
@@ -48,39 +54,71 @@
                                 <a href="{% url 'create_exercise' day_data.pk %}">Add Exercise</a>
                             </p>
                         {% endif %}
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Exercise</th>
-                                <th>Sets</th>
-                                <th>Reps</th>
-                                <th>Rest</th>
-                                <th>Progression</th>
-                                <th>Aim</th>
-                                <th>Focus</th>
-                                <th>Tempo</th>
-                                <th>Weight</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for exercise in day_data.exercises %}
+
+                        <!-- Original Table: PC View -->
+                        <div class="hidden sm:block overflow-x-auto">
+                            <table>
+                                <thead>
                                 <tr>
-                                    <td>{{ exercise.exercise_template.name }}</td>
-                                    <td>{{ exercise.sets }}</td>
-                                    <td>{{ exercise.reps }}</td>
-                                    <td>{{ exercise.rest }}</td>
-                                    <td>{{ exercise.progression }}</td>
-                                    <td>{{ exercise.aim }}</td>
-                                    <td>{{ exercise.exercise_template.focus }}</td>
-                                    <td>{{ exercise.tempo }}</td>
-                                    <td>{{ exercise.weight }}</td>
+                                    <th>Exercise</th>
+                                    <th>Sets</th>
+                                    <th>Reps</th>
+                                    <th>Rest</th>
+                                    <th>Progression</th>
+                                    <th>Aim</th>
+                                    <th>Focus</th>
+                                    <th>Tempo</th>
+                                    <th>Weight</th>
                                     {% if user.is_staff %}
-                                        <th><a href="{% url 'exercise-edit' exercise.id %}">Edit</a></th>
+                                        <th>Actions</th>
                                     {% endif %}
                                 </tr>
+                                </thead>
+                                <tbody>
+                                {% for exercise in day_data.exercises %}
+                                    <tr>
+                                        <td>{{ exercise.exercise_template.name }}</td>
+                                        <td>{{ exercise.sets }}</td>
+                                        <td>{{ exercise.reps }}</td>
+                                        <td>{{ exercise.rest }}</td>
+                                        <td>{{ exercise.progression }}</td>
+                                        <td>{{ exercise.aim }}</td>
+                                        <td>{{ exercise.exercise_template.focus }}</td>
+                                        <td>{{ exercise.tempo }}</td>
+                                        <td>{{ exercise.weight }}</td>
+                                        {% if user.is_staff %}
+                                            <td><a href="{% url 'exercise-edit' exercise.id %}">Edit</a></td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Mobile View -->
+                        <div class="sm:hidden space-y-4 mt-4">
+                            {% for exercise in day_data.exercises %}
+                                <div class="border rounded-lg p-4 shadow bg-grey">
+                                    <p><span
+                                            class="font-semibold">Exercise:</span> {{ exercise.exercise_template.name }}
+                                    </p>
+                                    <p><span class="font-semibold">Sets:</span> {{ exercise.sets }}</p>
+                                    <p><span class="font-semibold">Reps:</span> {{ exercise.reps }}</p>
+                                    <p><span class="font-semibold">Rest:</span> {{ exercise.rest }}</p>
+                                    <p><span class="font-semibold">Progression:</span> {{ exercise.progression }}</p>
+                                    <p><span class="font-semibold">Aim:</span> {{ exercise.aim }}</p>
+                                    <p><span class="font-semibold">Focus:</span> {{ exercise.exercise_template.focus }}
+                                    </p>
+                                    <p><span class="font-semibold">Tempo:</span> {{ exercise.tempo }}</p>
+                                    <p><span class="font-semibold">Weight:</span> {{ exercise.weight }}</p>
+                                    {% if user.is_staff %}
+                                        <p><a href="{% url 'exercise-edit' exercise.id %}"
+                                              class="text-blue-600 hover:underline">Edit</a></p>
+                                    {% endif %}
+                                </div>
                             {% endfor %}
-                            </tbody>
-                        </table>
+                        </div>
+
                     </div>
                 {% endfor %}
             </div>
@@ -89,19 +127,37 @@
 
     <!-- JavaScript to Handle Period Toggling -->
     <script>
-        function showPeriod(periodId) {
+        function showPeriod(periodId, clickedBtn = null) {
             // Hide all period content
             document.querySelectorAll('.period-content').forEach(function (element) {
                 element.style.display = 'none';
             });
 
-            // Show the selected period
+            // Show selected period
             document.getElementById(periodId).style.display = 'block';
+
+            // Remove active styles from all buttons
+            document.querySelectorAll('.period-btn').forEach(function (btn) {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                {#btn.classList.add('bg-gray-200', 'text-black');#}
+            });
+
+            // Apply active style to the clicked button
+            if (clickedBtn) {
+                {#clickedBtn.classList.remove('bg-gray-200', 'text-black');#}
+                clickedBtn.classList.add('bg-blue-600', 'text-white');
+                clickedBtn.blur(); // Fix for mobile visual glitch
+            }
         }
 
-        // Show the first period by default
+        // Auto-select the first period on load
         document.addEventListener('DOMContentLoaded', function () {
-            showPeriod('period-1');
+            const firstBtn = document.querySelector('.period-btn');
+            if (firstBtn) {
+                showPeriod('period-1', firstBtn);
+            }
         });
     </script>
+
+
 {% endblock %}

@@ -120,7 +120,11 @@ td input:focus {
 
 @media (max-width: 1024px) {
     .table-container {
-        padding: 0;
+        padding: 12px;
+    }
+
+    .workout-table {
+        padding: 12px;
     }
 }
 

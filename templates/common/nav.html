@@ -21,7 +21,7 @@
             <a href="{% url 'login' %}">login</a>
         {% else %}
             {% if request.user.profile.is_profile_complete %}
-                <a href="{% url 'account-detail' request.user.profile.slug %}">profile</a>
+                <a href="{% url 'account-detail' request.user.profile.slug %}" class="btn-primary">profile</a>
             {% else %}
                 <a href="{% url 'complete-profile' %}">profile</a>
             {% endif %}
@@ -29,10 +29,11 @@
                 {% csrf_token %}
             </form>
 
-            <button onclick="confirmLogout()" class="btn btn-danger">LOGOUT</button>
+            <a href="{% url 'logout' %}" onclick="confirmLogout(event)" class="btn-danger">LOGOUT</a>
 
             <script>
-                function confirmLogout() {
+                function confirmLogout(e) {
+                    e.preventDefault(); // Prevent the default link action
                     if (confirm("Are you sure you want to logout?")) {
                         document.getElementById('logout-form').submit();
                     }
@@ -41,7 +42,7 @@
         {% endif %}
 
     </div>
-{#    {{ request.session.user_data.email }}#}
+    {#    {{ request.session.user_data.email }}#}
 </div>
 
 <script>

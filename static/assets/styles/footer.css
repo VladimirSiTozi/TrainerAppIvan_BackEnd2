@@ -1,28 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+.footer {
+    background-color: #24262b;
+    padding: 40px 0;
+}
 
 .footer-container {
     max-width: 1170px;
     margin: auto;
-}
-
-.footer-row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 20px;
 }
 
-.footer ul {
-    padding: 0;
-    list-style: none;
-}
-
-.footer {
-    background-color: #24262b;
+.footer-group {
+    display: flex;
 }
 
 .footer-col {
-    width: 22%;
-    padding: 0 15px;
+    flex: 1 1 22%; /* 4 колони на ред, по ~25% - малко отстъп за gap */
+    min-width: 200px;
 }
 
 .footer-col h4 {
@@ -41,8 +37,12 @@
     bottom: -10px;
     background-color: #e91e63;
     height: 2px;
-    box-sizing: border-box;
-    width: 200px;
+    width: 80px;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
 }
 
 .footer-col ul li:not(:last-child) {
@@ -82,38 +82,27 @@
     background-color: #ffffff;
 }
 
-/*responsive*/
+/* Responsive */
 
-
+/* TABLET & UP */
 @media (max-width: 950px) {
     .footer-container {
-        max-width: 800px;
+        justify-content: center;
+    }
+
+    .footer-group {
+        display: flex;
+        flex-direction: column;
     }
 
     .footer-col {
-        width: 20%;
-    }
-
-    .footer-col h4::before {
-        width: 100px;
+        flex: 1 1 45%; /* 2 колони на ред */
     }
 }
 
-@media (max-width: 767px) {
+/* MOBILE */
+@media (max-width: 600px) {
     .footer-col {
-        width: 30%;
+        flex: 1 1 30%; /* 2 колони на ред с малък отстъп */
     }
 }
-
-@media (max-width: 574px) {
-    .footer-container {
-        max-width: 500px;
-    }
-
-    .footer-col {
-        max-width: 50%;
-    }
-}
-
-
-

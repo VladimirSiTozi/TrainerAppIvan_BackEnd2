@@ -1,4 +1,5 @@
 {% extends 'common/base.html' %}
+{% load custom_tags %}
 
 {% block content %}
     <div class="outer-product-container">
@@ -15,14 +16,14 @@
                 </div>
                 <div class="product-content">
                     <div class="single-category">
-                        <p><i>category:</i> {{ product.category }}</p>
+                        <p><i>Category:</i> {{ product.category|prettify_category    }}</p>
                     </div>
                     <div>
                         <p>{{ product.brief_description }}</p>
                     </div>
                     <div class="card-product-price single-product">
                         <p><span>{{ product.price }}</span>$</p>
-                        <button type="button" class="product-buy">Buy Now</button>
+                        <a href="{% url 'add_to_cart' product.id %}" class="buy-button">Buy Now</a>
                     </div>
                 </div>
             </div>

@@ -4,5 +4,5 @@
     <div class="home-card-text">
         <p>{{ product.brief_description|truncatechars:100 }}</p>
     </div>
-    <a href="https://example.com/product1" class="card-button">Buy Now</a>
+    <a href="{% url 'product-detail' product.pk %}" class="card-button">See More</a>
 </div>

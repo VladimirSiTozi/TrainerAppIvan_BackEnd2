@@ -4,15 +4,19 @@
 {% block account-content %}
     {% if nutrition_plans %}
         <div class="table-container">
-            <ul>
-                {% for nutrition_plan in nutrition_plans %}
-                    <li>
-                        <a href="{% url 'nutrition-plan-details' slug=nutrition_plan.user.profile.slug pk=nutrition_plan.pk %}"
-                           class="workout-link">{{ nutrition_plan.name }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
+            <div class="plan-lists-container">
+                <h2>Nutrition Plans</h2>
+                <ul class="plan-list">
+                    {% for nutrition_plan in nutrition_plans %}
+                        <li>
+                            <a href="{% url 'nutrition-plan-details' slug=nutrition_plan.user.profile.slug pk=nutrition_plan.pk %}"
+                               class="workout-link">
+                                {{ nutrition_plan.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     {% else %}
         <div class="no-programs-yet-container">

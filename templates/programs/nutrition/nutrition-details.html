@@ -2,8 +2,6 @@
 
 {% block account-content %}
     <div class="table-container">
-        
-
         {% if user.is_staff %}
             <h2>{{ nutrition_plan }}</h2>
             <p>
@@ -15,172 +13,214 @@
             <h2>{{ nutrition_plan.name }}</h2>
         {% endif %}
 
-        <div class="plan-detail">
+        <div class="plan-nutrition-details">
             <p><strong>Description:</strong> {{ nutrition_plan.description }}</p>
-            <p><strong>Target Calories:</strong> {{ nutrition_plan.target_calories }}</p>
-            <p><strong>Protein:</strong> {{ nutrition_plan.protein_grams }}g</p>
-            <p><strong>Carbs:</strong> {{ nutrition_plan.carbs_grams }}g</p>
-            <p><strong>Fats:</strong> {{ nutrition_plan.fats_grams }}g</p>
         </div>
 
+        <div class="plan-nutrition-details">
+            <h3>Plan Overview</h3>
+            <div class="plan-stats">
+{#                <div class="plan-item">#}
+{#                    <span class="label">Description</span>#}
+{#                    <span class="value">{{ nutrition_plan.description }}</span>#}
+{#                </div>#}
+                <div class="plan-item">
+                    <span class="label">Target Calories</span>
+                    <span class="value">{{ nutrition_plan.target_calories }}kcal</span>
+                </div>
+                <div class="plan-item">
+                    <span class="label">Protein</span>
+                    <span class="value">{{ nutrition_plan.protein_grams }}g</span>
+                </div>
+                <div class="plan-item">
+                    <span class="label">Carbs</span>
+                    <span class="value">{{ nutrition_plan.carbs_grams }}g</span>
+                </div>
+                <div class="plan-item">
+                    <span class="label">Fats</span>
+                    <span class="value">{{ nutrition_plan.fats_grams }}g</span>
+                </div>
+            </div>
+        </div>
+
+
         {% if nutrition_plan.trainer_notes %}
-            <h3>Trainer Notes</h3>
-            <ul>
-                {% for note in nutrition_plan.trainer_notes.splitlines %}
-                    <li>{{ note }}</li>
-                {% endfor %}
-            </ul>
+            <div class="notes-container">
+                <h3>Trainer Notes</h3>
+                <ul class="note-list">
+                    {% for note in nutrition_plan.trainer_notes.splitlines %}
+                        <li>{{ note }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         {% endif %}
 
         {% if nutrition_plan.meal_timing_notes %}
-            <h3>Meal Timing Notes</h3>
-            <ul>
-                {% for note in nutrition_plan.meal_timing_notes.splitlines %}
-                    <li>{{ note }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-
-        <h3>Meals</h3>
-        {% if not meals %}
-            <p>No meals added yet.</p>
-        {% endif %}
-        {% if breakfast %}
-            <h2>Breakfast</h2>
-            {% for meal in breakfast %}
-                <div class="inner-table-container">
-
-                    <h4>{{ meal.meal_template.name }}</h4>
-                    {% if user.is_staff %}
-                        <p>
-                            <a href="{% url 'edit-meal' meal.pk %}">Edit Meal</a>
-                        </p>
-                    {% endif %}
-                    <p><strong>Calories:</strong> {{ meal.meal_template.calories }}kcal</p>
-                    <p><strong>Protein:</strong> {{ meal.meal_template.protein_grams }}g |
-                        <strong>Carbs:</strong> {{ meal.meal_template.carbs_grams }}g |
-                        <strong>Fats:</strong> {{ meal.meal_template.fats_grams }}g</p>
-                    <p><strong>Foods:</strong> {{ meal.meal_template.foods_description }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
-
-        {% if morning_snack %}
-            <h2>Morning Snack</h2>
-            {% for meal in breakfast %}
-                <div class="inner-table-container">
-
-                    <h4>{{ meal.meal_template.name }}</h4>
-                    {% if user.is_staff %}
-                        <p>
-                            <a href="{% url 'edit-meal' meal.pk %}">Edit Meal</a>
-                        </p>
-                    {% endif %}
-                    <p><strong>Calories:</strong> {{ meal.meal_template.calories }}</p>
-                    <p><strong>Protein:</strong> {{ meal.meal_template.protein_grams }}g |
-                        <strong>Carbs:</strong> {{ meal.meal_template.carbs_grams }}g |
-                        <strong>Fats:</strong> {{ meal.meal_template.fats_grams }}g</p>
-                    <p><strong>Foods:</strong> {{ meal.meal_template.foods_description }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
-
-        {% if lunch %}
-            <h2>Lunch</h2>
-            {% for meal in breakfast %}
-                <div class="inner-table-container">
-
-                    <h4>{{ meal.meal_template.name }}</h4>
-                    {% if user.is_staff %}
-                        <p>
-                            <a href="{% url 'edit-meal' meal.pk %}">Edit Meal</a>
-                        </p>
-                    {% endif %}
-                    <p><strong>Calories:</strong> {{ meal.meal_template.calories }}</p>
-                    <p><strong>Protein:</strong> {{ meal.meal_template.protein_grams }}g |
-                        <strong>Carbs:</strong> {{ meal.meal_template.carbs_grams }}g |
-                        <strong>Fats:</strong> {{ meal.meal_template.fats_grams }}g</p>
-                    <p><strong>Foods:</strong> {{ meal.meal_template.foods_description }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
-
-        {% if afternoon_snack %}
-            <h2>Afternoon Snack</h2>
-            {% for meal in breakfast %}
-                <div class="inner-table-container">
-
-                    <h4>{{ meal.meal_template.name }}</h4>
-                    {% if user.is_staff %}
-                        <p>
-                            <a href="{% url 'edit-meal' meal.pk %}">Edit Meal</a>
-                        </p>
-                    {% endif %}
-                    <p><strong>Calories:</strong> {{ meal.meal_template.calories }}</p>
-                    <p><strong>Protein:</strong> {{ meal.meal_template.protein_grams }}g |
-                        <strong>Carbs:</strong> {{ meal.meal_template.carbs_grams }}g |
-                        <strong>Fats:</strong> {{ meal.meal_template.fats_grams }}g</p>
-                    <p><strong>Foods:</strong> {{ meal.meal_template.foods_description }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
-
-        {% if dinner %}
-            <h2>Dinner</h2>
-            {% for meal in breakfast %}
-                <div class="inner-table-container">
-
-                    <h4>{{ meal.meal_template.name }}</h4>
-                    {% if user.is_staff %}
-                        <p>
-                            <a href="{% url 'edit-meal' meal.pk %}">Edit Meal</a>
-                        </p>
-                    {% endif %}
-                    <p><strong>Calories:</strong> {{ meal.meal_template.calories }}</p>
-                    <p><strong>Protein:</strong> {{ meal.meal_template.protein_grams }}g |
-                        <strong>Carbs:</strong> {{ meal.meal_template.carbs_grams }}g |
-                        <strong>Fats:</strong> {{ meal.meal_template.fats_grams }}g</p>
-                    <p><strong>Foods:</strong> {{ meal.meal_template.foods_description }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
-
-        {% if evening_snack %}
-            <h2>Evening Snack</h2>
-            {% for meal in breakfast %}
-                <div class="inner-table-container">
-
-                    <h4>{{ meal.meal_template.name }}</h4>
-                    {% if user.is_staff %}
-                        <p>
-                            <a href="{% url 'edit-meal' meal.pk %}">Edit Meal</a>
-                        </p>
-                    {% endif %}
-                    <p><strong>Calories:</strong> {{ meal.meal_template.calories }}</p>
-                    <p><strong>Protein:</strong> {{ meal.meal_template.protein_grams }}g |
-                        <strong>Carbs:</strong> {{ meal.meal_template.carbs_grams }}g |
-                        <strong>Fats:</strong> {{ meal.meal_template.fats_grams }}g</p>
-                    <p><strong>Foods:</strong> {{ meal.meal_template.foods_description }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
-
-
-        <h3>Supplements</h3>
-        {% for supplement in nutrition_plan.supplements.all %}
-            <div class="inner-table-container">
-                <p><strong>{{ supplement.supplement_template.name }}</strong>{% if supplement.dosage %} –
-                    {{ supplement.dosage }}{% endif %}
-                </p>
-                {% if user.is_staff %}
-                    <p><a href="{% url 'edit-supplement' supplement.pk %}">Edit Supplement</a></p>
-                {% endif %}
-                {% if supplement.protein_grams %}
-                    <p><strong>Grams:</strong> {{ supplement.protein_grams }}g</p>
-                {% endif %}
+            <div class="notes-container">
+                <h3>Meal Timing Notes</h3>
+                <ul class="note-list">
+                    {% for note in nutrition_plan.meal_timing_notes.splitlines %}
+                        <li>{{ note }}</li>
+                    {% endfor %}
+                </ul>
             </div>
-        {% empty %}
-            <p>No supplements added yet.</p>
-        {% endfor %}
+        {% endif %}
+
+
+        <div class="meals-container">
+            <h2>Meals</h2>
+            {% if not meals %}
+                <p>No meals added yet.</p>
+            {% endif %}
+            {% if breakfast %}
+                <div class="time-meal-container">
+                    <h3>Breakfast</h3>
+                    {% for meal in breakfast %}
+                        <div class="inner-table-container">
+                            <h4>{{ meal.meal_template.name }}</h4>
+                            {% if user.is_staff %}
+                                <p>
+                                    <a href="{% url 'edit-meal' meal.pk %}">Edit Meal</a>
+                                </p>
+                            {% endif %}
+                            <p><strong>Calories:</strong> {{ meal.meal_template.calories }}kcal</p>
+                            <p><strong>Protein:</strong> {{ meal.meal_template.protein_grams }}g |
+                                <strong>Carbs:</strong> {{ meal.meal_template.carbs_grams }}g |
+                                <strong>Fats:</strong> {{ meal.meal_template.fats_grams }}g</p>
+                            <p><strong>Foods:</strong> {{ meal.meal_template.foods_description }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if morning_snack %}
+                <div class="time-meal-container">
+                    <h3>Morning Snack</h3>
+                    {% for meal in breakfast %}
+                        <div class="inner-table-container">
+
+                            <h4>{{ meal.meal_template.name }}</h4>
+                            {% if user.is_staff %}
+                                <p>
+                                    <a href="{% url 'edit-meal' meal.pk %}">Edit Meal</a>
+                                </p>
+                            {% endif %}
+                            <p><strong>Calories:</strong> {{ meal.meal_template.calories }}</p>
+                            <p><strong>Protein:</strong> {{ meal.meal_template.protein_grams }}g |
+                                <strong>Carbs:</strong> {{ meal.meal_template.carbs_grams }}g |
+                                <strong>Fats:</strong> {{ meal.meal_template.fats_grams }}g</p>
+                            <p><strong>Foods:</strong> {{ meal.meal_template.foods_description }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if lunch %}
+                <div class="time-meal-container">
+                    <h3>Lunch</h3>
+                    {% for meal in breakfast %}
+                        <div class="inner-table-container">
+
+                            <h4>{{ meal.meal_template.name }}</h4>
+                            {% if user.is_staff %}
+                                <p>
+                                    <a href="{% url 'edit-meal' meal.pk %}">Edit Meal</a>
+                                </p>
+                            {% endif %}
+                            <p><strong>Calories:</strong> {{ meal.meal_template.calories }}</p>
+                            <p><strong>Protein:</strong> {{ meal.meal_template.protein_grams }}g |
+                                <strong>Carbs:</strong> {{ meal.meal_template.carbs_grams }}g |
+                                <strong>Fats:</strong> {{ meal.meal_template.fats_grams }}g</p>
+                            <p><strong>Foods:</strong> {{ meal.meal_template.foods_description }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if afternoon_snack %}
+                <div class="time-meal-container">
+                    <h3>Afternoon Snack</h3>
+                    {% for meal in breakfast %}
+                        <div class="inner-table-container">
+
+                            <h4>{{ meal.meal_template.name }}</h4>
+                            {% if user.is_staff %}
+                                <p>
+                                    <a href="{% url 'edit-meal' meal.pk %}">Edit Meal</a>
+                                </p>
+                            {% endif %}
+                            <p><strong>Calories:</strong> {{ meal.meal_template.calories }}</p>
+                            <p><strong>Protein:</strong> {{ meal.meal_template.protein_grams }}g |
+                                <strong>Carbs:</strong> {{ meal.meal_template.carbs_grams }}g |
+                                <strong>Fats:</strong> {{ meal.meal_template.fats_grams }}g</p>
+                            <p><strong>Foods:</strong> {{ meal.meal_template.foods_description }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if dinner %}
+                <div class="time-meal-container">
+                    <h3>Dinner</h3>
+                    {% for meal in breakfast %}
+                        <div class="inner-table-container">
+
+                            <h4>{{ meal.meal_template.name }}</h4>
+                            {% if user.is_staff %}
+                                <p>
+                                    <a href="{% url 'edit-meal' meal.pk %}">Edit Meal</a>
+                                </p>
+                            {% endif %}
+                            <p><strong>Calories:</strong> {{ meal.meal_template.calories }}</p>
+                            <p><strong>Protein:</strong> {{ meal.meal_template.protein_grams }}g |
+                                <strong>Carbs:</strong> {{ meal.meal_template.carbs_grams }}g |
+                                <strong>Fats:</strong> {{ meal.meal_template.fats_grams }}g</p>
+                            <p><strong>Foods:</strong> {{ meal.meal_template.foods_description }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if evening_snack %}
+                <div class="time-meal-container">
+                    <h3>Evening Snack</h3>
+                    {% for meal in breakfast %}
+                        <div class="inner-table-container">
+
+                            <h4>{{ meal.meal_template.name }}</h4>
+                            {% if user.is_staff %}
+                                <p>
+                                    <a href="{% url 'edit-meal' meal.pk %}">Edit Meal</a>
+                                </p>
+                            {% endif %}
+                            <p><strong>Calories:</strong> {{ meal.meal_template.calories }}</p>
+                            <p><strong>Protein:</strong> {{ meal.meal_template.protein_grams }}g |
+                                <strong>Carbs:</strong> {{ meal.meal_template.carbs_grams }}g |
+                                <strong>Fats:</strong> {{ meal.meal_template.fats_grams }}g</p>
+                            <p><strong>Foods:</strong> {{ meal.meal_template.foods_description }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="meals-container">
+            <h2>Supplements</h2>
+            {% for supplement in nutrition_plan.supplements.all %}
+                <div class="inner-table-container">
+                    <p><strong>{{ supplement.supplement_template.name }}</strong>{% if supplement.dosage %} –
+                        {{ supplement.dosage }}{% endif %}
+                    </p>
+                    {% if user.is_staff %}
+                        <p><a href="{% url 'edit-supplement' supplement.pk %}">Edit Supplement</a></p>
+                    {% endif %}
+                    {% if supplement.protein_grams %}
+                        <p><strong>Grams:</strong> {{ supplement.protein_grams }}g</p>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>No supplements added yet.</p>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

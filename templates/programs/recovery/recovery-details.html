@@ -1,9 +1,8 @@
 {% extends 'account/profile-base.html' %}
 
-
 {% block account-content %}
     <div class="table-container">
-    
+
         {% if user.is_staff %}
             <h2>{{ recovery_plan }}</h2>
             <p>
@@ -13,55 +12,62 @@
             <h2>{{ recovery_plan.name }}</h2>
         {% endif %}
 
-        <div class="plan-detail">
-            {% if recovery_plan.description %}
+        {% if recovery_plan.description %}
+            <div class="plan-nutrition-details">
                 <p><strong>Description:</strong> {{ recovery_plan.description }}</p>
-            {% endif %}
-{#            <p><strong>Created At:</strong> {{ recovery_plan.created_at|date:"F j, Y" }}</p>#}
-        </div>
+            </div>
+        {% endif %}
 
         {% if recovery_plan.active_recovery %}
-            <h3>Active Recovery</h3>
-            <ul>
-                {% for item in recovery_plan.active_recovery.splitlines %}
-                    {% if item %}
-                        <li>{{ item }}</li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+            <div class="notes-container">
+                <h3>Active Recovery</h3>
+                <ul class="note-list">
+                    {% for item in recovery_plan.active_recovery.splitlines %}
+                        {% if item %}
+                            <li>{{ item }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
         {% endif %}
 
         {% if recovery_plan.sleep_and_rest %}
-            <h3>Sleep & Rest</h3>
-            <ul>
-                {% for item in recovery_plan.sleep_and_rest.splitlines %}
-                    {% if item %}
-                        <li>{{ item }}</li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+            <div class="notes-container">
+                <h3>Sleep & Rest</h3>
+                <ul class="note-list">
+                    {% for item in recovery_plan.sleep_and_rest.splitlines %}
+                        {% if item %}
+                            <li>{{ item }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
         {% endif %}
 
         {% if recovery_plan.self_care %}
-            <h3>Self-Care & Stress Management</h3>
-            <ul>
-                {% for item in recovery_plan.self_care.splitlines %}
-                    {% if item %}
-                        <li>{{ item }}</li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+            <div class="notes-container">
+                <h3>Self-Care & Stress Management</h3>
+                <ul class="note-list">
+                    {% for item in recovery_plan.self_care.splitlines %}
+                        {% if item %}
+                            <li>{{ item }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
         {% endif %}
 
         {% if recovery_plan.monitoring_follow_up %}
-            <h3>Monitoring & Follow-Up</h3>
-            <ul>
-                {% for item in recovery_plan.monitoring_follow_up.splitlines %}
-                    {% if item %}
-                        <li>{{ item }}</li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+            <div class="notes-container">
+                <h3>Monitoring & Follow-Up</h3>
+                <ul class="note-list">
+                    {% for item in recovery_plan.monitoring_follow_up.splitlines %}
+                        {% if item %}
+                            <li>{{ item }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
         {% endif %}
     </div>
 {% endblock %}

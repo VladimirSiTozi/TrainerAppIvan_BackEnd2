@@ -4,15 +4,18 @@
 {% block account-content %}
     {% if recovery_plans %}
         <div class="table-container">
-            <ul>
-                {% for recovery_plan in recovery_plans %}
-                    <li>
-                        <a href="{% url 'recovery-plan_details' slug=recovery_plan.user.profile.slug pk=recovery_plan.pk %}"
-                           class="workout-link">{{ recovery_plan.name }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
+            <div class="plan-lists-container">
+            <h2>Recovery Plans</h2>
+                <ul class="plan-list">
+                    {% for recovery_plan in recovery_plans %}
+                        <li>
+                            <a href="{% url 'recovery-plan_details' slug=recovery_plan.user.profile.slug pk=recovery_plan.pk %}"
+                               class="workout-link">{{ recovery_plan.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     {% else %}
         <div class="no-programs-yet-container">

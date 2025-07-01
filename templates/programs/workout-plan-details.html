@@ -47,7 +47,7 @@
 
                 {% for day_data in period_data.days %}
                     <div class="inner-table-container plan-detail">
-                        <h3>{{ day_data.day }}</h3>
+                        <h2 class="text-xl my-2">{{ day_data.day }}</h2>
                         {% if user.is_staff %}
                             <p>
                                 <a href="{% url 'day-edit' day_data.pk %}" class="btn-warning">Edit Day</a> |
@@ -98,7 +98,7 @@
                         <!-- Mobile View -->
                         <div class="sm:hidden space-y-4 mt-4">
                             {% for exercise in day_data.exercises %}
-                                <div class="border rounded-lg p-4 shadow bg-grey">
+                                <div class="border rounded-md p-4 shadow bg-grey">
                                     <p><span
                                             class="font-semibold">Exercise:</span> {{ exercise.exercise_template.name }}
                                     </p>

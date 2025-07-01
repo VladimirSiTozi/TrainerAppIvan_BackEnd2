@@ -94,3 +94,11 @@ class BusinessCardView(TemplateView):
 
 def privacy_policy(request):
     return render(request, 'common/privacy-policy.html')
+
+
+# def show_video(request):
+#     context = {
+#         'video_id': '722A27IoQnk',
+#         'video_title': 'My Cool Video'
+#     }
+#     return render(request, 'common/home.html', context)

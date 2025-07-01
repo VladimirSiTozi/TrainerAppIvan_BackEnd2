@@ -12,5 +12,6 @@ urlpatterns = [
         path('', views.ApplyView.as_view(), name='apply'),
         path('application-form/', views.ApplicationFormView.as_view(), name='application-form'),
     ])),
+    # path('watch/<str:video_id>/', views.show_video, name='show_video'),
     path('business-card/', views.BusinessCardView.as_view(), name='business-card'),
 ]

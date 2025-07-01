@@ -14,8 +14,8 @@
 
         {% if user.is_staff %}
             <p>
-                <a href="{% url 'workout-plan-edit' workout_plan.pk %}">Edit Workout Plan</a> |
-                <a href="{% url 'create-period' workout_plan.pk %}">Add Period</a>
+                <a href="{% url 'workout-plan-edit' workout_plan.pk %}" class="btn-warning">Edit Workout Plan</a> |
+                <a href="{% url 'create-period' workout_plan.pk %}" class="btn-warning">Add Period</a>
             </p>
         {% endif %}
 
@@ -39,8 +39,8 @@
                 <h3 class="text-2xl font-semibold my-2">Period {{ period_data.period }}</h3>
                 {% if user.is_staff %}
                     <p>
-                        <a href="{% url 'period-edit' period_data.pk %}">Edit Period</a> |
-                        <a href="{% url 'create-day' period_data.pk %}">Add Day</a>
+                        <a href="{% url 'period-edit' period_data.pk %}" class="btn-warning">Edit Period</a> |
+                        <a href="{% url 'create-day' period_data.pk %}" class="btn-warning">Add Day</a>
                     </p>
                 {% endif %}
                 <p>Duration: {{ period_data.duration_weeks }} weeks</p>
@@ -50,8 +50,8 @@
                         <h3>{{ day_data.day }}</h3>
                         {% if user.is_staff %}
                             <p>
-                                <a href="{% url 'day-edit' day_data.pk %}">Edit Day</a> |
-                                <a href="{% url 'create_exercise' day_data.pk %}">Add Exercise</a>
+                                <a href="{% url 'day-edit' day_data.pk %}" class="btn-warning">Edit Day</a> |
+                                <a href="{% url 'create_exercise' day_data.pk %}" class="btn-warning">Add Exercise</a>
                             </p>
                         {% endif %}
 

@@ -171,6 +171,11 @@
     color: white;
 }
 
+.btn-warning {
+    background: yellow;
+    color: black;
+}
+
 .btn-danger:hover {
     background: #c82333;
 }

@@ -5,9 +5,9 @@
         {% if user.is_staff %}
             <h2>{{ nutrition_plan }}</h2>
             <p>
-                <a href="{% url 'nutrition-plan-edit' nutrition_plan.pk %}">Edit Nutrition Plan</a> |
-                <a href="{% url 'create-meal' nutrition_plan.pk %}">Add Meal</a> |
-                <a href="{% url 'create-supplement' nutrition_plan.pk %}">Add Supplement</a>
+                <a href="{% url 'nutrition-plan-edit' nutrition_plan.pk %}" class="btn-warning">Edit Nutrition Plan</a> |
+                <a href="{% url 'create-meal' nutrition_plan.pk %}" class="btn-warning">Add Meal</a> |
+                <a href="{% url 'create-supplement' nutrition_plan.pk %}" class="btn-warning">Add Supplement</a>
             </p>
         {% else %}
             <h2>{{ nutrition_plan.name }}</h2>

@@ -6,7 +6,7 @@
         {% if user.is_staff %}
             <h2>{{ recovery_plan }}</h2>
             <p>
-                <a href="{% url 'recovery-edit' recovery_plan.pk %}">Edit Recovery Plan</a>
+                <a href="{% url 'recovery-edit' recovery_plan.pk %}" class="btn-warning"    >Edit Recovery Plan</a>
             </p>
         {% else %}
             <h2>{{ recovery_plan.name }}</h2>

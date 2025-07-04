@@ -192,14 +192,14 @@
 }
 
 /* Remove buttons */
-.remove-btn {
-    background: none;
-    border: none;
-    color: #dc3545;
-    cursor: pointer;
-    font-size: 14px;
-    padding: 0;
-}
+/*.remove-btn {*/
+/*    background: none;*/
+/*    border: none;*/
+/*    color: #dc3545;*/
+/*    cursor: pointer;*/
+/*    font-size: 14px;*/
+/*    padding: 0;*/
+/*}*/
 
 /* Compact layout for many items */
 .compact-view {

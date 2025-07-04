@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
 
+from TrainerAppIvan_BackEnd2.account.models import AppUser
 from TrainerAppIvan_BackEnd2.mixins import StaffRequiredMixin
 from TrainerAppIvan_BackEnd2.product.forms import ProductForm
 from TrainerAppIvan_BackEnd2.product.models import Product, CartItem, Cart
@@ -94,22 +95,22 @@ def view_cart(request):
 
 
 # ????????????
-@login_required
-def checkout(request):
-    cart = request.cart
-
-    if cart.items.count() == 0:
-        messages.error(request, "Количката ви е празна!")
-        return redirect('view_cart')
-
-    # Transfer cart to user if it was a guest cart
-    if not cart.user:
-        cart.user = request.user
-        cart.session = None
-        cart.save()
-
-    # Proceed with checkout logic
-    return render(request, 'cart/checkout.html', {'cart': cart})
+# @login_required
+# def checkout(request):
+#     cart = request.cart
+#
+#     if cart.items.count() == 0:
+#         messages.error(request, "Количката ви е празна!")
+#         return redirect('view_cart')
+#
+#     # Transfer cart to user if it was a guest cart
+#     if not cart.user:
+#         cart.user = request.user
+#         cart.session = None
+#         cart.save()
+#
+#     # Proceed with checkout logic
+#     return render(request, 'cart/checkout.html', {'cart': cart})
 
 
 @csrf_exempt
@@ -143,10 +144,12 @@ def create_checkout_session(request):
                 metadata={
                     "product_ids": ",".join(product_ids),
                 },
+                client_reference_id=str(request.user.id),
                 mode='payment',
                 success_url=request.build_absolute_uri(reverse('success')),  # Use reverse()
                 cancel_url=request.build_absolute_uri(reverse('cancel')),
             )
+            # print(checkout_session['client_reference_id'])
             return JsonResponse({'url': checkout_session.url})
         except stripe.error.CardError as e:
             # Handle specific card errors (e.g., insufficient funds)
@@ -158,8 +161,18 @@ def create_checkout_session(request):
 
 
 @csrf_exempt
+@require_POST
 def stripe_webhook_view(request):
+    # print("Webhook triggered")
+    # print("Headers:", request.headers)
+    # print("Body:", request.body[:200])
     if request.method != 'POST':
+        return HttpResponse(status=400)
+
+    sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
+    # print(sig_header)
+    if not sig_header:
+        # print("Missing Stripe signature header!")
         return HttpResponse(status=400)
 
     payload = request.body
@@ -182,20 +195,40 @@ def stripe_webhook_view(request):
         session = event['data']['object']
 
         customer_email = session["customer_details"]["email"]
+        # print("session metadata: ")
+        # print(session["metadata"])
+        metadata = session.get("metadata", {})
+        # print(metadata)
         product_ids = session["metadata"]["product_ids"].split(",")
+
+
+        user_id = session.get("client_reference_id")
+        # print(customer_email)
+        # print(product_ids)
+        # print(user_id)
+        if user_id:
+            try:
+                user = AppUser.objects.get(id=user_id)
+                cart = Cart.objects.get(user=user)
+                cart.items.all().delete()
+            except Cart.DoesNotExist:
+                pass
 
         # Load products
         products = []
         for product_id in product_ids:
             product = get_object_or_404(Product, id=product_id)
             products.append(product)
+        # print(products)
 
         product_names = ", ".join(product.name for product in products)
 
         # HTML block for products
         product_html = ""
         for product in products:
-            image_url = request.build_absolute_uri(product.image.url) if product.image else ""
+            image_url = request.build_absolute_uri(product.image.url) if product.image and hasattr(product.image, 'url') else ""
+            # print(image_url)
+
             product_html += f"""
                 <div style="margin-bottom: 20px; padding: 10px; border-bottom: 1px solid #eee;">
                     <h3 style="margin: 0 0 5px 0;">{product.name} personal training plan</h3>

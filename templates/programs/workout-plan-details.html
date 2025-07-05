@@ -77,7 +77,12 @@
                                 <tbody>
                                 {% for exercise in day_data.exercises %}
                                     <tr>
-                                        <td>{{ exercise.exercise_template.name }}</td>
+                                        <td class="hover:scale-[1.02] transition-all duration-200 ease-in-out">
+                                            <a href="{% url 'exercise-template-details' exercise.exercise_template.pk %}"
+                                               class="hover:underline">
+                                                {{ exercise.exercise_template.name }}
+                                            </a>
+                                        </td>
                                         <td>{{ exercise.sets }}</td>
                                         <td>{{ exercise.reps }}</td>
                                         <td>{{ exercise.rest }}</td>
@@ -87,7 +92,8 @@
                                         <td>{{ exercise.tempo }}</td>
                                         <td>{{ exercise.weight }}</td>
                                         {% if user.is_staff %}
-                                            <td><a href="{% url 'exercise-edit' exercise.id %}">Edit</a></td>
+                                            <td><a href="{% url 'exercise-edit' exercise.id %}"
+                                                   class="btn-warning">Edit</a></td>
                                         {% endif %}
                                     </tr>
                                 {% endfor %}

@@ -1,4 +1,5 @@
 import json
+import re
 
 from django import forms
 
@@ -51,10 +52,45 @@ class DayForm(forms.ModelForm):
 class ExerciseInstanceForm(forms.ModelForm):
     class Meta:
         model = ExerciseInstance
-        fields = ['exercise_template', 'sets', 'reps', 'rest', 'progression', 'aim', 'weight', 'tempo']
+        fields = ['exercise_template', 'order', 'sets', 'reps', 'rest', 'progression', 'aim', 'weight', 'tempo']
         widgets = {
-            'sets': forms.NumberInput(attrs={'min': 1}),
-            'rest': forms.TextInput(attrs={'placeholder': 'e.g. 60s'}),
+            'exercise_template': forms.Select(attrs={
+                'class': 'form-control',
+            }),
+            'order': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'order of the exercise',
+            }),
+            'sets': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g. 3',
+            }),
+            'reps': forms.TextInput(attrs={
+                'class': 'form-control',
+                'min': 1,
+                'placeholder': 'e.g. 8-12',
+            }),
+            'rest': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g. 60s',
+            }),
+            'progression': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g. Increase weight each week',
+            }),
+            'aim': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g. Hypertrophy',
+            }),
+            'weight': forms.TextInput(attrs={
+                'class': 'form-control',
+                'step': 0.1,
+                'placeholder': 'e.g. 40.5',
+            }),
+            'tempo': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g. 2-1-2',
+            }),
         }
 
     def __init__(self, *args, **kwargs):
@@ -66,7 +102,7 @@ class ExerciseInstanceForm(forms.ModelForm):
 class ExerciseTemplateForm(forms.ModelForm):
     class Meta:
         model = ExerciseTemplate
-        fields = ['name', 'description', 'focus']
+        fields = "__all__"
         widgets = {
             'name': forms.TextInput(attrs={
                 'placeholder': 'Enter exercise template name (e.g., Bench Press, Squat, Pull-Ups)',
@@ -85,6 +121,26 @@ class ExerciseTemplateForm(forms.ModelForm):
             'description': 'Description',
             'focus': 'Target Muscle Group/s',
         }
+
+    def clean_youtube_url(self):
+        url = self.cleaned_data['youtube_url']
+        if not url:
+            return ''
+
+        # Extract video ID from various formats
+        regex = r'(?:v=|\/)([0-9A-Za-z_-]{11}).*'
+        match = re.search(regex, url)
+        if match:
+            self.cleaned_data['youtube_video_id'] = match.group(1)
+            return url
+        raise forms.ValidationError("Invalid YouTube URL")
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.youtube_video_id = self.cleaned_data.get('youtube_video_id', '')
+        if commit:
+            instance.save()
+        return instance
 
 
 # Nutrition

@@ -44,6 +44,11 @@ class ExerciseTemplate(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     focus = models.CharField(max_length=100, blank=True, null=True)  # e.g., "Chest"
+    youtube_video_id = models.CharField(max_length=20, blank=True, null=True)
+    image = models.ImageField(blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -51,6 +56,7 @@ class ExerciseTemplate(models.Model):
 
 class ExerciseInstance(models.Model):
     exercise_template = models.ForeignKey(ExerciseTemplate, on_delete=models.CASCADE, related_name='instances')
+    order = models.PositiveIntegerField(blank=True, null=True)
     day = models.ForeignKey(Day, on_delete=models.CASCADE, related_name='exercises')
     sets = models.PositiveIntegerField()
     reps = models.CharField(max_length=50)

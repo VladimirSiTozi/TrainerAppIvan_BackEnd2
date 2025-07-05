@@ -32,7 +32,7 @@
                 <ul>
                     {% for profile in profile_results %}
                         <li>
-                            <a href="{% url 'account-detail' user.profile.slug %}">
+                            <a href="{% url 'account-detail' profile.slug %}">
                                 {{ profile.first_name }} {{ profile.last_name }}; email: {{ profile.user.email }}
                             </a>
                         </li>

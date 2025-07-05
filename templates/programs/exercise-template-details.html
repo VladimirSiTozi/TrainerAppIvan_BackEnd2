@@ -1,0 +1,40 @@
+{% extends 'account/profile-base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="exercise-container">
+        <div class="exercise-container-inner">
+
+            <!-- Media Block -->
+            {% if exercise.youtube_video_id %}
+                <div class="media-block">
+                    <iframe
+                            src="https://www.youtube.com/embed/{{ exercise.youtube_video_id }}"
+                            frameborder="0"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            {% elif exercise.image %}
+                <div class="media-block">
+                    <img src="{{ exercise.image.url }}" alt="{{ exercise.name }}"
+                         style="width: 400px; border-radius: 20px;">
+                </div>
+            {% elif not exercise.youtube_video_id and not exercise.image %}
+                <div class="media-block">
+                    <img src="{% static 'assets/images/no-cardio.png' %}" alt="No image"
+                         style="width: 400px; border-radius: 20px;">
+                </div>
+            {% endif %}
+
+            <!-- Description Block -->
+            <div class="text-block">
+                <h2>{{ exercise.name }}</h2>
+                <p style="font-weight: bold; margin-bottom: 0.5rem;">Focus: {{ exercise.focus }}</p>
+                <p>{{ exercise.description }}</p>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

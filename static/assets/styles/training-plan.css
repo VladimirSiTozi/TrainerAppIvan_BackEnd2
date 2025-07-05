@@ -213,6 +213,10 @@ tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
+.navigation-container td a {
+    background-color: red;
+}
+
 .plan-detail tr:nth-child(even) {
     background-color: #f9f9f9;
     color: #333;
@@ -292,6 +296,67 @@ td input:focus {
 .no-programs-content {
     width: 65%; /* Explicit width for content */
     flex-shrink: 0; /* Prevents content from shrinking */
+}
+
+.exercise-container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 50px auto;
+    padding: 50px;
+    border-radius: 12px;
+    background-color: #333;
+}
+
+.exercise-container-inner {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.media-block,
+.text-block {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+}
+
+.media-block iframe {
+    width: 400px;
+    height: 250px;
+    border-radius: 12px;
+}
+
+/* Tablet size: make video larger */
+@media (min-width: 600px) and (max-width: 1024px) {
+    .media-block iframe {
+        width: 600px;
+        height: 350px;
+    }
+}
+
+/* Phone and smaller screens: full width */
+@media (max-width: 600px) {
+    .media-block iframe {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 1100px) {
+    .exercise-container {
+        padding: 16px;
+        width: 90%;
+    }
+
+    .exercise-container-inner {
+        flex-direction: column-reverse;
+        gap: 1rem;
+    }
+
+    .media-block {
+        margin: auto;
+    }
 }
 
 @media (max-width: 1024px) {

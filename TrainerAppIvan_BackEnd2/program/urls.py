@@ -25,12 +25,16 @@ urlpatterns = [
 
     ])),
 
-    path('exercise/template/', include([
-        path('create/', views.CreateExerciseTemplateView.as_view(), name='create_new_exercise'),
-        path('<int:pk>/', include([
-            path('edit/', views.EditExerciseTemplateView.as_view(), name='edit_exercise_template'),
-            path('delete/', views.DeleteExerciseTemplateView.as_view(), name='delete_exercise_template'),
+    path('exercise/', include([
+        path('<int:pk>/', views.ExerciseTemplateDetailsView.as_view(), name='exercise-template-details'),
+        path('templete/', include([
+            path('create/', views.CreateExerciseTemplateView.as_view(), name='create_new_exercise'),
+            path('<int:pk>/', include([
+                path('edit/', views.EditExerciseTemplateView.as_view(), name='edit_exercise_template'),
+                path('delete/', views.DeleteExerciseTemplateView.as_view(), name='delete_exercise_template'),
+            ])),
         ])),
+
     ])),
 
     path('exercise/', include([

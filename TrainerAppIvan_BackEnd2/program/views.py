@@ -98,7 +98,7 @@ class WorkoutPlanDetailView(LoginRequiredMixin, DetailView, ProfileContextMixin)
                 period_data['days'].append({
                     'pk': day.pk,
                     'day': day.name,
-                    'exercises': day.exercises.all()
+                    'exercises': day.exercises.all().order_by('order'),
                 })
             plan_data.append(period_data)
 
@@ -290,6 +290,12 @@ class DeletePeriodView(StaffRequiredMixin, DeleteView):
 
 
 # Exercise
+class ExerciseTemplateDetailsView(LoginRequiredMixin, DetailView):
+    model = ExerciseTemplate
+    context_object_name = 'exercise'
+    template_name = 'programs/exercise-template-details.html'
+
+
 class CreateExerciseTemplateView(StaffRequiredMixin, CreateView):
     model = ExerciseTemplate
     form_class = ExerciseTemplateForm

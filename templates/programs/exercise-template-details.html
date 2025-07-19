@@ -17,8 +17,7 @@
                 </div>
             {% elif exercise.image %}
                 <div class="media-block">
-                    <img src="{{ exercise.image.url }}" alt="{{ exercise.name }}"
-                         style="width: 400px; border-radius: 20px;">
+                    <img src="{{ exercise.image.url }}" alt="{{ exercise.name }}">
                 </div>
             {% elif not exercise.youtube_video_id and not exercise.image %}
                 <div class="media-block">
@@ -30,7 +29,7 @@
             <!-- Description Block -->
             <div class="text-block">
                 <h2>{{ exercise.name }}</h2>
-                <p style="font-weight: bold; margin-bottom: 0.5rem;">Focus: {{ exercise.focus }}</p>
+                <p style="margin-bottom: 0.5rem;"><strong>Focus:</strong> <i>{{ exercise.focus }}</i></p>
                 <p>{{ exercise.description }}</p>
             </div>
         </div>

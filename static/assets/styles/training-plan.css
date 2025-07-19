@@ -321,6 +321,11 @@ td input:focus {
     margin: auto;
 }
 
+.media-block img {
+    width: 100%;
+    border-radius: 20px;"
+}
+
 .media-block iframe {
     width: 400px;
     height: 250px;

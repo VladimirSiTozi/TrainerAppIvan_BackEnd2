@@ -9,14 +9,19 @@
         <div class="card-text">
             <p>{{ product.brief_description|truncatechars:200 }}</p>
         </div>
-        <div class="card-product-price">
-            <p><span>{{ product.price }}</span>$</p>
-        </div>
-        <div class="card-product-price">
-            <form action="{% url 'add_to_cart' product.id %}" method="post">
-                {% csrf_token %}
-                <button type="submit">Buy Now</button>
-            </form>
+
+        <div class="card-product-bottom">
+            <div class="card-product-price">
+                <div class="card-product-price-inner">
+                    <p><span>{{ product.price }}</span>$</p>
+                </div>
+            </div>
+            <div class="card-product-price">
+                <form action="{% url 'add_to_cart' product.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Buy Now</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

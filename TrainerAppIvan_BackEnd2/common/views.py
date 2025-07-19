@@ -94,3 +94,8 @@ class BusinessCardView(TemplateView):
 
 def privacy_policy(request):
     return render(request, 'common/privacy-policy.html')
+
+
+class VerifyEmailMessageView(TemplateView):
+    template_name = 'common/verify-email-address.html'
+

@@ -18,6 +18,10 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
         default=False,
     )
 
+    is_email_verified = models.BooleanField(
+        default=False,
+    )
+
     USERNAME_FIELD = 'email'  # First credential to login in
     REQUIRED_FIELDS = []
 

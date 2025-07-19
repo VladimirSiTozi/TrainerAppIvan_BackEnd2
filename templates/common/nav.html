@@ -23,7 +23,11 @@
             {% if request.user.profile.is_profile_complete %}
                 <a href="{% url 'account-detail' request.user.profile.slug %}" class="btn-primary">profile</a>
             {% else %}
-                <a href="{% url 'complete-profile' %}">profile</a>
+                {% if request.user.is_email_verified %}
+                    <a href="{% url 'complete-profile' %}">profile</a>
+                {% else %}
+                    <a href="{% url 'verify-email-message' %}">profile</a>
+                {% endif %}
             {% endif %}
             <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
                 {% csrf_token %}

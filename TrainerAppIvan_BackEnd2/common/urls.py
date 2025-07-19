@@ -13,4 +13,5 @@ urlpatterns = [
         path('application-form/', views.ApplicationFormView.as_view(), name='application-form'),
     ])),
     path('business-card/', views.BusinessCardView.as_view(), name='business-card'),
+    path('verify-email/', views.VerifyEmailMessageView.as_view(), name='verify-email-message'),
 ]

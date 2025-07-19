@@ -14,6 +14,7 @@ urlpatterns = [
     path('shop/', include('TrainerAppIvan_BackEnd2.product.urls')),
     path('articles/', include('TrainerAppIvan_BackEnd2.article.urls')),
     path('workout/plan/', include('TrainerAppIvan_BackEnd2.program.urls')),
+    path('verify-email/<uidb64>/<token>/', views.verify_email, name='verify_email'),
 ]
 
 if settings.DEBUG:

@@ -26,6 +26,14 @@ from TrainerAppIvan_BackEnd2.account.models import AppUser, Profile
 from TrainerAppIvan_BackEnd2.mixins import StaffRequiredMixin
 from TrainerAppIvan_BackEnd2.program.models import WorkoutPlan, ExerciseTemplate
 
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from django.core.mail import send_mail
+from .tokens import email_verification_token
+from django.contrib import messages
+
 UserModel = get_user_model()
 
 
@@ -156,7 +164,7 @@ class AccountRegisterView(CreateView):
     model = UserModel
     form_class = AppUserCreationForm
     template_name = 'account/register.html'
-    success_url = reverse_lazy('complete-profile')
+    success_url = reverse_lazy('verify-email-message')
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -182,26 +190,7 @@ class AccountRegisterView(CreateView):
         )
         admin_email.send()
 
-        # Optional: Send welcome email to the user
-        user_subject = "Welcome to Our Platform!"
-        user_body = f"""
-                Hi there,
-
-                Thank you for registering with us through our website!
-
-                Please complete your profile to get started.
-
-                Best regards,
-                The Team
-                """
-
-        user_email = EmailMultiAlternatives(
-            subject=user_subject,
-            body=user_body,
-            from_email=settings.EMAIL_HOST_USER,
-            to=[user.email],
-        )
-        user_email.send()
+        send_verification_email(self.request, user)
 
         return response
 
@@ -325,3 +314,54 @@ class UsersListView(StaffRequiredMixin, ListView):
     def get_queryset(self):
         return AppUser.objects.all().order_by('email')
 
+
+def send_verification_email(request, user):
+    current_site = get_current_site(request)
+    uid = urlsafe_base64_encode(force_bytes(user.pk))
+    token = email_verification_token.make_token(user)
+    verification_url = f"http://{current_site.domain}{reverse('verify_email', kwargs={'uidb64': uid, 'token': token})}"
+
+    # subject = 'Verify your email address'
+    # message = f'Click the link to verify your email: {verification_url}'
+    # from_email = settings.EMAIL_HOST_USER
+    # recipient_list = [user.email]
+    #
+    # send_mail(subject, message, from_email, recipient_list)
+
+    user_subject = "Welcome to Our Platform!"
+    user_body = f"""
+            Hi there,
+
+            Thank you for registering with us through our website!
+            
+            Click the link to verify your email: {verification_url}
+
+            Best regards,
+            The Team
+            """
+
+    user_email = EmailMultiAlternatives(
+        subject=user_subject,
+        body=user_body,
+        from_email=settings.EMAIL_HOST_USER,
+        to=[user.email],
+    )
+
+    user_email.send()
+
+
+def verify_email(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = AppUser.objects.get(pk=uid)
+    except (AppUser.DoesNotExist, ValueError, TypeError, OverflowError):
+        user = None
+
+    if user and email_verification_token.check_token(user, token):
+        user.is_email_verified = True
+        user.save()
+        messages.success(request, 'Email verified successfully!')
+    else:
+        messages.error(request, 'Invalid or expired link.')
+
+    return redirect('complete-profile')

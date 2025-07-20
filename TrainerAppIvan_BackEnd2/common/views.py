@@ -1,5 +1,9 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
+    PasswordResetCompleteView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.core.mail import send_mail
@@ -99,3 +103,24 @@ def privacy_policy(request):
 class VerifyEmailMessageView(TemplateView):
     template_name = 'common/verify-email-address.html'
 
+
+# Reset Password
+class CustomPasswordResetView(SuccessMessageMixin, PasswordResetView):
+    template_name = 'common/password-temps/password-reset.html'
+    email_template_name = 'registration/password_reset_email.html'
+    subject_template_name = 'registration/password_reset_subject.txt'
+    success_url = reverse_lazy('password_reset_done')
+    success_message = "If an account exists for that email, a password reset link has been sent."
+
+
+class CustomPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'common/password-temps/password-reset-done.html'
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'common/password-temps/password-rest-confirm.html'
+    success_url = reverse_lazy('password_reset_complete')
+
+
+class CustomPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'common/password-temps/password-reset-complete.html'

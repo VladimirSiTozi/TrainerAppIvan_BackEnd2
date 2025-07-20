@@ -10,7 +10,7 @@
             <div class="login-form-inner">
                 <h1 class="heading-title light-theme">Sign in</h1>
                 <p class="body-text">See your growth and get consulting support!</p>
-            
+
                 <a href="{% url 'google_sign_in' %}" class="rounded-button google-login-button">
                 <span class="google-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -93,13 +93,17 @@
                             <input type="checkbox" name="remember_me" id="remember" checked>
                             <label for="remember">Remember me</label>
                         </div>
+                        <div class="register-div">
+                            <a href="{% url 'password_reset' %}" class="link create-account">Forgot Password?</a>
+                        </div>
                     </div>
 
                     <button type="submit" class="rounded-button login-cta">Login</button>
                 </form>
 
                 <div class="register-div">
-                    Not registered yet? <a href="{% url 'register' %}" class="link create-account">Create an account?</a>
+                    Not registered yet? <a href="{% url 'register' %}" class="link create-account">Create an
+                    account?</a>
                 </div>
             </div>
         </div>

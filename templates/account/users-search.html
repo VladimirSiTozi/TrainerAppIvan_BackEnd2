@@ -15,9 +15,15 @@
                 <ul>
                     {% for user in user_results %}
                         <li>
+                            {% if user.is_active %}
                             <a href="{% url 'account-detail' user.profile.slug %}">
                                 {{ user.email }}, names: {{ user.profile.first_name }} {{ user.profile.last_name }}
                             </a>
+                            {% else %}
+                            <p>
+                                {{ user.email }}
+                            </p>
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>

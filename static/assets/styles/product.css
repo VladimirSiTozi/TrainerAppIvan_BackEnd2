@@ -136,7 +136,7 @@
 }
 
 .card-product-bottom {
-    background: radial-gradient(circle, #bdc3c7, #2c3e50);
+    background: radial-gradient(circle, #C9D6FF, #E2E2E2);
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
     padding: 24px;
@@ -144,7 +144,7 @@
 }
 
 .card-product-price-inner p {
-    font-size: 44px;
+    font-size: 36px;
     color: green;
 }
 

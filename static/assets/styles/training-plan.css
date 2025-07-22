@@ -342,6 +342,13 @@ td input:focus {
 
 /* Phone and smaller screens: full width */
 @media (max-width: 600px) {
+    .no-exercise-exists img {
+        width: 220px !important;
+        height: 220px;
+        display: block;
+        margin: 0 auto;
+    }
+
     .media-block iframe {
         width: 100%;
         height: auto;

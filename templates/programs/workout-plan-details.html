@@ -105,8 +105,11 @@
                         <div class="sm:hidden space-y-4 mt-4">
                             {% for exercise in day_data.exercises %}
                                 <div class="border rounded-md p-4 shadow bg-grey">
-                                    <p><span
-                                            class="font-semibold">Exercise:</span> {{ exercise.exercise_template.name }}
+                                    <p> <span class="font-semibold">Exercise:</span> 
+                                        <a href="{% url 'exercise-template-details' exercise.exercise_template.pk %}"
+                                               class="hover:underline">
+                                                {{ exercise.exercise_template.name }}
+                                        </a>
                                     </p>
                                     <p><span class="font-semibold">Sets:</span> {{ exercise.sets }}</p>
                                     <p><span class="font-semibold">Reps:</span> {{ exercise.reps }}</p>

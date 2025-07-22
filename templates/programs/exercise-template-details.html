@@ -20,7 +20,8 @@
                     <img src="{{ exercise.image.url }}" alt="{{ exercise.name }}">
                 </div>
             {% elif not exercise.youtube_video_id and not exercise.image %}
-                <div class="media-block">
+                <div class="media-block no-exercise-exists">
+                    <p>No video or image is available for this exercise.</p>
                     <img src="{% static 'assets/images/no-cardio.png' %}" alt="No image"
                          style="width: 400px; border-radius: 20px;">
                 </div>

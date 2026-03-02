@@ -190,6 +190,20 @@ a {
     transform: scale(1.03);
 }
 
+.hero-banner {
+    width: 100%;
+}
+
+.full-banner-image {
+    width: 100%;
+}
+
+.full-banner-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 .trainer-skills {
     list-style: none;
     padding: 0;

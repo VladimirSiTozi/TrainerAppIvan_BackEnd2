@@ -1,5 +1,6 @@
 import os
 
+import dj_database_url
 from django.urls import reverse_lazy
 from dotenv import load_dotenv
 from pathlib import Path
@@ -36,7 +37,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['ac36-2a00-4804-a000-ee9-d9c-5d46-8567-d8cf.ngrok-free.app', 'localhost', '127.0.0.1']
 
-CSRF_TRUSTED_ORIGINS = ['https://f4fe1c663302.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://ac36-2a00-4804-a000-ee9-d9c-5d46-8567-d8cf.ngrok-free.app']
 
 # Application definition
 
@@ -62,6 +63,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -105,15 +107,24 @@ WSGI_APPLICATION = 'TrainerAppIvan_BackEnd2.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": config('MY_ENGINE'),
+#         "NAME": config('MY_DATABASE_NAME'),
+#         "USER": config('MY_DATABASE_USERNAME'),
+#         "PASSWORD": config('MY_DATABASE_PASSWORD'),
+#         "HOST": config('MY_HOST'),
+#         "PORT": config('MY_PORT'),
+#     }
+# }
+
 DATABASES = {
-    "default": {
-        "ENGINE": config('MY_ENGINE'),
-        "NAME": config('MY_DATABASE_NAME'),
-        "USER": config('MY_DATABASE_USERNAME'),
-        "PASSWORD": config('MY_DATABASE_PASSWORD'),
-        "HOST": config('MY_HOST'),
-        "PORT": config('MY_PORT'),
-    }
+    'default': dj_database_url.config(
+        # Ако DATABASE_URL не е намерен (локално), ползвай SQLite като бекъп или стария си стринг
+        default=config('DATABASE_URL', 'sqlite:///db.sqlite3'),
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
 
 
@@ -153,10 +164,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     BASE_DIR / 'static',
 )
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = '/mediafiles/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'

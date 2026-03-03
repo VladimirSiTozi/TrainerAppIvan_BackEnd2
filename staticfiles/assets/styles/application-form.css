@@ -1,0 +1,113 @@
+/*Apply Page*/
+.apply-container-wrapper{
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+}
+
+.apply-container {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.message {
+    margin-bottom: 25px;
+    font-size: 18px;
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+.btn-login {
+    background-color: #3498db;
+    color: white;
+}
+.btn-login:hover {
+    background-color: #2980b9;
+}
+.btn-form {
+    background-color: #2ecc71;
+    color: white;
+}
+.btn-form:hover {
+    background-color: #27ae60;
+}
+.note {
+    margin-top: 30px;
+    font-style: italic;
+    color: #7f8c8d;
+}
+
+
+
+/* Application form */
+.application-form {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 50px;
+    background: #333;
+    /* Semi-transparent white background */
+    /* border: 1px solid #ccc; */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.inner-app-form {
+    margin: 50px;
+}
+
+/* Common form - may be used for contact form*/
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+small {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+button {
+    padding: 12px 20px;
+    background-color: #6a1b9a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/*button:hover {*/
+/*    background-color: #4a148c;*/
+/*}*/

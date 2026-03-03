@@ -1,0 +1,147 @@
+.cart-container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+}
+
+.cart-title {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.2rem;
+  color: #333;
+}
+
+.cart-item {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.item-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-name {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #222;
+}
+
+.item-desc {
+  color: #777;
+  font-size: 0.9rem;
+  margin: 5px 0 15px;
+}
+
+.item-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.item-quantity {
+  width: 60px;
+  padding: 6px 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.item-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.remove-btn {
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#remove-from-cart:hover {
+  background: #e04344;
+}
+
+.cart-summary {
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+  margin-top: 40px;
+  text-align: right;
+}
+
+.cart-summary h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.summary-subtotal,
+.summary-shipping,
+.summary-total {
+  font-size: 1.1rem;
+  margin: 8px 0;
+}
+
+.summary-total span {
+  font-weight: bold;
+  color: #111;
+}
+
+.checkout-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.checkout-btn {
+  width: 200px;
+  margin-top: 20px;
+  padding: 12px 30px;
+  font-size: 1rem;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background: #4338ca;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .cart-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .item-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cart-summary {
+    text-align: center;
+  }
+  .checkout-button-wrapper {
+    justify-content: center;
+  }
+}

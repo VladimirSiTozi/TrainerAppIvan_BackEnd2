@@ -1,0 +1,117 @@
+/* Main container */
+.article-main {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    background: #f9f9f9;
+}
+
+/* Child containers */
+.article-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    gap: 30px;
+    padding: 40px;
+}
+
+.normal-container {
+    flex-direction: column;
+}
+
+
+/* Articles */
+.articles {
+    width: 95%;
+    margin: 0 auto;
+}
+
+/* ARTICLE CARDS */
+.articles__article-card {
+    height: 400px;
+    width: 350px;
+    cursor: pointer;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 50px;
+}
+
+/* ARTICLE CARDS - TOP */
+.articles__article-card__top__article-cat {
+    background: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: #FC6C03;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 200;
+}
+
+/* ARTICLE CARDS - BOTTOM */
+.articles__article-card__bottom {
+    background: rgba(234, 239, 242, .7);
+    height: 40%;
+}
+
+.articles__article-card__bottom__date-title__date {
+    font-size: 13px;
+    color: #99A7B0;
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 200;
+}
+
+.articles__article-card__bottom__date-title__title {
+    margin-top: 6px;
+    font-family: 'Libre Franklin', sans-serif;
+    color: #283D4A;
+    font-size: 28px;
+}
+
+/* UTILITY CLASSES */
+.letter-spacing {
+    letter-spacing: .05em;
+}
+
+/* IMAGE STYLES */
+.article-image {
+    height: 250px; /* Set a fixed height for the image container */
+    overflow: hidden; /* Ensure the image doesn't overflow */
+}
+.article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container without distorting */
+}
+
+@media (max-width: 1180px) {
+    .articles__article-card {
+        width: 300px;
+        height: 380px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .article-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .articles__article-card {
+        width: 100%;
+        height: auto;
+        padding-bottom: 30px;
+    }
+
+    .article-image {
+        height: 180px;
+    }
+
+    .articles__article-card__bottom__date-title__title {
+        font-size: 20px;
+    }
+}

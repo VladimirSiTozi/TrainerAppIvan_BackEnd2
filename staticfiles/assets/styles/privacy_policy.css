@@ -1,0 +1,60 @@
+.policy-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    line-height: 1.6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.policy-container h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.policy-container h2 {
+    font-size: 22px;
+    margin-top: 30px;
+}
+
+.policy-container p,
+.policy-container ul {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.policy-container ul {
+    padding-left: 20px;
+}
+
+.policy-container a {
+    color: #3182ce;
+    text-decoration: underline;
+}
+
+.effective-date {
+    font-size: 14px;
+    color: #718096;
+    margin-bottom: 20px;
+}
+
+.cookie-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.cookie-table th,
+.cookie-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.cookie-table tr:nth-child(2){
+    color: black;
+}
+
+.cookie-table thead {
+    background-color: #f7fafc;
+}

@@ -1,0 +1,119 @@
+/* Child containers */
+.coaching-container {
+    flex: 1;
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding-bottom: 30px;
+}
+
+.normal-container {
+    flex-direction: column;
+}
+
+.pros-cons-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.pros-cons-container .coaching-inner {
+    max-width: 45%;
+}
+
+.coaching-content-boxes {
+    gap: 50px;
+}
+
+/* Coach card */
+.coach-card {
+    width: 300px;
+    height: 100%;
+    border-radius: 10px;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-top {
+    height: 80px;
+}
+
+/* Styles for the image */
+.card-image {
+    width: 100%; /* Make image fill the card width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below the image */
+}
+
+.card-bottom {
+    height: 120px;
+}
+
+.coach-text {
+    padding: 50px;
+}
+
+.athletes-text-box {
+    padding: 0px 50px 50px 50px;
+}
+
+/* Boxers card */
+.boxers-card {
+    width: 300px; /* Fixed width for the card */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Center-align text */
+    font-family: "Roboto", sans-serif; /* Consistent font */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+.box-card-image {
+    width: 100%; /* Make image fill the card width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below the image */
+}
+
+.box-card-top {
+    height: 30px;
+}
+
+.box-card-bottom {
+    height: 120px;
+}
+
+
+/*RESPONSIVE*/
+@media (max-width: 1240px) {
+    .coaching-container {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 1025px) {
+
+}
+
+@media (max-width: 951px) {
+
+}
+
+@media (max-width: 850px) {
+
+}
+
+@media (max-width: 700px) {
+    .pros-cons-container {
+        flex-direction: column;
+    }
+
+    .pros-cons-container .coaching-inner {
+        max-width: 100%;
+    }
+
+    .coaching-content-boxes {
+        display: flex;
+        flex-direction: column;
+    }
+}

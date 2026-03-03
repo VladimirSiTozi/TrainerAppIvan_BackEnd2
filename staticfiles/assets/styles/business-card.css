@@ -1,0 +1,97 @@
+.fitness-card {
+    max-width: 600px;
+    margin: auto;
+    background: #8E2DE2;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    color: white;
+    font-family: "Gruppo", sans-serif;
+    font-weight: 400;
+}
+
+.card-header {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    max-width: 300px;
+    height: auto;
+}
+
+.card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.consultation-btn {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.consultation-btn:hover {
+    background-color: #ff3b2f;
+}
+
+.card-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.card-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    padding: 10px 50px;
+    color: white;
+    font-size: 20px;
+    border: 2px solid #7F00FF;
+    border-radius: 86px;
+}
+
+.card-link:hover {
+    background: #7F00FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #E100FF, #7F00FF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #E100FF, #7F00FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-color: #7F00FF;
+    transform: scale(1.02);
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.card-link img {
+    width: 120px;
+    height: 80px;
+    border-radius: 22px;
+}
+
+@media (max-width: 768px) {
+    .fitness-card {
+        width: 100%;
+    }
+
+    .consultation-btn {
+        width: 100%;
+        padding: 15px;
+    }
+}

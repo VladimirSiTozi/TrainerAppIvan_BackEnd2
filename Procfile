@@ -1,0 +1,1 @@
+web: gunicorn TrainerAppIvan_BackEnd2.wsgi

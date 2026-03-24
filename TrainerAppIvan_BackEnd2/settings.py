@@ -35,7 +35,7 @@ SECRET_KEY = config('MY_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ac36-2a00-4804-a000-ee9-d9c-5d46-8567-d8cf.ngrok-free.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS = ['https://ac36-2a00-4804-a000-ee9-d9c-5d46-8567-d8cf.ngrok-free.app']
 
@@ -119,12 +119,7 @@ WSGI_APPLICATION = 'TrainerAppIvan_BackEnd2.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config(
-        # Ако DATABASE_URL не е намерен (локално), ползвай SQLite като бекъп или стария си стринг
-        default=config('DATABASE_URL', 'sqlite:///db.sqlite3'),
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+    'default': dj_database_url.config(default=os.environ.get("DATABASE_URL"))
 }
 
 

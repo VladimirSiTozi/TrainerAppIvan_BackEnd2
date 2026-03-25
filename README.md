@@ -2,6 +2,7 @@
 
 ## 🚀 Overview (TL;DR)
 **Live Demo:** [Виж сайта](https://trainerappivan-backend2.onrender.com/)
+> ⚠️ Note: The initial load of the site may take 1–2 minutes because it’s hosted on Render’s free plan.
 
 A full-stack **Python/Django web application** built for **fitness trainers and their clients**.
 

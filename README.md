@@ -1,7 +1,7 @@
 # 🏋️ Fitness Trainer Web Application (Django)
 
 ## 🚀 Overview (TL;DR)
-**Live Demo:** [Виж сайта]([https://your-demo-link.com](https://trainerappivan-backend2.onrender.com/))
+**Live Demo:** [Виж сайта](https://trainerappivan-backend2.onrender.com/)
 
 A full-stack **Python/Django web application** built for **fitness trainers and their clients**.
 

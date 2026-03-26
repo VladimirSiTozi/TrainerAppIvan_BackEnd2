@@ -4,6 +4,9 @@
 **Live Demo:** [Виж сайта](https://trainerappivan-backend2.onrender.com/)
 > ⚠️ Note: The initial load of the site may take 1–2 minutes because it’s hosted on Render’s free plan.
 
+## 🖼️ Application Preview (Homepage)
+<img width="1547" height="975" alt="image" src="https://github.com/user-attachments/assets/6fcb92f8-6434-423c-836c-f74fef517983" />
+
 A full-stack **Python/Django web application** built for **fitness trainers and their clients**.
 
 It enables trainers to create and manage personalized workout programs, while clients can access them through their own profiles.

@@ -37,6 +37,8 @@ The system supports two types of users:
   * Can view assigned workout plans and trainer advice
   * Can purchase programs/products
 
+  <img width="1300" height="985" alt="image" src="https://github.com/user-attachments/assets/6d0cf0df-02f0-4b0b-9bed-597347f7c9ef" />
+
 * **Trainer**
 
   * Has extended permissions
@@ -60,6 +62,10 @@ Trainers can:
   * Descriptions
   * YouTube videos or images
 * Manage content dynamically from the website interface
+
+<img width="1416" height="899" alt="image" src="https://github.com/user-attachments/assets/a58da9bb-0d12-46a2-9574-189eade6ad4f" />
+
+<img width="1240" height="985" alt="image" src="https://github.com/user-attachments/assets/df8af1bb-7e21-4e96-9a23-d75c2c6a0c4a" />
 
 ---
 
@@ -94,10 +100,14 @@ Users can:
 * Browse available programs
 * Purchase training plans or products
 
+<img width="1218" height="982" alt="image" src="https://github.com/user-attachments/assets/5dd39293-551e-4129-911c-8c40c372acb1" />
+
 **Payments:**
 
 * Integrated with **Stripe (test mode)**
 * Designed for future production-ready payment support
+
+<img width="1233" height="987" alt="image" src="https://github.com/user-attachments/assets/abaf7785-0999-44b0-9a2d-946996e4b690" />
 
 ---
 
@@ -148,6 +158,8 @@ Users can:
 
 * Django Authentication System
 * Google OAuth
+
+<img width="1018" height="975" alt="image" src="https://github.com/user-attachments/assets/b01a595e-4905-4481-942e-e966b99e233a" />
 
 ### Payments
 
@@ -210,5 +222,19 @@ Users can:
 * Messaging system (trainer ↔ client)
 * Mobile optimization
 * Notifications system
+
+---
+
+## 📱 Responsive Design
+
+The application is fully responsive and optimized for:
+
+- 📱 Mobile devices
+- 📲 Tablets
+- 💻 Desktop screens
+
+The layout adapts dynamically to provide a smooth user experience across all devices.
+
+<img width="464" height="1091" alt="image" src="https://github.com/user-attachments/assets/e30a3daf-701d-4a99-a076-e2e7a20d2134" />
 
 ---

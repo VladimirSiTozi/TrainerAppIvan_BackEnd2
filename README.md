@@ -1,8 +1,16 @@
 # 🏋️ Fitness Trainer Web Application (Django)
 
 ## 🚀 Overview (TL;DR)
-**Live Demo:** [Виж сайта](https://trainerappivan-backend2.onrender.com/)
+
+**A full-stack fitness trainer web application built with Django, designed to help users manage workouts, track progress, and stay consistent with their fitness goals. The platform provides an intuitive interface and responsive design for a smooth experience across all devices.**
+
+<p align="center">
+  <a href="https://trainerappivan-backend2.onrender.com/"><strong><ion-icon name="enter-outline"></ion-icon>Live Demo</strong></a>
+</p>
+
 > ⚠️ Note: The initial load of the site may take 1–2 minutes because it’s hosted on Render’s free plan.
+
+--- 
 
 ## 🖼️ Application Preview (Homepage)
 <img width="1547" height="975" alt="image" src="https://github.com/user-attachments/assets/6fcb92f8-6434-423c-836c-f74fef517983" />

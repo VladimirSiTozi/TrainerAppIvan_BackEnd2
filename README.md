@@ -112,7 +112,7 @@ Users can:
 * Purchase training plans or products
 
 * Shoping cart
-<img width="1218" height="982" alt="image" src="https://github.com/user-attachments/assets/5dd39293-551e-4129-911c-8c40c372acb1" />
+<img width="918" height="682" alt="image" src="https://github.com/user-attachments/assets/5dd39293-551e-4129-911c-8c40c372acb1" />
 
 **Payments:**
 
@@ -120,7 +120,7 @@ Users can:
 * Designed for future production-ready payment support
 
 * Stripe payment method
-<img width="1233" height="987" alt="image" src="https://github.com/user-attachments/assets/abaf7785-0999-44b0-9a2d-946996e4b690" />
+<img width="933" height="687" alt="image" src="https://github.com/user-attachments/assets/abaf7785-0999-44b0-9a2d-946996e4b690" />
 
 ---
 
@@ -173,7 +173,7 @@ Users can:
 * Google OAuth
 
 * User registration page with email and Google authentication
-<img width="1018" height="975" alt="image" src="https://github.com/user-attachments/assets/b01a595e-4905-4481-942e-e966b99e233a" />
+<img width="720" height="675" alt="image" src="https://github.com/user-attachments/assets/b01a595e-4905-4481-942e-e966b99e233a" />
 
 ### Payments
 
@@ -250,6 +250,6 @@ The application is fully responsive and optimized for:
 The layout adapts dynamically to provide a smooth user experience across all devices.
 
 * Mobile View (Responsive Design)
-<img width="464" height="1091" alt="image" src="https://github.com/user-attachments/assets/e30a3daf-701d-4a99-a076-e2e7a20d2134" />
+<img width="320" height="600" alt="image" src="https://github.com/user-attachments/assets/e30a3daf-701d-4a99-a076-e2e7a20d2134" />
 
 ---
